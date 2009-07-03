@@ -1,0 +1,34 @@
+plugin.tx_blogexample {
+	maxItems = 3
+	foo = TEXT
+	foo.value = Hello World!
+	foo.bar.baz = 10
+	foo = COBJ
+	controllers {
+		Post {
+			singlePid = 25
+			maxItems = 8
+			actions {
+				index {
+					maxItems = 5					
+				}
+			}
+		}
+		Comment {
+			content.crop = 100
+		}		
+	}
+}
+
+
+plugin.tx_blogexample_pi1 < plugin.tx_blogexample
+plugin.tx_blogexample_pi1 {
+	maxItems = 5
+}
+
+# This is an example how to modify the translation
+plugin.tx_blogexample._LOCAL_LANG {
+	default {
+		read_more = more >>
+	}
+}
