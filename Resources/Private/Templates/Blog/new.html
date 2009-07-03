@@ -1,0 +1,9 @@
+<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new blog</h1></div>
+<p class="bodytext">Enter information about your new blog below:</p>
+<f:form method="post" controller="Blog" action="create" name="newBlog" object="{newBlog}">
+	<label for="name">Name <span class="required">(required)</span></label><br />
+	<f:form.textbox property="name" /><br />
+	<label for="description">Description</label><br />
+	<f:form.textarea property="description" rows="8" cols="46" /><br />
+	<f:form.submit>Create</f:form.submit>
+</f:form>
