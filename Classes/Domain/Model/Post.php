@@ -1,0 +1,334 @@
+<?php
+
+/***************************************************************
+*  Copyright notice
+*
+*  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+*  All rights reserved
+*
+*  This script is part of the TYPO3 project. The TYPO3 project is
+*  free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  The GNU General Public License can be found at
+*  http://www.gnu.org/copyleft/gpl.html.
+*
+*  This script is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
+
+/**
+ * A blog post
+ *
+ * @package Blog
+ * @subpackage Domain
+ * @version $Id:$
+ * @copyright Copyright belongs to the respective authors
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * @scope prototype
+ * @entity
+ */
+class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
+
+	/**
+	 * @var int The uid of the blog the post is related to
+	 */
+	protected $blogUid;
+
+	/**
+	 * @var string
+	 */
+	protected $title;
+
+	/**
+	 * @var DateTime
+	 */
+	protected $date;
+
+	/**
+	 * @var array
+	 */
+	protected $tags = array();
+
+	/**
+	 * @var string
+	 */
+	protected $author;
+
+	/**
+	 * @var string
+	 */
+	protected $content;
+
+	/**
+	 * @var integer
+	 */
+	protected $votes;
+
+	/**
+	 * @var array()
+	 */
+	protected $comments = array();
+
+	/**
+	 * @var boolean
+	 */
+	protected $published = FALSE;
+
+	/**
+	 * Constructs this post
+	 */
+	public function __construct() {
+		$this->date = new DateTime();
+	}	
+	
+	/**
+	 * Sets the uid of the blog this post is related to
+	 *
+	 * @param int $blogUid The blog uid
+	 * @return void
+	 */
+	public function setBlogUid($blogUid) {
+		$this->blogUid = $blogUid;
+	}
+
+	/**
+	 * Returns the uid of the blog this post is related to
+	 *
+	 * @return int The blog uid this post is part of
+	 */
+	public function getBlogUid() {
+		return $this->blogUid;
+	}
+	
+	/**
+	 * Setter for title
+	 *
+	 * @param string $title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+
+	/**
+	 * Getter for title
+	 *
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
+	 * Setter for date
+	 *
+	 * @param DateTime $date
+	 * @return void
+	 */
+	public function setDate(DateTime $date) {
+		$this->date = $date;
+	}
+
+	/**
+	 * Getter for date
+	 *
+	 *
+	 * @return DateTime
+	 */
+	public function getDate() {
+		return $this->date;
+	}
+
+	/**
+	 * Setter for tags
+	 *
+	 * @param array $tags One or more Tx_BlogExample_Domain_Model_Tag objects
+	 * @return void
+	 */
+	public function setTags(array $tags) {
+		foreach ($tags as $tag) {
+			$this->addTag($tag);			
+		}
+	}
+
+	/**
+	 * Adds a tag to this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @return void
+	 */
+	public function addTag(Tx_BlogExample_Domain_Model_Tag $tag) {
+		$this->tags[] = $tag;
+	}
+
+	/**
+	 * Adds a tag to this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @return void
+	 */
+	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tagToDelete) {
+		foreach ($this->tags as $key => $tag) {
+			if ($tag === $tagToDelete) {
+				unset($this->tags[$key]);
+				reset($this->tags);
+				return;
+			}
+		}
+	}
+	
+	/**
+	 * Remove all tags from this post
+	 *
+	 * @return void
+	 */
+	public function removeAllTags() {
+		$this->tags = array();
+	}
+
+	/**
+	 * Getter for tags
+	 *
+	 * @return array holding Tx_BlogExample_Domain_Model_Tag objects
+	 */
+	public function getTags() {
+		return $this->tags;
+	}
+
+	/**
+	 * Sets the author for this post
+	 *
+	 * @param string $author
+	 * @return void
+	 */
+	public function setAuthor($author) {
+		$this->author = $author;
+	}
+
+	/**
+	 * Getter for author
+	 *
+	 * @return string
+	 */
+	public function getAuthor() {
+		return $this->author;
+	}
+
+	/**
+	 * Sets the content for this post
+	 *
+	 * @param string $content
+	 * @return void
+	 */
+	public function setContent($content) {
+		$this->content = $content;
+	}
+
+	/**
+	 * Getter for content
+	 *
+	 * @return string
+	 */
+	public function getContent() {
+		return $this->content;
+	}
+
+	/**
+	 * Sets the votes for this post
+	 *
+	 * @param integer $votes
+	 * @return void
+	 */
+	public function setVotes($votes) {
+		$this->votes = $votes;
+	}
+
+	/**
+	 * Getter for votes
+	 *
+	 * @return integer
+	 */
+	public function getVotes() {
+		return $this->votes;
+	}
+
+	/**
+	 * Setter for the comments to this post
+	 *
+	 * @param array $comments an array of Tx_BlogExample_Domain_Model_Comment instances
+	 * @return void
+	 */
+	public function setComments(array $comments) {
+		foreach ($comments as $comment) {
+			$this->addComment($comment);
+		}
+	}
+
+	/**
+	 * Adds a comment to this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Comment $comment
+	 * @return void
+	 */
+	public function addComment(Tx_BlogExample_Domain_Model_Comment $comment) {
+		$this->comments[] = $comment;			
+	}
+	
+	/**
+	 * Remove all comments from this post
+	 *
+	 * @return void
+	 */
+	public function removeAllComments() {
+		$this->comments = array();
+	}
+
+	/**
+	 * Returns the comments to this post
+	 *
+	 * @return array of Tx_BlogExample_Domain_Model_Comment
+	 */
+	public function getComments() {
+		return $this->comments;
+	}
+
+	/**
+	 * Sets the published/unpublished state for this post
+	 *
+	 * @param boolean $published
+	 * @return void
+	 */
+	public function setPublished($published) {
+		$this->published = $published;
+	}
+
+	/**
+	 * Getter for published/unpublished state of this post
+	 *
+	 * @return boolean
+	 */
+	public function getPublished() {
+		return $this->published;
+	}
+	
+	/**
+	 * Returns this post as a formatted string
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->title . chr(10) .
+			' written on ' . $this->date->format('Y-m-d') . chr(10) .
+			' by ' . $this->author . chr(10) .
+			wordwrap($this->content, 70, chr(10)) . chr(10) .
+			implode(', ', $this->tags);
+	}
+}
+?>
