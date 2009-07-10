@@ -117,6 +117,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function deleteAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->blogRepository->remove($blog);
+//		$this->pushFlashMessage('Your blog has been removed.');
 		$this->redirect('index');
 	}
 
@@ -138,9 +139,10 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @return void
 	 */
-	public function populateAction() {		
+	public function populateAction() {
+		$author = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Person', 'Jochen', 'Rau', 'foo.bar@typoplanet.de');
 		for ($blogNumber = 1; $blogNumber < 4; $blogNumber++) { 
-			$blog = $this->getBlog($blogNumber);
+			$blog = $this->getBlog($blogNumber, $author);
 			$this->blogRepository->add($blog);
 		}
 		$this->redirect('index');
@@ -150,9 +152,10 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 * Returns a sample blog populated with generic data. It is also an example how to handle objects and repositories in general.
 	 *
 	 * @param int $blogNumber The number of the blog
+	 * @param Tx_BlogExample_Domain_Model_Person $author The author of posts
 	 * @return Tx_BlogExample_Domain_Model_Blog The blog object
 	 */
-	private function getBlog($blogNumber) {
+	private function getBlog($blogNumber, $author) {
 		$blog = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Blog');
 		$blog->setName('Blog #' . $blogNumber);
 		$blog->setDescription('A blog about TYPO3 extension development.');
@@ -160,7 +163,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 		for ($postNumber = 1; $postNumber < 3; $postNumber++) {
 			$post = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Post');
 			$post->setTitle('The Post #' . $postNumber);
-			$post->setAuthor('Jochen Rau');
+			$post->setAuthor($author);
 			$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
 			$post->setPublished(TRUE);
 			$post->setVotes('5.00');

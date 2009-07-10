@@ -58,16 +58,16 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * The posts contained in this blog
 	 *
-	 * @var array
+	 * @var Tx_Extbase_Persistence_ObjectStorage
 	 */
-	protected $posts = array();
+	protected $posts;
 
 	/**
-	 * Constructs this blog
+	 * Constructs a new Blog
 	 *
-	 * @return
 	 */
 	public function __construct() {
+		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 	
 	/**
@@ -115,8 +115,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addPost(Tx_BlogExample_Domain_Model_Post $post) {
-		// $post->setBlogUid($this->getUid());
-		$this->posts[] = $post;
+		$this->posts->attach($post);
 	}
 
 	/**
@@ -126,13 +125,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removePost(Tx_BlogExample_Domain_Model_Post $postToRemove) {
-		foreach ($this->posts as $key => $post) {
-			if ($post === $postToRemove) {
-				unset($this->posts[$key]);
-				reset($this->posts);
-				return;
-			}
-		}
+		$this->posts->detach($postToRemove);
 	}
 	
 	/**
@@ -141,84 +134,20 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removeAllPosts() {
-		$this->posts = array();
+		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return array of Tx_BlogExample_Domain_Model_Post
+	 * @return Tx_Extbase_Persistence_ObjectStorage
 	 */
 	public function getPosts() {
-		return $this->posts;
-	}
-
-	/**
-	 * Returns the latest $count posts from the blog
-	 *
-	 * @param integer $count
-	 * @return array of Tx_BlogExample_Domain_Model_Post
-	 */
-	public function getLatestPosts($count = 5) {
-		$posts = $this->posts->toArray();
-		return array_slice($posts, -$count, $count, TRUE);
-	}
-
-	/**
-	 * Returns single post by its identifyer
-	 *
-	 * @param string $uid the post uid
-	 * @return Tx_BlogExample_Domain_Model_Post post or NULL if not found
-	 */
-	public function findPostByUid($uid) {
-		if (array_key_exists($uid, $this->posts)) {
-			return $this->posts[$uid];
-		} else {
-			return NULL;
+		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->posts->_loadRealInstance();
 		}
+		return clone $this->posts;
 	}
 
-	/**
-	 * Returns single post posts by title
-	 *
-	 * @param string $postTitle the title of this post
-	 * @return Tx_BlogExample_Domain_Model_Post post or NULL if not found
-	 */
-	public function findPostByTitle($postTitle) {
-		foreach ($this->posts as $post) {
-			if (strtolower($post->getTitle()) === strtolower($postTitle)) {
-				return $post;
-			}
-		}
-		return NULL;
-	}
-
-	/**
-	 * Returns posts posts by tag
-	 *
-	 * @param string $tag
-	 * @return array of Tx_BlogExample_Domain_Model_Post
-	 */
-	public function findPostsByTag($tag) {
-		$foundPosts = array();
-		foreach ($this->posts as $post) {
-			foreach ($post->getTags() as $postTag) {
-				if (strtolower($postTag) === strtolower($tag)) {
-					$foundPosts[] = $post;
-					break;
-				}
-			}
-		}
-		return $foundPosts;
-	}
-
-	/**
-	 * Returns this blog as a formatted string
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		return $this->name;
-	}
 }
 ?>

@@ -49,6 +49,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	public function initializeAction() {
 		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_BlogRepository');
 		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PostRepository');
+		$this->personRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PersonRepository');
 	}
 
 	/**
@@ -79,6 +80,11 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @return string An HTML form for creating a new post
 	 */
 	public function newAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $newPost = NULL) {
+		$this->view->assign('authors', $this->personRepository->findAll());
+		$tag1 = new Tx_BlogExample_Domain_Model_Tag('Foo');
+		$tag2 = new Tx_BlogExample_Domain_Model_Tag('Bar');
+		$tag3 = new Tx_BlogExample_Domain_Model_Tag('Baz');
+		$this->view->assign('tags', array($tag1, $tag2, $tag3)); // TODO Crude, but it works for demonstration
 		$this->view->assign('blog', $blog);
 		$this->view->assign('newPost', $newPost);
 	}
@@ -88,6 +94,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post belogns to
 	 * @param Tx_BlogExample_Domain_Model_Post $newBlog A fresh Blog object which has not yet been added to the repository
+	 * @param array $tags The tags
 	 * @return void
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $newPost) {
@@ -103,6 +110,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @return string Form for editing the existing blog
 	 */
 	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
+		$this->view->assign('authors', $this->personRepository->findAll());
 		$this->view->assign('blog', $blog);
 		$this->view->assign('post', $post);
 	}

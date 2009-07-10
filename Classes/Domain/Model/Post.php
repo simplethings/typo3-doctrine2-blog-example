@@ -52,12 +52,12 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	protected $date;
 
 	/**
-	 * @var array
+	 * @var Tx_Extbase_Persistence_ObjectStorage
 	 */
-	protected $tags = array();
+	protected $tags;
 
 	/**
-	 * @var string
+	 * @var Tx_BlogExample_Model_Person
 	 */
 	protected $author;
 
@@ -72,9 +72,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	protected $votes;
 
 	/**
-	 * @var array()
+	 * @var Tx_Extbase_Persistence_ObjectStorage
 	 */
-	protected $comments = array();
+	protected $comments;
 
 	/**
 	 * @var boolean
@@ -85,6 +85,8 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * Constructs this post
 	 */
 	public function __construct() {
+		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->date = new DateTime();
 	}	
 	
@@ -165,7 +167,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addTag(Tx_BlogExample_Domain_Model_Tag $tag) {
-		$this->tags[] = $tag;
+		$this->tags->attach($tag);
 	}
 
 	/**
@@ -190,7 +192,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removeAllTags() {
-		$this->tags = array();
+		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 
 	/**
@@ -205,17 +207,17 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the author for this post
 	 *
-	 * @param string $author
+	 * @param Tx_BlogExample_Domain_Model_Person $author
 	 * @return void
 	 */
-	public function setAuthor($author) {
+	public function setAuthor(Tx_BlogExample_Domain_Model_Person $author) {
 		$this->author = $author;
 	}
 
 	/**
 	 * Getter for author
 	 *
-	 * @return string
+	 * @return Tx_BlogExample_Domain_Model_Person
 	 */
 	public function getAuthor() {
 		return $this->author;
@@ -278,7 +280,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addComment(Tx_BlogExample_Domain_Model_Comment $comment) {
-		$this->comments[] = $comment;			
+		$this->comments->attach($comment);
 	}
 	
 	/**
@@ -287,7 +289,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removeAllComments() {
-		$this->comments = array();
+		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 
 	/**

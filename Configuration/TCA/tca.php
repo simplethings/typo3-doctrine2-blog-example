@@ -54,6 +54,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_blog.posts',
 			'config' => array(
 				'type' => 'inline',
+				'loadingStrategy' => 'proxy',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
 				'foreign_field' => 'blog_uid',
@@ -109,13 +110,13 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			)
 		),
 		'author' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.author',
-			'config'  => array(
-				'type' => 'input',
-				'size' => 20,
-				'eval' => 'trim, required',
-				'max'  => 256
+			'config' => array(
+				'type' => 'select',
+				'foreign_class' => 'Tx_BlogExample_Domain_Model_Person',
+				'foreign_table' => 'tx_blogexample_domain_model_person',
+				'maxitems' => 1,
 			)
 		),
 		'content' => array(
@@ -259,6 +260,73 @@ $TCA['tx_blogexample_domain_model_comment'] = array(
 	),
 	'types' => array(
 		'1' => array('showitem' => 'hidden, date, author, email, content')
+	),
+	'palettes' => array(
+		'1' => array('showitem' => '')
+	)
+);
+
+$TCA['tx_blogexample_domain_model_person'] = array(
+	'ctrl' => $TCA['tx_blogexample_domain_model_person']['ctrl'],
+	'interface' => array(
+		'showRecordFieldList' => 'firstname, lastname, email, avatar'
+	),
+	'columns' => array(
+		'hidden' => array(
+			'exclude' => 1,
+			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+			'config'  => array(
+				'type' => 'check'
+			)
+		),
+		'firstname' => array(
+			'exclude' => 0,
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_person.firstname',
+			'config'  => array(
+				'type' => 'input',
+				'size' => 20,
+				'eval' => 'trim,required',
+				'max'  => 256
+			)
+		),
+		'lastname' => array(
+			'exclude' => 0,
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_person.lastname',
+			'config'  => array(
+				'type' => 'input',
+				'size' => 20,
+				'eval' => 'trim,required',
+				'max'  => 256
+			)
+		),
+		'email' => array(
+			'exclude' => 0,
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_person.email',
+			'config'  => array(
+				'type' => 'input',
+				'size' => 20,
+				'eval' => 'trim, required',
+				'max'  => 256
+			)
+		),
+		'avatar' => array(
+			'exclude' => 1,
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_person.avatar',
+			'config'  => array(
+				'type'          => 'group',
+				'internal_type' => 'file',
+				'allowed'       => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+				'max_size'      => 3000,
+				'uploadfolder'  => 'uploads/pics',
+				'show_thumbs'   => 1,
+				'size'          => 1,
+				'maxitems'      => 1,
+				'minitems'      => 0
+			)
+		),
+	),
+	'types' => array(
+		'1' => array('showitem' => 'firstname, lastname, email, avatar')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

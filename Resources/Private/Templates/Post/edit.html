@@ -1,7 +1,7 @@
 <div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit post "{post.title}"</h1></div>
 <f:form method="post" controller="Post" action="update" name="updatedPost" object="{post}" arguments="{post : post, blog : blog}" >
 	<label for="author">Author</label><br />
-	<f:form.textbox property="author" /><br />
+	<f:form.select value="{post.author.uid}" name="author" options="{authors}" optionValueField="uid" optionLabelField="fullName"><select><option>###dummy###</option></select></f:form.select><br />
 	<label for="title">Title</label><br />
 	<f:form.textbox property="title" /><br />
 	<label for="content">Content</label><br />

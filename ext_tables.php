@@ -5,7 +5,7 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
  * A fully configured omnipotent plugin
  */
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'BlogExample',																	// The name of the extension in UpperCamelCase
+	$_EXTKEY,																		// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 	'Pi1',																			// A unique name of the plugin in UpperCamelCase
 	'A Blog Example',																// A title shown in the backend dropdown field
 	array(																			// An array holding the controller-action-combinations that are accessible 
@@ -106,6 +106,28 @@ $TCA['tx_blogexample_domain_model_comment'] = array (
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca.php',
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Private/Icons/icon_tx_blogexample_domain_model_comment.gif'
+	)
+);
+
+t3lib_extMgm::allowTableOnStandardPages('tx_blogexample_domain_model_person');
+$TCA['tx_blogexample_domain_model_person'] = array (
+	'ctrl' => array (
+		'title'             => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_person',
+		'label' 			=> 'lastname',
+		'label_alt'			=> 'firstname',
+		'label_alt_force'	=> TRUE,
+		'tstamp' 			=> 'tstamp',
+		'crdate' 			=> 'crdate',
+		'versioningWS' 		=> 2,
+		'versioning_followPages'	=> true,
+		'origUid' 			=> 't3_origuid',
+		'prependAtCopy' 	=> 'LLL:EXT:lang/locallang_general.xml:LGL.prependAtCopy',
+		'delete' 			=> 'deleted',
+		'enablecolumns' 	=> array(
+			'disabled' => 'hidden'
+			),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca.php',
+		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Private/Icons/icon_tx_blogexample_domain_model_person.gif'
 	)
 );
 

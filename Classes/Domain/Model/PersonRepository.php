@@ -24,56 +24,10 @@
 ***************************************************************/
 
 /**
- * A blog post tag
+ * A repository for Persons
  *
- * @package Blog
- * @subpackage Domain
- * @version $Id:$
- * @copyright Copyright belongs to the respective authors
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @scope prototype
- * @valueobject
  */
-class Tx_BlogExample_Domain_Model_Tag extends Tx_Extbase_DomainObject_AbstractValueObject {
+class Tx_BlogExample_Domain_Model_PersonRepository extends Tx_Extbase_Persistence_Repository {
 
-	/**
-	 * @var string
-	 */
-	protected $name;
-
-	/*
-	 * Constructs this tag
-	 */
-	public function __construct($name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * Setter for name
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * Returns this tag's name
-	 *
-	 * @return string This tag's name
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * Returns this tag as a formatted string
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		return $this->getName();
-	}
 }
 ?>
