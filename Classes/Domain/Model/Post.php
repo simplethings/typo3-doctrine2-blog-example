@@ -69,7 +69,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * @var integer
 	 */
-	protected $votes;
+	protected $votes = 0;
 
 	/**
 	 * @var Tx_Extbase_Persistence_ObjectStorage

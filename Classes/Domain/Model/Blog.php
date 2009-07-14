@@ -53,7 +53,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 *
 	 * @var string
 	 */
-	protected $logo;
+	protected $logo = '';
 
 	/**
 	 * The posts contained in this blog

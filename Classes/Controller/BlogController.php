@@ -183,12 +183,10 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 			$comment->setContent('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
 			$post->addComment($comment);
 
-			$tag = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Tag');
-			$tag->setName('MVC');
+			$tag = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Tag', 'MVC');
 			$post->addTag($tag);
 
-			$tag = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Tag');
-			$tag->setName('Domain Driven Design');
+			$tag = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Tag', 'Domain Driven Design');
 			$post->addTag($tag);
 		}
 		return $blog;
