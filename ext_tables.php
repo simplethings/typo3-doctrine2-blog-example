@@ -2,22 +2,12 @@
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 /**
- * A fully configured omnipotent plugin
+ * Registers a Plugin to be listed in the Backend. You also have to configure the Dispatcher in ext_localconf.php.
  */
 Tx_Extbase_Utility_Plugin::registerPlugin(
 	$_EXTKEY,																		// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 	'Pi1',																			// A unique name of the plugin in UpperCamelCase
-	'A Blog Example',																// A title shown in the backend dropdown field
-	array(																			// An array holding the controller-action-combinations that are accessible 
-		'Blog' => 'index,show,new,create,delete,deleteAll,edit,update,populate',	// The first controller and its first action will be the default 
-		'Post' => 'index,show,new,create,delete,edit,update',
-		'Comment' => 'create',
-		),
-	array(																			// An array of non-cachable controller-action-combinations (they must already be enabled)
-		'Blog' => 'delete,deleteAll,edit,update,populate',
-		'Post' => 'show,delete,edit,update',
-		'Comment' => 'create',
-		)
+	'A Blog Example'																// A title shown in the backend dropdown field
 );
 
 /**
