@@ -10,11 +10,6 @@ Tx_Extbase_Utility_Plugin::registerPlugin(
 	'A Blog Example'																// A title shown in the backend dropdown field
 );
 
-/**
- * A minimalistic configuration
- */
-// Tx_Extbase_Utility_Plugin::registerPlugin('BlogExample', 'Pi1', 'A Blog Example', array('Blog' => 'index,show,edit'));
-
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Blog Example');
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';

@@ -61,6 +61,13 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @var Tx_Extbase_Persistence_ObjectStorage
 	 */
 	protected $posts;
+	
+	/**
+	 * The Administrator of the blog
+	 *
+	 * @var Tx_Extbase_Domain_Model_FrontendUser
+	 */
+	protected $administrator;
 
 	/**
 	 * Constructs a new Blog
@@ -147,6 +154,25 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 			$this->posts->_loadRealInstance();
 		}
 		return clone $this->posts;
+	}
+	
+	/**
+	 * Sets the administrator value
+	 *
+	 * @param Tx_Extbase_Domain_Model_FrontendUser $administrator The Administrator of this Blog
+	 * @return void
+	 */
+	public function setAdministrator(Tx_Extbase_Domain_Model_FrontendUser $administrator) {
+		$this->administrator = $administrator;
+	}
+	
+	/**
+	 * Returns the administrator value
+	 *
+	 * @return Tx_Extbase_Domain_Model_FrontendUser
+	 */
+	public function getAdministrator() {
+		return $this->administrator;
 	}
 
 }

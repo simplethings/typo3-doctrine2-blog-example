@@ -1,5 +1,15 @@
 <div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Welcome to {blog.name}</h1></div>
-<p class="bodytext">{blog.description} In order to start blogging, read the <a href="#">Help section</a>.</p>
+<p class="bodytext">{blog.description} In order to start blogging, read the <a href="#">Help section</a>.
+<f:if condition="{blog.administrator}">
+	<f:then>
+		If you have any further questions, feel free to ask the administrator {blog.administrator.name}
+		<f:if condition="{blog.administrator.email}">(<a href="mailto:{blog.administrator.email}">{blog.administrator.email})</a></f:if>.
+	</f:then>
+	<f:else>
+		There is currently no administrator assigned to this Blog.
+	</f:else>
+</f:if>
+</p>
 <div class="tx-blogexample-list-container">
 	<f:if condition="{blog.posts}">
 		<f:then>

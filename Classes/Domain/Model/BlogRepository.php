@@ -46,5 +46,42 @@ class Tx_BlogExample_Domain_Model_BlogRepository extends Tx_Extbase_Persistence_
 			parent::remove($blog);
 		}
 	}
+
+	public function findSpecial() {
+		$query = $this->createQuery();
+//		$query->matching(
+//			$query->logicalAnd(
+// 				$query->logicalNot($query->like('description', '%foo%')),
+//				$query->logicalOr(
+//					$query->like('name', '%og%'),
+//					$query->like('name', '%asd%')
+//				)
+// 			)
+// 		)
+//		$query->matching(
+//			$query->logicalOr(
+//				$query->logicalNot($query->equals('column1', NULL)),
+//				$query->logicalOr(
+//					$query->like('column2', '%test%'),$query->like('column3', '%test%')
+//					)
+//				)
+//			);
+		$query->matching(
+			$query->logicalOr(
+				$query->logicalNot($query->equals('name', 'Blog #1')),
+				$query->logicalOr(
+					$query->like('description', '%test%'),$query->like('description', '%foo%')
+					)
+				)
+			);
+		$query->setOrderings(array('name' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+		$query->setLimit(2);
+		$query->setOffset(1);
+		
+
+		$blogs = $query->execute();
+
+		return $blogs;
+	}
 }
 ?>

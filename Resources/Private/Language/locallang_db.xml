@@ -11,6 +11,7 @@
 			<label index="tx_blogexample_domain_model_blog.description">Short description</label>
 			<label index="tx_blogexample_domain_model_blog.logo">Logo</label>
 			<label index="tx_blogexample_domain_model_blog.posts">Posts</label>
+			<label index="tx_blogexample_domain_model_blog.administrator">Administrator</label>
 			<label index="tx_blogexample_domain_model_post">Post</label>
 			<label index="tx_blogexample_domain_model_post.title">Title</label>
 			<label index="tx_blogexample_domain_model_post.date">Date</label>

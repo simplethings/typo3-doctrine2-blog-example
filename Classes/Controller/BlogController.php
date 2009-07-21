@@ -44,6 +44,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	public function initializeAction() {		
 		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_BlogRepository');
 		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PostRepository');
+		$this->administratorRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_AdministratorRepository');
 	}
 
 	/**
@@ -73,6 +74,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function newAction(Tx_BlogExample_Domain_Model_Blog $newBlog = NULL) {
 		$this->view->assign('newBlog', $newBlog);
+		$this->view->assign('administrators', $this->administratorRepository->findAll());	
 	}
 
 	/**
@@ -95,6 +97,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->view->assign('blog', $blog);
+		$this->view->assign('administrators', $this->administratorRepository->findAll());	
 	}
 
 	/**

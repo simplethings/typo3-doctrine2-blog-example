@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA['tx_blogexample_domain_model_blog'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_blog']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, name, description, logo, posts'
+		'showRecordFieldList' => 'hidden, name, description, logo, posts, administrator'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -66,9 +66,19 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				),
 			)
 		),
+		'administrator' => Array (		
+			'exclude' => 1,		
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_blog.administrator',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'fe_users',
+				'foreign_class' => 'Tx_BlogExample_Domain_Model_Administrator',
+				'maxitems' => 1,
+			)
+		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, name, description, logo, posts')
+		'1' => array('showitem' => 'hidden, name, description, logo, posts, administrator')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')
@@ -164,6 +174,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.comments',
 			'config' => array(
 				'type' => 'inline',
+				'loadingStrategy' => 'proxy',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Comment',
 				'foreign_table' => 'tx_blogexample_domain_model_comment',
 				'foreign_field' => 'post_uid',

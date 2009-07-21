@@ -7,6 +7,6 @@
 	<label for="content">Content <span class="required">(required)</span></label><br />
 	<f:form.textarea property="content" rows="8" cols="46" /><br />
 	<label for="tags">Tags</label><br />
-	<f:form.select property="tags" options="{tags}" multiple="multiple" size="5"><select><option>###dummy###</option></select></f:form.select>
+	<f:form.select property="tags" options="{tags}" value="{selected}" optionValueField="uid" optionLabelField="name" multiple="multiple" size="5"><select><option>###dummy###</option></select></f:form.select><br />
 	<f:form.submit>Create</f:form.submit>
 </f:form>
