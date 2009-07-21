@@ -298,7 +298,11 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return array of Tx_BlogExample_Domain_Model_Comment
 	 */
 	public function getComments() {
-		return $this->comments;
+		// TODO This should be invoked transparently
+		if ($this->comments instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->comments->_loadRealInstance();
+		}
+		return clone $this->comments;
 	}
 
 	/**

@@ -150,6 +150,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return Tx_Extbase_Persistence_ObjectStorage
 	 */
 	public function getPosts() {
+		// TODO This should be invoked transparently
 		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
 			$this->posts->_loadRealInstance();
 		}
