@@ -20,12 +20,6 @@ plugin.tx_blogexample {
 	}
 }
 
-
-plugin.tx_blogexample_pi1 < plugin.tx_blogexample
-plugin.tx_blogexample_pi1 {
-	maxItems = 5
-}
-
 # This is an example how to modify the translation
 plugin.tx_blogexample._LOCAL_LANG {
 	default {
