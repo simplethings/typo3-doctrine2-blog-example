@@ -35,35 +35,32 @@
 class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
-	 * The blog's name
+	 * The blog's title.
 	 *
 	 * @var string
+	 * @validate Text, StringLength(minimum = 1, maximum = 80)
+	 * @identity
 	 */
-	protected $name = '';
+	protected $title = '';
 
 	/**
 	 * A short description of the blog
 	 *
 	 * @var string
+	 * @validate Text, StringLength(maximum = 150)
 	 */
 	protected $description = '';
-
-	/**
-	 * The blog's logo
-	 *
-	 * @var string
-	 */
-	protected $logo = '';
 
 	/**
 	 * The posts contained in this blog
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage
+	 * @lazy
 	 */
 	protected $posts;
 	
 	/**
-	 * The Administrator of the blog
+	 * The blog's administrator
 	 *
 	 * @var Tx_Extbase_Domain_Model_FrontendUser
 	 */
@@ -78,24 +75,24 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	}
 	
 	/**
-	 * Sets this blog's name
+	 * Sets this blog's title
 	 *
-	 * @param string $name The blog's name
+	 * @param string $title The blog's title
 	 * @return void
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setTitle($title) {
+		$this->title = $title;
 	}
 
 	/**
-	 * Returns the blog's name
+	 * Returns the blog's title
 	 *
-	 * @return string The blog's name
+	 * @return string The blog's title
 	 */
-	public function getName() {
-		return $this->name;
+	public function getTitle() {
+		return $this->title;
 	}
-	
+
 	/**
 	 * Sets the description for the blog
 	 *

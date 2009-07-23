@@ -23,10 +23,10 @@ CREATE TABLE tx_blogexample_domain_model_blog (
 	l18n_parent int(11) DEFAULT '0' NOT NULL,
 	l18n_diffsource mediumblob NOT NULL,
 
-	name varchar(255) DEFAULT '' NOT NULL,
+	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	logo tinyblob NOT NULL,
-	administrator int(255) NOT NULL,
+	administrator int(255) DEFAULT '0' NOT NULL,
 
 	posts int(11) DEFAULT '0' NOT NULL,
 
@@ -61,7 +61,7 @@ CREATE TABLE tx_blogexample_domain_model_post (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
-	author int(255) NOT NULL,
+	author int(255) DEFAULT '0' NOT NULL,
 	content text NOT NULL,
 	votes varchar(8) DEFAULT '0' NOT NULL
 	published tinyint(4) unsigned DEFAULT '0' NOT NULL,

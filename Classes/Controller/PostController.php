@@ -32,11 +32,6 @@
 class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * @var Tx_BlogExample_Domain_Model_BlogRepository
-	 */
-	protected $blogRepository;
-
-	/**
 	 * @var Tx_BlogExample_Domain_Model_PostRepository
 	 */
 	protected $postRepository;
@@ -47,9 +42,8 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function initializeAction() {
-		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_BlogRepository');
-		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PostRepository');
-		$this->personRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PersonRepository');
+		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_PostRepository');
+		$this->personRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_PersonRepository');
 	}
 
 	/**

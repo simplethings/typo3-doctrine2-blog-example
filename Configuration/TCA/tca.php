@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA['tx_blogexample_domain_model_blog'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_blog']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, name, description, logo, posts, administrator'
+		'showRecordFieldList' => 'hidden, title, description, logo, posts, administrator'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -14,9 +14,9 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'type' => 'check'
 			)
 		),
-		'name' => array(
+		'title' => array(
 			'exclude' => 0,
-			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_blog.name',
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_blog.title',
 			'config'  => array(
 				'type' => 'input',
 				'size' => 20,
@@ -78,7 +78,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, name, description, logo, posts, administrator')
+		'1' => array('showitem' => 'hidden, title, description, logo, posts, administrator')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

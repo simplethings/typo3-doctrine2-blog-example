@@ -1,10 +1,12 @@
 <?php
-
 /***************************************************************
 *  Copyright notice
 *
 *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
 *  All rights reserved
+*
+*  This class is a backport of the corresponding class of FLOW3.
+*  All credits go to the v5 team.
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
 *  free software; you can redistribute it and/or modify
@@ -24,10 +26,32 @@
 ***************************************************************/
 
 /**
- * A repository for Persons
+ * A Blogvalidator
  *
+ * @version $Id: BlogValidator.php 2863 2009-07-22 15:03:14Z robert $
+ * @copyright Copyright belongs to the respective authors
+ * @scope singleton
  */
-class Tx_BlogExample_Domain_Model_PersonRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_BlogExample_Domain_Validator_BlogValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+
+	/**
+	 * If the given blog is valid
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog
+	 * @return boolean true
+	 */
+	public function isValid($blog) {
+		return TRUE; // FIXME Validation is TRUE at any time
+		if (!$blog instanceof Tx_BlogExample_Domain_Model_Blog) {
+			$this->addError('The blog is not a blog', 1);
+			return FALSE;
+		}
+		if ($blog->getIdentifier() === 'Extbase') {
+			$this->addError('"Extbase" can\'t be used as a blog name.', 2);
+			return FALSE;
+		}
+		return TRUE;
+	}
 
 }
 ?>

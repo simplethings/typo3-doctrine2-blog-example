@@ -25,11 +25,8 @@
 
 /**
  * A repository for Blogs
- *
- * @copyright Copyright belongs to the respective authors
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class Tx_BlogExample_Domain_Model_BlogRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {
 	
 	/**
 	 * Remove the blog's posts before removing the blog itself.
@@ -66,17 +63,21 @@ class Tx_BlogExample_Domain_Model_BlogRepository extends Tx_Extbase_Persistence_
 //					)
 //				)
 //			);
+//		$query->matching(
+//			$query->logicalOr(
+//				$query->logicalNot($query->equals('name', 'Blog #1')),
+//				$query->logicalOr(
+//					$query->like('description', '%test%'),$query->like('description', '%foo%')
+//					)
+//				)
+//			);
 		$query->matching(
-			$query->logicalOr(
-				$query->logicalNot($query->equals('name', 'Blog #1')),
-				$query->logicalOr(
-					$query->like('description', '%test%'),$query->like('description', '%foo%')
-					)
-				)
+				$query->greaterThan('name', 'C')
 			);
-		$query->setOrderings(array('name' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
-		$query->setLimit(2);
-		$query->setOffset(1);
+			
+//		$query->setOrderings(array('name' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+//		$query->setLimit(1);
+//		$query->setOffset(1);
 		
 
 		$blogs = $query->execute();

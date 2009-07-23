@@ -24,11 +24,9 @@
 ***************************************************************/
 
 /**
- * A repository for Posts
- *
- * @copyright Copyright belongs to the respective authors
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * A repository for Persons
  */
-class Tx_BlogExample_Domain_Model_PostRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_BlogExample_Domain_Repository_PersonRepository extends Tx_Extbase_Persistence_Repository {
+
 }
 ?>

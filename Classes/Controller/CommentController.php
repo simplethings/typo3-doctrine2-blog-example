@@ -32,20 +32,6 @@
 class Tx_BlogExample_Controller_CommentController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * @var Tx_BlogExample_Domain_Model_BlogRepository
-	 */
-	protected $blogRepository;
-
-	/**
-	 * Initializes the current action
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PostRepository');
-	}
-
-	/**
 	 * Action that adds a comment to a blog post and redirects to single view
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Post $post The post the comment is related to

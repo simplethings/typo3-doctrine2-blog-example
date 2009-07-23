@@ -42,9 +42,9 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function initializeAction() {		
-		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_BlogRepository');
-		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_PostRepository');
-		$this->administratorRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_AdministratorRepository');
+		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_BlogRepository');
+		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_PostRepository');
+		$this->administratorRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_AdministratorRepository');
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	private function getBlog($blogNumber, $author) {
 		$blog = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Blog');
-		$blog->setName('Blog #' . $blogNumber);
+		$blog->setTitle('Blog #' . $blogNumber);
 		$blog->setDescription('A blog about TYPO3 extension development.');
 
 		for ($postNumber = 1; $postNumber < 3; $postNumber++) {

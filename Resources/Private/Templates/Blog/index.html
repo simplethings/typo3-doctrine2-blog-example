@@ -4,7 +4,7 @@
 <ul>
 	<f:for each="{blogs}" as="blog">
 		<li>
-			<h3><f:link.action controller="Post" action="index" arguments="{blog : blog}">{blog.name}</f:link.action></h3>
+			<h3><f:link.action controller="Post" action="index" arguments="{blog : blog}">{blog.title}</f:link.action></h3>
 			<p>
 				<f:format.Nl2br>{blog.description}</f:format.Nl2br><br />
 				<f:link.action action="show" arguments="{blog : blog}">Show</f:link.action>

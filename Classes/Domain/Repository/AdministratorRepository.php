@@ -25,9 +25,8 @@
 
 /**
  * A repository for Persons
- *
  */
-class Tx_BlogExample_Domain_Model_AdministratorRepository extends Tx_Extbase_Domain_Model_FrontendUserRepository {
+class Tx_BlogExample_Domain_Repository_AdministratorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
 
 }
 ?>
