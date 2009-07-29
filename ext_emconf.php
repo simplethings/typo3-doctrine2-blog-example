@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext: "blog_example"
 #
-# Auto generated 
+# Auto generated
 #
 # Manual updates:
 # Only the data in the array - anything else is removed by next write.
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
-	'version' => '0.9.0',
+	'version' => '0.9.3',
 	'constraints' => array(
 		'depends' => array(
 			'php' => '5.2.0-0.0.0',
