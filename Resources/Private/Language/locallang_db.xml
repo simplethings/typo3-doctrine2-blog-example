@@ -21,6 +21,7 @@
 			<label index="tx_blogexample_domain_model_post.published">Published</label>
 			<label index="tx_blogexample_domain_model_post.tags">Tags</label>
 			<label index="tx_blogexample_domain_model_post.comments">Comments</label>
+			<label index="tx_blogexample_domain_model_post.related">Related posts</label>
 			<label index="tx_blogexample_domain_model_person">Person</label>
 			<label index="tx_blogexample_domain_model_person.firstname">Firstname</label>
 			<label index="tx_blogexample_domain_model_person.lastname">Lastname</label>

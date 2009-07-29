@@ -5,11 +5,15 @@
 	</h3>
 	<p class="bodytext"><f:format.Nl2br>{post.content}</f:format.Nl2br></p>
 	<p class="bodytext">By: {post.author.fullName}</p>
-	<div class="tx-blogexample-tags">
+	<p class="bodytext">
 		Tags: <f:for each="{post.tags}" as="tag">[{tag.name}] </f:for>
-	</div>
-
-	<hr class="clearer" />
+	</p>
+	<f:if condition="{post.relatedPosts}">
+		<div>Related posts:</div>
+		<ul class="tx-blogexample-related">
+			<f:for each="{post.relatedPosts}" as="relatedPost"><li><f:link.action action="show" controller="Post" arguments="{post: relatedPost, blog: post.blog}">{relatedPost.title}</f:link.action></f:for>
+		</ul>	
+	</f:if>
 	<div class="tx-blogexample-single-backlink"></div>
 </div>
 <div class="tx-blogexample-comment-list">

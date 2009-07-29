@@ -55,10 +55,12 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'config' => array(
 				'type' => 'inline',
 				'loadingStrategy' => 'proxy',
+				'deleteRelationsWithParent' => 1,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
-				'foreign_field' => 'blog_uid',
-				'foreign_table_field' => 'blog_table',
+				// TODO Re-enable the foreign key references by uncommenting the following two lines
+//				'foreign_field' => 'blog_uid',
+//				'foreign_table_field' => 'blog_table',
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
@@ -73,6 +75,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Administrator',
+				'foreign_table_where' => 'AND fe_users.pid=###STORAGE_PID###',
 				'maxitems' => 1,
 			)
 		),
@@ -88,7 +91,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 $TCA['tx_blogexample_domain_model_post'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_post']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, title, date, author, content, votes, published, tags, comments'
+		'showRecordFieldList' => 'hidden, title, date, author, content, votes, published, tags, comments, related_posts'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -166,7 +169,8 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'multiple' => 1,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Tag',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
-				'MM' => 'tx_blogexample_post_tag_mm'
+				'MM' => 'tx_blogexample_post_tag_mm',
+				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
 			)
 		),
 		'comments' => array(
@@ -186,19 +190,38 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				),
 			)
 		),
-		'blog_uid' => array(		
+		'related_posts' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.related',
 			'config' => array(
-				'type' => 'passthrough',	
-			)
+				'type' => 'select',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 9999,
+				'autoSizeMax' => 30,
+				'multiple' => 0,
+				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
+				'foreign_table' => 'tx_blogexample_domain_model_post',
+				'foreign_table_where' => 'AND tx_blogexample_domain_model_post.blog_uid=###REC_FIELD_blog_uid### AND tx_blogexample_domain_model_post.uid!=###THIS_UID###',
+				'MM' => 'tx_blogexample_post_post_mm',
+				//'MM_opposite_field' => 'related_posts', // FIXME MM_opposite_field does not work
+				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
+		)
 		),
-		'blog_table' => array(		
-			'config' => array(
-				'type' => 'passthrough',	
-			)
-		),
+		// TODO Re-enable the foreign key references by uncommenting the following two column configurations
+//		'blog_uid' => array(		
+//			'config' => array(
+//				'type' => 'passthrough',	
+//			)
+//		),
+//		'blog_table' => array(		
+//			'config' => array(
+//				'type' => 'passthrough',	
+//			)
+//		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, title, date, author, content, votes, published, tags, comments')
+		'1' => array('showitem' => 'hidden, title, date, author, content, votes, published, tags, comments, related_posts')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

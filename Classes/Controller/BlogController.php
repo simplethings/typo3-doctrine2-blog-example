@@ -148,6 +148,11 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 			$blog = $this->getBlog($blogNumber, $author);
 			$this->blogRepository->add($blog);
 		}
+		
+		// Code for testing #4011
+		//$post = $this->postRepository->findOneByName('Post #1');
+		//$blog->addPost($post);
+		
 		$this->redirect('index');
 	}
 	
@@ -159,19 +164,26 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 * @return Tx_BlogExample_Domain_Model_Blog The blog object
 	 */
 	private function getBlog($blogNumber, $author) {
-		$blog = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Blog');
+		$blog = new Tx_BlogExample_Domain_Model_Blog;
 		$blog->setTitle('Blog #' . $blogNumber);
 		$blog->setDescription('A blog about TYPO3 extension development.');
+		
+		$administrator = new Tx_BlogExample_Domain_Model_Administrator('foobar', '123455');
+		$administrator->setName('John Doe');
+		$administrator->setEmail('john.doe@example.com');
+		$administrator->setUsername(''); // For security reasons
+		$administrator->setPassword(''); // For security reasons
+		$blog->setAdministrator($administrator);
 
-		for ($postNumber = 1; $postNumber < 3; $postNumber++) {
-			$post = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Post');
+		for ($postNumber = 1; $postNumber < 4; $postNumber++) {
+			$post = new Tx_BlogExample_Domain_Model_Post;
 			$post->setTitle('The Post #' . $postNumber);
 			$post->setAuthor($author);
 			$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
 			$post->setPublished(TRUE);
 			$post->setVotes('5.00');
 			$blog->addPost($post);
-
+						
 			$comment = new Tx_BlogExample_Domain_Model_Comment;
 			$comment->setDate(new DateTime);
 			$comment->setAuthor('Peter Pan');
@@ -186,12 +198,13 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 			$comment->setContent('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
 			$post->addComment($comment);
 
-			$tag = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Tag', 'MVC');
+			$tag = new Tx_BlogExample_Domain_Model_Tag('MVC');
 			$post->addTag($tag);
 
-			$tag = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Tag', 'Domain Driven Design');
+			$tag = new Tx_BlogExample_Domain_Model_Tag('Domain Driven Design');
 			$post->addTag($tag);
 		}
+			
 		return $blog;
 	}
 		

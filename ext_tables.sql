@@ -26,9 +26,9 @@ CREATE TABLE tx_blogexample_domain_model_blog (
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	logo tinyblob NOT NULL,
-	administrator int(255) DEFAULT '0' NOT NULL,
+	administrator varchar(255) DEFAULT '',
 
-	posts int(11) DEFAULT '0' NOT NULL,
+	posts varchar(255) DEFAULT '' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -67,6 +67,7 @@ CREATE TABLE tx_blogexample_domain_model_post (
 	published tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	tags int(11) unsigned DEFAULT '0' NOT NULL,
 	comments int(11) unsigned DEFAULT '0' NOT NULL,
+	related_posts int(11) unsigned DEFAULT '0' NOT NULL,
 
 	blog_uid int(11) DEFAULT '0' NOT NULL,
 	blog_table tinytext NOT NULL,
@@ -163,6 +164,19 @@ CREATE TABLE tx_blogexample_domain_model_tag (
 # Table structure for table 'tx_blogexample_post_tag_mm'
 #
 CREATE TABLE tx_blogexample_post_tag_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(255) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_blogexample_post_post_mm'
+#
+CREATE TABLE tx_blogexample_post_post_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,

@@ -80,6 +80,13 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @var boolean
 	 */
 	protected $published = FALSE;
+	
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage
+	 */
+	protected $relatedPosts;
+
+	
 
 	/**
 	 * Constructs this post
@@ -87,6 +94,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	public function __construct() {
 		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->date = new DateTime();
 	}	
 	
@@ -295,7 +303,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return array of Tx_BlogExample_Domain_Model_Comment
+	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Comment
 	 */
 	public function getComments() {
 		// TODO This should be invoked transparently
@@ -304,7 +312,47 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 		}
 		return clone $this->comments;
 	}
+	
+	/**
+	 * Setter for the related posts
+	 *
+	 * @param array $relatedPosts an array of Tx_BlogExample_Domain_Model_Post instances
+	 * @return void
+	 */
+	public function setRelatedPosts(array $relatedPosts) {
+		foreach ($relatedPosts as $relatedPost) {
+			$this->addRelatedPost($relatedPosts);
+		}
+	}
+	
+	/**
+	 * Adds a related post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Post $comment
+	 * @return void
+	 */
+	public function addRelatedPost(Tx_BlogExample_Domain_Model_Post $post) {
+		$this->relatedPosts->attach($post);
+	}
+	
+	/**
+	 * Remove all related posts
+	 *
+	 * @return void
+	 */
+	public function removeAllRelatedPosts() {
+		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+	}
 
+	/**
+	 * Returns the related posts
+	 *
+	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Post
+	 */
+	public function getRelatedPosts() {
+		return clone $this->relatedPosts;
+	}
+	
 	/**
 	 * Sets the published/unpublished state for this post
 	 *

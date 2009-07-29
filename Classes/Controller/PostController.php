@@ -130,8 +130,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function deleteAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
-		// TODO The following line will be replaced by $blog->removePost($post);
-		$this->postRepository->remove($post);
+		$blog->removePost($post);
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
 	

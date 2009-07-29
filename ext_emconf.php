@@ -12,10 +12,10 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'A Blog Example for the Extbase Framework',
-	'description' => 'An example extension demonstrating the features of the Extbase Framework. It is the back-ported Blog Example package of FLOW3. Have fun playing with it!',
+	'description' => 'An example extension demonstrating the features of the Extbase Framework. It is the back-ported Blog Example package of FLOW3. Have fun playing with it! But don\'t use it in a productive environment for security reasons. ',
 	'category' => 'plugin',
 	'author' => 'Jochen Rau',
-	'author_company' => 'typoplanet',
+	'author_company' => '',
 	'author_email' => 'jochen.rau@typoplanet.de',
 	'shy' => '',
 	'dependencies' => 'extbase,fluid',

@@ -71,10 +71,12 @@ class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persist
 //					)
 //				)
 //			);
-		$query->matching(
-				$query->greaterThan('name', 'C')
-			);
-			
+//		$query->matching(
+//			$query->greaterThan('name', 'C')
+//			);
+//		$query->statement('SELECT * FROM tx_blogexample_domain_model_blog WHERE deleted=0');
+		$query->statement("SELECT * FROM tx_blogexample_domain_model_blog WHERE SUBSTRING(title,1,1) LIKE BINARY 'B' AND description LIKE '%blog%' ORDER BY title ASC");
+		
 //		$query->setOrderings(array('name' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
 //		$query->setLimit(1);
 //		$query->setOffset(1);
