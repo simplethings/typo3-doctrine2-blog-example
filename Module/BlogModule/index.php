@@ -34,9 +34,9 @@
  */
 
 // temporary index.php to get it started now
-include_once(t3lib_extMgm::extPath('blogexample', 'Classes/Controller/ModuleController.php'));
+include_once(t3lib_extMgm::extPath('blog_example', 'Classes/Controller/ModuleController.php'));
 
-$LANG->includeLLFile('EXT:blogexample/Resources/Private/Language/locallang.xml');
+$LANG->includeLLFile('EXT:blog_example/Resources/Private/Language/locallang.xml');
 $BE_USER->modAccess($MCONF,1);    // This checks permissions and exits if the users has no permission for entry.
 
 $SOBE = t3lib_div::makeInstance('Tx_Blog_Controller_ModuleController');

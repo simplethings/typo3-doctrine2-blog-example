@@ -2,7 +2,7 @@
 <T3locallang>
 	<meta type="array">
 		<type>module</type>
-		<description>Language labels for the blogexample extension</description>
+		<description>Language labels for the blog_example extension</description>
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">

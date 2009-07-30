@@ -75,7 +75,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Administrator',
-				'foreign_table_where' => 'AND fe_users.pid=###STORAGE_PID###',
+//				'foreign_table_where' => 'AND fe_users.pid=###STORAGE_PID###',
 				'maxitems' => 1,
 			)
 		),

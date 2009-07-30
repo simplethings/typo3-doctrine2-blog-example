@@ -380,9 +380,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	public function __toString() {
 		return $this->title . chr(10) .
 			' written on ' . $this->date->format('Y-m-d') . chr(10) .
-			' by ' . $this->author . chr(10) .
+			' by ' . $this->author->getFullName() . chr(10) .
 			wordwrap($this->content, 70, chr(10)) . chr(10) .
-			implode(', ', $this->tags);
+			implode(', ', $this->tags->toArray());
 	}
 }
 ?>

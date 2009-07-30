@@ -31,7 +31,7 @@
 
 
 /**
- * Module 'Blogs' for the 'blogexample' extension.
+ * Module 'Blogs' for the 'blog_example' extension.
  *
  * @author    Steffen Kamper <info@sk-typo3.de>
  * @package    TYPO3
@@ -82,7 +82,7 @@ class  Tx_Blog_Controller_ModuleController extends t3lib_SCbase {
                 
                         // initialize doc
                     $this->doc = t3lib_div::makeInstance('template');
-                    $this->doc->setModuleTemplate(t3lib_extMgm::extPath('blogexample') . 'Resources//Private/Templates/Module/BlogModule.html');
+                    $this->doc->setModuleTemplate(t3lib_extMgm::extPath('blog_example') . 'Resources/Private/Templates/Module/BlogModule.html');
                     $this->doc->backPath = $BACK_PATH;
                     $docHeaderButtons = $this->getButtons();
 
@@ -147,7 +147,7 @@ class  Tx_Blog_Controller_ModuleController extends t3lib_SCbase {
                     switch((string)$this->MOD_SETTINGS['function'])    {
                         case 1:
                             $content='<div align="center"><strong>Hello World!</strong></div><br />
-                                The "Kickstarter" has made this module automatically, it contains a default framework for a backend module but apart from that it does nothing useful until you open the script '.substr(t3lib_extMgm::extPath('blogexample'),strlen(PATH_site)).'mod1/index.php and edit it!
+                                The "Kickstarter" has made this module automatically, it contains a default framework for a backend module but apart from that it does nothing useful until you open the script '.substr(t3lib_extMgm::extPath('blog_example'),strlen(PATH_site)).'mod1/index.php and edit it!
                                 <hr />
                                 <br />This is the GET/POST vars sent to the script:<br />'.
                                 'GET:'.t3lib_div::view_array($_GET).'<br />'.
@@ -198,8 +198,8 @@ class  Tx_Blog_Controller_ModuleController extends t3lib_SCbase {
 
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/blogexample/Classes/Controller/ModuleController.php'])    {
-    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/blogexample/Classes/Controller/ModuleController.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/blog_example/Classes/Controller/ModuleController.php'])    {
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/blog_example/Classes/Controller/ModuleController.php']);
 }
 
 
