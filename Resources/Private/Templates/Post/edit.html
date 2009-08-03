@@ -1,3 +1,6 @@
+<f:layout name="default" />
+<f:section name="main">
+
 <div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit post "{post.title}"</h1></div>
 <f:form method="post" controller="Post" action="update" name="updatedPost" object="{post}" arguments="{post : post, blog : blog}" >
 	<label for="author">Author</label><br />
@@ -8,3 +11,4 @@
 	<f:form.textarea property="content" rows="8" cols="46" /><br />
 	<f:form.submit>Update!</f:form.submit>
 </f:form>
+</f:section>

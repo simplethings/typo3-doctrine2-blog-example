@@ -1,3 +1,6 @@
+<f:layout name="default" />
+<f:section name="main">
+
 <div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new Post</h1></div>
 <f:form method="post" controller="Post" action="create"  name="newPost" object="{newPost}" arguments="{blog : blog}">
 	<label for="author">Author <span class="required">(required)</span></label><br />
@@ -10,3 +13,5 @@
 	<f:form.select property="tags" options="{tags}" optionValueField="uid" optionLabelField="name" multiple="multiple" size="5"><select><option>###dummy###</option></select></f:form.select><br />
 	<f:form.submit>Create</f:form.submit>
 </f:form>
+
+</f:section>

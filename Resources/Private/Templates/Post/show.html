@@ -1,3 +1,6 @@
+<f:layout name="default" />
+<f:section name="main">
+
 <div class="tx-blogexample-single-item">
 	<span class="tx-blogexample-single-date"><f:format.date>{post.date}</f:format.date></span>
 	<h3>
@@ -12,7 +15,7 @@
 		<div>Related posts:</div>
 		<ul class="tx-blogexample-related">
 			<f:for each="{post.relatedPosts}" as="relatedPost"><li><f:link.action action="show" controller="Post" arguments="{post: relatedPost, blog: post.blog}">{relatedPost.title}</f:link.action></f:for>
-		</ul>	
+		</ul>
 	</f:if>
 	<div class="tx-blogexample-single-backlink"></div>
 </div>
@@ -43,3 +46,5 @@
 	<br />
 	<f:form.submit>Say it</f:form.submit>
 </f:form>
+
+</f:section>
