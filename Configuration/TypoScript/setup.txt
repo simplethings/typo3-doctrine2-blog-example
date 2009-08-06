@@ -1,5 +1,5 @@
-plugin.tx_blogexample {
-	maxItems = 3
+plugin.tx_blogexample.settings {
+	maxItems = 1
 	foo = TEXT
 	foo.value = Hello World!
 	foo.bar.baz = 10
@@ -10,14 +10,15 @@ plugin.tx_blogexample {
 			maxItems = 8
 			actions {
 				index {
-					maxItems = 5					
+					maxItems = 5
 				}
 			}
 		}
 		Comment {
 			content.crop = 100
-		}		
+		}
 	}
+
 }
 
 # This is an example how to modify the translation
