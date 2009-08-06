@@ -50,8 +50,8 @@ class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persist
 //			$query->logicalAnd(
 // 				$query->logicalNot($query->like('description', '%foo%')),
 //				$query->logicalOr(
-//					$query->like('name', '%og%'),
-//					$query->like('name', '%asd%')
+//					$query->like('title', '%og%'),
+//					$query->like('title', '%asd%')
 //				)
 // 			)
 // 		)
@@ -63,9 +63,10 @@ class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persist
 //					)
 //				)
 //			);
+//		$query->getQuerySettings()->setRespectStoragePageState(FALSE); 
 //		$query->matching(
 //			$query->logicalOr(
-//				$query->logicalNot($query->equals('name', 'Blog #1')),
+//				$query->logicalNot($query->equals('titleFoo', 'Blog #1')),
 //				$query->logicalOr(
 //					$query->like('description', '%test%'),$query->like('description', '%foo%')
 //					)
@@ -74,10 +75,11 @@ class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persist
 //		$query->matching(
 //			$query->greaterThan('name', 'C')
 //			);
+		$query->matching($query->equals('FooBarBaz', 2));
 //		$query->statement('SELECT * FROM tx_blogexample_domain_model_blog WHERE deleted=0');
-		$query->statement("SELECT * FROM tx_blogexample_domain_model_blog WHERE SUBSTRING(title,1,1) LIKE BINARY 'B' AND description LIKE '%blog%' ORDER BY title ASC");
+//		$query->statement('SELECT * FROM tx_blogexample_domain_model_blog WHERE SUBSTRING(title,1,1) LIKE BINARY ? AND description LIKE ? ORDER BY title ASC', array('B', '%ab%')); 	
 		
-//		$query->setOrderings(array('name' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+//		$query->setOrderings(array('fooBar' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
 //		$query->setLimit(1);
 //		$query->setOffset(1);
 		

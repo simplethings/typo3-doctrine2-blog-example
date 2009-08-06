@@ -170,7 +170,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Tag',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
 				'MM' => 'tx_blogexample_post_tag_mm',
-				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
+				//'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
 			)
 		),
 		'comments' => array(

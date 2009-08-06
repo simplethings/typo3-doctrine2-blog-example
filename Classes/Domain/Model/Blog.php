@@ -62,7 +62,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * The blog's administrator
 	 *
-	 * @var Tx_Extbase_Domain_Model_FrontendUser
+	 * @var Tx_BlogExample_Domain_Model_Administrator
 	 */
 	protected $administrator;
 
@@ -157,7 +157,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the administrator value
 	 *
-	 * @param Tx_Extbase_Domain_Model_FrontendUser $administrator The Administrator of this Blog
+	 * @param Tx_BlogExample_Domain_Model_Administrator $administrator The Administrator of this Blog
 	 * @return void
 	 */
 	public function setAdministrator(Tx_Extbase_Domain_Model_FrontendUser $administrator) {
@@ -167,7 +167,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the administrator value
 	 *
-	 * @return Tx_Extbase_Domain_Model_FrontendUser
+	 * @return Tx_BlogExample_Domain_Model_Administrator
 	 */
 	public function getAdministrator() {
 		return $this->administrator;
