@@ -41,7 +41,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @return void
 	 */
-	public function initializeAction() {		
+	public function initializeAction() {
 		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_BlogRepository');
 		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_PostRepository');
 		$this->administratorRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_AdministratorRepository');
@@ -57,24 +57,15 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	}
 
 	/**
-	 * Shows a single blog
-	 *
-	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog to show
-	 * @return string The rendered view of a single blog
-	 */
-	public function showAction(Tx_BlogExample_Domain_Model_Blog $blog) {
-		$this->forward('index', 'Post', NULL, array('blog' => $blog));
-	}
-
-	/**
 	 * Displays a form for creating a new blog
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
+	 * @dontvalidate $newBlog
 	 */
 	public function newAction(Tx_BlogExample_Domain_Model_Blog $newBlog = NULL) {
 		$this->view->assign('newBlog', $newBlog);
-		$this->view->assign('administrators', $this->administratorRepository->findAll());	
+		$this->view->assign('administrators', $this->administratorRepository->findAll());
 	}
 
 	/**
@@ -94,21 +85,21 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The original blog
 	 * @return string Form for editing the existing blog
+	 * @dontvalidate $blog
 	 */
 	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->view->assign('blog', $blog);
-		$this->view->assign('administrators', $this->administratorRepository->findAll());	
+		$this->view->assign('administrators', $this->administratorRepository->findAll());
 	}
 
 	/**
 	 * Updates an existing blog
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Blog $blog The existing, unmodified blog
-	 * @param Tx_BlogExample_Domain_Model_Blog $updatedBlog A clone of the original blog with the updated values already applied
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog A not yet persisted clone of the original blog containing the modifications
 	 * @return void
 	 */
-	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Blog $updatedBlog) {
-		$this->blogRepository->replace($blog, $updatedBlog);
+	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog) {
+		$this->blogRepository->update($blog);
 		$this->redirect('index');
 	}
 
@@ -135,7 +126,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 			$this->blogRepository->remove($blog);
 		}
 		$this->redirect('index');
-	}	
+	}
 
 	/**
 	 * Creates a several new blogs
@@ -144,18 +135,18 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function populateAction() {
 		$author = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Person', 'Jochen', 'Rau', 'foo.bar@typoplanet.de');
-		for ($blogNumber = 1; $blogNumber < 4; $blogNumber++) { 
+		for ($blogNumber = 1; $blogNumber < 4; $blogNumber++) {
 			$blog = $this->getBlog($blogNumber, $author);
 			$this->blogRepository->add($blog);
 		}
-		
+
 		// Code for testing #4011
 		//$post = $this->postRepository->findOneByName('Post #1');
 		//$blog->addPost($post);
-		
+
 		$this->redirect('index');
 	}
-	
+
 	/**
 	 * Returns a sample blog populated with generic data. It is also an example how to handle objects and repositories in general.
 	 *
@@ -167,7 +158,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 		$blog = new Tx_BlogExample_Domain_Model_Blog;
 		$blog->setTitle('Blog #' . $blogNumber);
 		$blog->setDescription('A blog about TYPO3 extension development.');
-		
+
 		$administrator = new Tx_BlogExample_Domain_Model_Administrator('foobar', '123455');
 		$administrator->setName('John Doe');
 		$administrator->setEmail('john.doe@example.com');
@@ -183,7 +174,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 			$post->setPublished(TRUE);
 			$post->setVotes('5.00');
 			$blog->addPost($post);
-						
+
 			$comment = new Tx_BlogExample_Domain_Model_Comment;
 			$comment->setDate(new DateTime);
 			$comment->setAuthor('Peter Pan');
@@ -204,10 +195,10 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 			$tag = new Tx_BlogExample_Domain_Model_Tag('Domain Driven Design');
 			$post->addTag($tag);
 		}
-			
+
 		return $blog;
 	}
-		
+
 
 }
 

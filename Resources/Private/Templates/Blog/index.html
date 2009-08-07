@@ -9,8 +9,8 @@
 		<li>
 			<h3><f:link.action controller="Post" action="index" arguments="{blog : blog}">{blog.title}</f:link.action></h3>
 			<p>
-				<f:format.Nl2br>{blog.description}</f:format.Nl2br><br />
-				<f:link.action action="show" arguments="{blog : blog}">Show</f:link.action>
+				<f:format.nl2br>{blog.description}</f:format.nl2br><br />
+				<f:link.action controller="Post" action="index" arguments="{blog : blog}">Show</f:link.action>
 				<f:link.action action="edit" arguments="{blog : blog}">Edit</f:link.action>
 				<f:link.action action="delete" arguments="{blog : blog}">Delete</f:link.action>
 			</p>

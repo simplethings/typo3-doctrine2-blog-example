@@ -65,13 +65,14 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	public function showAction(Tx_BlogExample_Domain_Model_Post $post) {
 		$this->view->assign('post', $post);
 	}
-	
+
 	/**
 	 * Displays a form for creating a new post
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post belogs to
 	 * @param Tx_BlogExample_Domain_Model_Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
+	 * @dontvalidate $newPost
 	 */
 	public function newAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $newPost = NULL) {
 		$this->view->assign('authors', $this->personRepository->findAll());
@@ -88,20 +89,20 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post belogns to
 	 * @param Tx_BlogExample_Domain_Model_Post $newBlog A fresh Blog object which has not yet been added to the repository
-	 * @param array $tags The tags
 	 * @return void
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $newPost) {
 		$blog->addPost($newPost);
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
-	
+
 	/**
 	 * Displays a form to edit an existing post
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post belogs to
 	 * @param Tx_BlogExample_Domain_Model_Post $post The original post
 	 * @return string Form for editing the existing blog
+	 * @dontvalidate $post
 	 */
 	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
 		$this->view->assign('authors', $this->personRepository->findAll());
@@ -117,8 +118,8 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @param Tx_BlogExample_Domain_Model_Post $updatedPost A clone of the original post with the updated values already applied
 	 * @return void
 	 */
-	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Post $updatedPost) {
-		$this->postRepository->replace($post, $updatedPost);
+	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
+		$this->postRepository->update($post);
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
 
@@ -133,7 +134,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 		$blog->removePost($post);
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
-	
+
 }
 
 ?>

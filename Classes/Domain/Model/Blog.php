@@ -58,7 +58,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @lazy
 	 */
 	protected $posts;
-	
+
 	/**
 	 * The blog's administrator
 	 *
@@ -73,7 +73,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	public function __construct() {
 		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
 	}
-	
+
 	/**
 	 * Sets this blog's title
 	 *
@@ -131,7 +131,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	public function removePost(Tx_BlogExample_Domain_Model_Post $postToRemove) {
 		$this->posts->detach($postToRemove);
 	}
-	
+
 	/**
 	 * Remove all posts from this blog
 	 *
@@ -153,7 +153,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 		}
 		return clone $this->posts;
 	}
-	
+
 	/**
 	 * Sets the administrator value
 	 *
@@ -163,7 +163,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	public function setAdministrator(Tx_Extbase_Domain_Model_FrontendUser $administrator) {
 		$this->administrator = $administrator;
 	}
-	
+
 	/**
 	 * Returns the administrator value
 	 *
