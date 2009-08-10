@@ -33,7 +33,7 @@
 	</div>
 	</f:for>
 </div>
-<f:form name="comment" method="post" controller="Comment" action="create" object="{comment}" arguments="{post : post}">
+<f:form name="newComment" method="post" controller="Comment" action="create" object="{newComment}" arguments="{post : post}">
 	<h4>Add your own</h4>
 	<label for="author">name <span class="required">(required)</span></label><br />
 	<f:form.textbox id="author" property="author" />

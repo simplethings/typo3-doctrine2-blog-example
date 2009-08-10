@@ -60,10 +60,12 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * Action that displays one single post
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Post $post The post to display
+	 * @param Tx_BlogExample_Domain_Model_Comment $newComment A new comment
 	 * @return string The rendered view
 	 */
-	public function showAction(Tx_BlogExample_Domain_Model_Post $post) {
+	public function showAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $newComment = NULL) {
 		$this->view->assign('post', $post);
+		$this->view->assign('newComment', $newComment);
 	}
 
 	/**

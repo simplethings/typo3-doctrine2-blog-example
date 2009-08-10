@@ -119,6 +119,9 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addPost(Tx_BlogExample_Domain_Model_Post $post) {
+		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->posts->_loadRealInstance();
+		}
 		$this->posts->attach($post);
 	}
 
@@ -129,6 +132,9 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removePost(Tx_BlogExample_Domain_Model_Post $postToRemove) {
+		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->posts->_loadRealInstance();
+		}
 		$this->posts->detach($postToRemove);
 	}
 
@@ -160,7 +166,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @param Tx_BlogExample_Domain_Model_Administrator $administrator The Administrator of this Blog
 	 * @return void
 	 */
-	public function setAdministrator(Tx_Extbase_Domain_Model_FrontendUser $administrator) {
+	public function setAdministrator(Tx_BlogExample_Domain_Model_Administrator $administrator) {
 		$this->administrator = $administrator;
 	}
 

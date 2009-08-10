@@ -43,6 +43,7 @@ class Tx_BlogExample_Domain_Model_Comment extends Tx_Extbase_DomainObject_Abstra
 
 	/**
 	 * @var string
+	 * @validate Text, StringLength(minimum = 3, maximum = 80)
 	 */
 	protected $author;
 
@@ -53,6 +54,7 @@ class Tx_BlogExample_Domain_Model_Comment extends Tx_Extbase_DomainObject_Abstra
 
 	/**
 	 * @var string
+	 * @validate Text, NotEmpty
 	 */
 	protected $content;
 	

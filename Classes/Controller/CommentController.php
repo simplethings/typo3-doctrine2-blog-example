@@ -35,12 +35,28 @@ class Tx_BlogExample_Controller_CommentController extends Tx_Extbase_MVC_Control
 	 * Action that adds a comment to a blog post and redirects to single view
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Post $post The post the comment is related to
-	 * @param Tx_BlogExample_Domain_Model_Comment $comment The comment to create
+	 * @param Tx_BlogExample_Domain_Model_Comment $newComment The comment to create
 	 * @return void
 	 */
-	public function createAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $comment) {
-		$post->addComment($comment);
+	public function createAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $newComment) {
+		$post->addComment($newComment);
+//		$this->pushFlashMessage('Your new comment was created.');
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
+	}
+
+	/**
+	 * Override getErrorFlashMessage to present
+	 * nice flash error messages.
+	 *
+	 * @return string
+	 */
+	protected function getErrorFlashMessage() {
+		switch ($this->actionMethodName) {
+			case 'createAction' :
+				return 'Could not create the new comment:';
+			default :
+				return parent::getErrorFlashMessage();
+		}
 	}
 		
 }

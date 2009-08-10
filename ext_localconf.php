@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
  * right combination of Controller and Action according to
  * the user input (default settings, FlexForm, URL etc.)
  */
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	$_EXTKEY,																		// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 	'Pi1',																			// A unique name of the plugin in UpperCamelCase
 	array(																			// An array holding the controller-action-combinations that are accessible 
