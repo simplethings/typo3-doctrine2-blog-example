@@ -54,9 +54,7 @@ class Tx_BlogExample_Controller_BlogModuleController extends Tx_Extbase_MVC_Cont
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-		//debug($this);
-		debug($this->scBase);
-	   	
+	   
 	   	                    
 			// Prepare scBase
 		$this->scBase = t3lib_div::makeInstance('t3lib_SCbase'); 
