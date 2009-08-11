@@ -10,6 +10,25 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'A Blog Example'																// A title shown in the backend dropdown field
 );
 
+/**
+* Registers Backend Module
+*/
+
+Tx_Extbase_Utility_Extension::registerModule(
+	$_EXTKEY,
+	array(
+		'BlogModule' => 'index'
+	),
+	array(
+		'access' => 'user,group',
+		'icon'   => 'EXT:blog_example/ext_icon.gif',
+		'labels' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_mod.xml',
+	),
+	'tools',	// Make module a submodule of 'user'
+	'blogs'
+);
+
+
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Blog Example');
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';
@@ -135,7 +154,7 @@ $TCA['tx_blogexample_domain_model_tag'] = array (
 
 /* Module */
 if (TYPO3_MODE == 'BE') {
-    t3lib_extMgm::addModulePath('tools_txblogexampleM1', t3lib_extMgm::extPath($_EXTKEY) . 'Module/BlogModule/');
-    t3lib_extMgm::addModule('tools', 'txblogexampleM1', '', t3lib_extMgm::extPath($_EXTKEY) . 'Module/BlogModule/');
+    //t3lib_extMgm::addModulePath('tools_txblogexampleM1', t3lib_extMgm::extPath($_EXTKEY) . 'Module/BlogModule/');
+    //t3lib_extMgm::addModule('tools', 'txblogexampleM1', '', t3lib_extMgm::extPath($_EXTKEY) . 'Module/BlogModule/');
 }
 ?>
