@@ -38,7 +38,7 @@ abstract class Tx_BlogExample_ViewHelpers_AbstractBackendViewHelper extends Tx_F
 
 
 	/**
-	* Ges instance of template if exists or create a new one.
+	* Gets instance of template if exists or create a new one.
 	* Saves instance in viewHelperVariableContainer
 	* 
 	* @return template $doc 
@@ -56,7 +56,7 @@ abstract class Tx_BlogExample_ViewHelpers_AbstractBackendViewHelper extends Tx_F
 	}
 	
 	/**
-	* Ges instance of scBase if exists or create a new one.
+	* Gets instance of scBase if exists or create a new one.
 	* Saves instance in viewHelperVariableContainer
 	* 
 	* @return t3lib_SCbase $scBase

@@ -42,13 +42,6 @@ class Tx_BlogExample_Controller_BlogModuleController extends Tx_Extbase_MVC_Cont
 	protected $modMenu;
 	
 	/**
-	 * Holds reference to t3lib_SCbase
-	 * 
-	 * @var t3lib_SCbase
-	 */
-	protected $scBase;
-	
-	/**
 	 * Index action for this controller.
 	 *
 	 * @return string The rendered view
