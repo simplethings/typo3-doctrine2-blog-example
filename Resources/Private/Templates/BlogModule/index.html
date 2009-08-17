@@ -1,16 +1,32 @@
-{namespace be=Tx_BlogExample_ViewHelpers} 
-<be:befunc>{startPage}</be:befunc>    
-
+{namespace blog=Tx_BlogExample_ViewHelpers}<blog:be.startPage pageTitle="{title}" jumpToUrl="true" extJs="true" />    
+<form action="" method="post" enctype="multipart/form-data">
 <div class="typo3-fullDoc">
 	<!-- Page header with buttons, path details and csh -->
 	<div id="typo3-docheader">
 		<div id="typo3-docheader-row1">
-			<div class="buttonsleft"><div class="buttongroup"><be:befunc>{CSH}{SAVE}</be:befunc></div></div>
-			<div class="buttonsright"><div class="buttongroup"><be:befunc>{SHORTCUT}</be:befunc></div></div>
+			<div class="buttonsleft">
+				<div class="buttongroup">
+					<blog:be.buttons.csh table="_MOD_web_func" />
+					<blog:be.buttons.save />
+				</div>
+			</div>
+			<div class="buttonsright">
+				<div class="buttongroup">
+					<blog:be.buttons.shortcut setList="{setKeys}" />
+				</div>
+			</div>
 		</div>
 		<div id="typo3-docheader-row2">
-			<div class="docheader-row2-left"><div class="docheader-funcmenu"><be:befunc>{FUNC_MENU}</be:befunc></div></div>
-			<div class="docheader-row2-right"><be:befunc>{PAGEPATH}{PAGEINFO}</be:befunc></div>
+			<div class="docheader-row2-left">
+				<div class="docheader-funcmenu">
+					<blog:be.menus.functionMenu modMenu="{modMenu}" key="{modMenuKey}" />
+					<blog:be.menus.functionMenu modMenu="{submodMenu}" key="{submodMenuKey}" />
+				</div>
+			</div>
+			<div class="docheader-row2-right">
+				<blog:be.status.pagePath />
+				<blog:be.status.pageInfo />
+			</div>
 		</div>
 	</div>
 	<!-- Content of module, for instance listing, info or editing -->
@@ -18,8 +34,9 @@
 		<div id="typo3-inner-docbody">
 		 	<h1>{title}</h1>
 			<p>Welcome in the OldStyle backend module!<br />Looks like Standard, but is an Extbase driven module :)</p>	
-			<f:format.html></f:format.html>
+			
 		</div>
 	</div>
 </div>
-<be:befunc>{endPage}</be:befunc> 
+</form>
+<blog:be.endPage />  

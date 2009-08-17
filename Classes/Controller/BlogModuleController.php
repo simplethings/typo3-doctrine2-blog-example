@@ -35,11 +35,11 @@
 class Tx_BlogExample_Controller_BlogModuleController extends Tx_Extbase_MVC_Controller_ActionController {
 	
 	/**
-	 * Holds reference to the template class
+	 * Fills array for the funcMenu
 	 * 
-	 * @var template
+	 * @var array
 	 */
-	protected $doc;
+	protected $modMenu;
 	
 	/**
 	 * Holds reference to t3lib_SCbase
@@ -56,29 +56,19 @@ class Tx_BlogExample_Controller_BlogModuleController extends Tx_Extbase_MVC_Cont
 	public function indexAction() {
 	   
 	   	                    
-			// Prepare scBase
-		$this->scBase = t3lib_div::makeInstance('t3lib_SCbase'); 
-		$this->scBase->MCONF['name'] = $this->request->getControllerName();
-		$this->scBase->init();
-		
-			// Prepare template class
-		$this->doc = t3lib_div::makeInstance('template'); 
-		$this->doc->backPath = $GLOBALS['BACK_PATH'];
-		
+								   
 		$this->menuConfig();
 		
 			// Template page
-		$this->view->assign('title', 'Backend Module!');  
+		$this->view->assign('title', 'BlogModule');  
+			// used for function menu
+		$this->view->assign('modMenu', $this->modMenu['function']);  
+		$this->view->assign('modMenuKey', 'function');  
+		$this->view->assign('submodMenu', $this->modMenu['subfunction']);
+		$this->view->assign('submodMenuKey', 'subfunction');
+			// save SET for shortcut  
+		$this->view->assign('setKeys', implode(',', array_keys($this->modMenu)));  
 		
-		$this->view->assign('FUNC_MENU', t3lib_BEfunc::getFuncMenu(0, 'SET[function]', $this->scBase->MOD_SETTINGS['function'], $this->scBase->MOD_MENU['function']));
-		
-		$this->view->assign('CSH', t3lib_BEfunc::cshItem('_MOD_web_func', '', $GLOBALS['BACK_PATH']));
-		$this->view->assign('SAVE', '<input type="image" class="c-inputButton" name="submit" value="Update"' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/savedok.gif', '') . ' title="' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:rm.saveDoc', 1) . '" />');
-		$this->view->assign('SHORTCUT',  $this->doc->makeShortcutIcon('', 'function', $settings['pluginName']));
-		
-		
-		$this->view->assign('startPage', $this->doc->startPage('OldStyle Module'));
-		$this->view->assign('endPage', $this->doc->endPage());
                             
 	}
 		
@@ -87,15 +77,18 @@ class Tx_BlogExample_Controller_BlogModuleController extends Tx_Extbase_MVC_Cont
 	 *
 	 * @return	void
 	 */
-	function menuConfig()	{
-		$this->scBase->MOD_MENU = Array (
-			'function' => Array (
-				'1' => 'Menu 1',
-				'2' => 'Menu 2',
-				'3' => 'Menu 3',
-			)
+	protected function menuConfig()	{
+		$this->modMenu['function'] = array (
+			'1' => 'Menu 1',
+			'2' => 'Menu 2',
+			'3' => 'Menu 3',
 		);
-		$this->scBase->menuConfig();
+		$this->modMenu['subfunction'] = array (
+			'1' => 'SubMenu 1',
+			'2' => 'SubMenu 2',
+			'3' => 'SubMenu 3',
+		);
+		
 	}
 	
 }

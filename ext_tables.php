@@ -24,7 +24,7 @@ Tx_Extbase_Utility_Extension::registerModule(
 		'icon'   => 'EXT:blog_example/ext_icon.gif',
 		'labels' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_mod.xml',
 	),
-	'tools',	// Make module a submodule of 'user'
+	'web',	// Make module a submodule of 'web'
 	'blogs'
 );
 

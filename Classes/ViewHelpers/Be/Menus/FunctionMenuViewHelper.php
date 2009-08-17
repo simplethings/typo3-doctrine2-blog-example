@@ -20,32 +20,40 @@
  *                                                                        */
 
 /**
- * View helper which return input as it is
+ * View helper which return a function menu from scBase
  *
  * = Examples =
  *
- * <f:null>{anyString}</f:null>
+ * <f:be.menus.functionMenu modMenu="{modMenu}" key="function" />
  *
  *
  * @package     TYPO3
  * @subpackage  tx_blogexample
- * @author Steffen Kamper <info@sk-typo3.de>
+ * @author      Steffen Kamper <info@sk-typo3.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id: 
  * 
  */
-class Tx_BlogExample_ViewHelpers_BeFuncViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_BlogExample_ViewHelpers_Be_Menus_FunctionMenuViewHelper extends Tx_BlogExample_ViewHelpers_AbstractBackendViewHelper {
 
-	protected $objectAccessorPostProcessorEnabled = FALSE;
 	
 	/**
-	 * Render without processing
+	 * Render FunctionMenu
 	 *
-	 *
+	 * @param array $modMenu
+	 * @param string $name
 	 * @return string 
 	 */
-	public function render() {
-		return $this->renderChildren(); 
+	public function render(array $modMenu, $key = 'function') {
+		
+		$doc = $this->getDocInstance();
+		
+		$scBase = $this->getScBaseInstance(); 
+		$scBase->MOD_MENU[$key] = $modMenu;
+		$scBase->menuConfig();
+		
+		$value = t3lib_BEfunc::getFuncMenu(0, 'SET[' . $key . ']', $scBase->MOD_SETTINGS[$key], $scBase->MOD_MENU[$key]);
+		return $value; 
 	}
 }
 ?>
