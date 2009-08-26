@@ -1,4 +1,5 @@
-{namespace blog=Tx_BlogExample_ViewHelpers}<blog:be.startPage pageTitle="{title}" jumpToUrl="true" extJs="true" />    
+{namespace blog=Tx_BlogExample_ViewHelpers}
+<blog:be.startPage pageTitle="{title}" jumpToUrl="true" extJs="true" />    
 <form action="" method="post" enctype="multipart/form-data">
 <div class="typo3-fullDoc">
 	<!-- Page header with buttons, path details and csh -->
@@ -12,15 +13,15 @@
 			</div>
 			<div class="buttonsright">
 				<div class="buttongroup">
-					<blog:be.buttons.shortcut setList="{setKeys}" />
+					<blog:be.buttons.shortcut setList="[0: action, 1: options]" />
 				</div>
 			</div>
 		</div>
 		<div id="typo3-docheader-row2">
 			<div class="docheader-row2-left">
 				<div class="docheader-funcmenu">
-					<blog:be.menus.functionMenu modMenu="{modMenu}" key="{modMenuKey}" />
-					<blog:be.menus.functionMenu modMenu="{submodMenu}" key="{submodMenuKey}" />
+					<blog:be.menus.functionMenu modMenu="{actionMenu}" key="action" />
+					<blog:be.menus.functionMenu modMenu="{optionsMenu}" key="option" />
 				</div>
 			</div>
 			<div class="docheader-row2-right">
@@ -32,11 +33,13 @@
 	<!-- Content of module, for instance listing, info or editing -->
 	<div id="typo3-docbody">
 		<div id="typo3-inner-docbody">
-		 	<h1>{title}</h1>
-			<p>Welcome in the OldStyle backend module!<br />Looks like Standard, but is an Extbase driven module :)</p>	
-			
+			<h1>Blog Administration Module</h1>
+			<hr />
+			<f:render section="moduleContent" />
+			<hr />
+			<p>This is an additional footer.</p>
 		</div>
 	</div>
 </div>
 </form>
-<blog:be.endPage />  
+<blog:be.endPage />

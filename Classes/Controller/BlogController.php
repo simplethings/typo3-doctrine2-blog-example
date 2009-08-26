@@ -76,6 +76,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
+		$this->pushFlashMessage('Your new blog was created.');
 		$this->redirect('index');
 	}
 
@@ -83,12 +84,17 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	/**
 	 * Edits an existing blog
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Blog $blog The original blog
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog to edit or the blog with updated properties
+	 * @param Tx_BlogExample_Domain_Model_Blog $existingBlog The existing unmodified blog or NULL to use the blog
 	 * @return string Form for editing the existing blog
-	 * @dontvalidate $blog
+	 * @validate $blog Raw
 	 */
-	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog) {
+	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Blog $existingBlog = NULL) {
+		if ($existingBlog === NULL) {
+			$existingBlog = $blog;
+		}
 		$this->view->assign('blog', $blog);
+		$this->view->assign('existingBlog', $existingBlog);
 		$this->view->assign('administrators', $this->administratorRepository->findAll());
 	}
 
@@ -100,6 +106,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->blogRepository->update($blog);
+//		$this->pushFlashMessage('Your blog has been updated.');
 		$this->redirect('index');
 	}
 
@@ -198,7 +205,23 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 
 		return $blog;
 	}
-
+	
+	/**
+	 * Override getErrorFlashMessage to present
+	 * nice flash error messages.
+	 *
+	 * @return string
+	 */
+	protected function getErrorFlashMessage() {
+		switch ($this->actionMethodName) {
+			case 'updateAction' :
+				return 'Could not update the blog:';
+			case 'createAction' :
+				return 'Could not create the new blog:';
+			default :
+				return parent::getErrorFlashMessage();
+		}
+	}
 
 }
 

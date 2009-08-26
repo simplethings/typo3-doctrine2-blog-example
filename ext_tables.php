@@ -5,27 +5,27 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
  * Registers a Plugin to be listed in the Backend. You also have to configure the Dispatcher in ext_localconf.php.
  */
 Tx_Extbase_Utility_Extension::registerPlugin(
-	$_EXTKEY,																		// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
-	'Pi1',																			// A unique name of the plugin in UpperCamelCase
-	'A Blog Example'																// A title shown in the backend dropdown field
+	$_EXTKEY, // The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
+	'Pi1', // A unique name of the plugin in UpperCamelCase
+	'A Blog Example' // A title shown in the backend dropdown field
 );
 
 /**
-* Registers Backend Module
+* Registers a Backend Module
 */
-
 Tx_Extbase_Utility_Extension::registerModule(
 	$_EXTKEY,
+	'web',	// Make module a submodule of 'web'
+	'admin_module', // Submodule key
+	'', // Position
 	array(
-		'BlogModule' => 'index'
+		'AdminModule' => 'index'
 	),
 	array(
 		'access' => 'user,group',
 		'icon'   => 'EXT:blog_example/ext_icon.gif',
 		'labels' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_mod.xml',
-	),
-	'web',	// Make module a submodule of 'web'
-	'blogs'
+	)
 );
 
 
@@ -151,10 +151,4 @@ $TCA['tx_blogexample_domain_model_tag'] = array (
 	)
 );
 
-
-/* Module */
-if (TYPO3_MODE == 'BE') {
-    //t3lib_extMgm::addModulePath('tools_txblogexampleM1', t3lib_extMgm::extPath($_EXTKEY) . 'Module/BlogModule/');
-    //t3lib_extMgm::addModule('tools', 'txblogexampleM1', '', t3lib_extMgm::extPath($_EXTKEY) . 'Module/BlogModule/');
-}
 ?>

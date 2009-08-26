@@ -1,0 +1,29 @@
+<f:layout name="module" />
+<f:section name="moduleContent">
+	<f:if condition="{blogs}">
+		<f:then>
+			<p>Here is a list of blogs:</p>
+			<ul>
+				<f:for each="{blogs}" as="blog">
+					<li>
+						<h3><f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.title}</f:link.action></h3>
+						<p><f:format.nl2br>{blog.description}</f:format.nl2br>
+							<f:link.action action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:link.action>
+							<f:link.action action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:link.action>
+						</p>
+					</li>
+				</f:for>
+			</ul>
+			<p><f:link.action action="deleteAll">Delete all Blogs [!!!]</f:link.action></p>
+		</f:then>
+		<f:else>
+			<p>There are no Blogs to show.</p>
+		</f:else>
+	</f:if>
+
+	<f:if condition="{currentOption}">
+		<f:then>
+			<p>Do you really like {currentOption}?
+		</f:then>
+	</f:if>
+</f:section>
