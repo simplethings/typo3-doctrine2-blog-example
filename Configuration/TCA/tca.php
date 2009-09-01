@@ -166,11 +166,12 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'minitems' => 0,
 				'maxitems' => 9999,
 				'autoSizeMax' => 30,
-				'multiple' => 1,
+				'multiple' => 0,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Tag',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
 				'MM' => 'tx_blogexample_post_tag_mm',
-				//'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
+				'MM_insert_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
+				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
 			)
 		),
 		'comments' => array(
@@ -195,6 +196,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.related',
 			'config' => array(
 				'type' => 'select',
+				'loadingStrategy' => 'proxy',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 9999,
@@ -202,11 +204,12 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'multiple' => 0,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
-				'foreign_table_where' => 'AND tx_blogexample_domain_model_post.blog_uid=###REC_FIELD_blog_uid### AND tx_blogexample_domain_model_post.uid!=###THIS_UID###',
+				// 'foreign_table_where' => 'AND tx_blogexample_domain_model_post.blog_uid=###REC_FIELD_blog_uid### AND tx_blogexample_domain_model_post.uid!=###THIS_UID###',
 				'MM' => 'tx_blogexample_post_post_mm',
-				//'MM_opposite_field' => 'related_posts', // FIXME MM_opposite_field does not work
+				'MM_opposite_field' => 'related_posts',
+				'MM_insert_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
 				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
-		)
+			)
 		),
 		// TODO Re-enable the foreign key references by uncommenting the following two column configurations
 //		'blog_uid' => array(		
@@ -370,7 +373,7 @@ $TCA['tx_blogexample_domain_model_person'] = array(
 $TCA['tx_blogexample_domain_model_tag'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_tag']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, name'
+		'showRecordFieldList' => 'hidden, name, posts'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -390,9 +393,27 @@ $TCA['tx_blogexample_domain_model_tag'] = array(
 				'max'  => 256
 			)
 		),
+		'posts' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_tag.posts',
+			'config' => array(
+				'type' => 'select',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 9999,
+				'autoSizeMax' => 30,
+				'multiple' => 0,
+				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
+				'foreign_table' => 'tx_blogexample_domain_model_post',
+				'MM' => 'tx_blogexample_post_tag_mm',
+				'MM_opposite_field' => 'tags',
+				'MM_insert_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
+				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
+			)
+		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, name')
+		'1' => array('showitem' => 'hidden, name, posts')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

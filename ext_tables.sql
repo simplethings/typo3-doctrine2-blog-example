@@ -155,7 +155,8 @@ CREATE TABLE tx_blogexample_domain_model_tag (
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	name varchar(255) DEFAULT '' NOT NULL,
-
+	posts int(11) unsigned DEFAULT '0' NOT NULL,
+	
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 );
@@ -168,6 +169,7 @@ CREATE TABLE tx_blogexample_post_tag_mm (
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
@@ -181,6 +183,7 @@ CREATE TABLE tx_blogexample_post_post_mm (
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)

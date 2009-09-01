@@ -34,6 +34,7 @@
 			<label index="tx_blogexample_domain_model_comment.content">Content</label>
 			<label index="tx_blogexample_domain_model_tag">Tag</label>
 			<label index="tx_blogexample_domain_model_tag.name">Name</label>
+			<label index="tx_blogexample_domain_model_tag.posts">Related posts</label>
 		</languageKey>
 	</data>
 </T3locallang>
