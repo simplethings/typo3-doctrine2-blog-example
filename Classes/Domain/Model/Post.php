@@ -332,6 +332,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addRelatedPost(Tx_BlogExample_Domain_Model_Post $post) {
+		if ($this->relatedPosts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->relatedPosts->_loadRealInstance();
+		}
 		$this->relatedPosts->attach($post);
 	}
 	
@@ -350,6 +353,10 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Post
 	 */
 	public function getRelatedPosts() {
+		// TODO This should be invoked transparently
+		if ($this->relatedPosts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->relatedPosts->_loadRealInstance();
+		}
 		return clone $this->relatedPosts;
 	}
 	
