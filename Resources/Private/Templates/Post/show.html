@@ -1,6 +1,10 @@
 <f:layout name="default" />
 <f:section name="mainbox">
 
+<f:for each="{flashMessages}" as="message">
+	<p class="tx-extbase-flash-message"><strong>{message}</strong></p>
+</f:for>
+
 <div class="tx-blogexample-single-item">
 	<span class="tx-blogexample-single-date"><f:format.date>{post.date}</f:format.date></span>
 	<h3>
@@ -35,6 +39,11 @@
 </div>
 <h4>Add your own</h4>
 <f:form name="newComment" method="post" controller="Comment" action="create" object="{newComment}" arguments="{post : post}">
+	<f:form.errors for="newComment">
+		<div class="error">
+			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
 	<label for="author">name <span class="required">(required)</span></label><br />
 	<f:form.textbox id="author" property="author" />
 	<br />
