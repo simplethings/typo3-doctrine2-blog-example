@@ -53,7 +53,10 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @return string
 	 */
 	public function indexAction(Tx_BlogExample_Domain_Model_Blog $blog) {
+		$posts = $this->postRepository->findByBlog($blog);
 		$this->view->assign('blog', $blog);
+		$this->view->assign('posts', $posts);
+		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($blog, 3));
 	}
 
 	/**
@@ -61,10 +64,12 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Post $post The post to display
 	 * @param Tx_BlogExample_Domain_Model_Comment $newComment A new comment
+	 * @dontvalidate $newComment
 	 * @return string The rendered view
 	 */
 	public function showAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $newComment = NULL) {
 		$this->view->assign('post', $post);
+		$this->view->assign('blog', $post->getBlog());
 		$this->view->assign('newComment', $newComment);
 	}
 
@@ -78,10 +83,6 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 */
 	public function newAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $newPost = NULL) {
 		$this->view->assign('authors', $this->personRepository->findAll());
-		$tag1 = new Tx_BlogExample_Domain_Model_Tag('Foo');
-		$tag2 = new Tx_BlogExample_Domain_Model_Tag('Bar');
-		$tag3 = new Tx_BlogExample_Domain_Model_Tag('Baz');
-		$this->view->assign('tags', array($tag1, $tag2, $tag3)); // TODO Crude, but it works for demonstration
 		$this->view->assign('blog', $blog);
 		$this->view->assign('newPost', $newPost);
 	}
@@ -95,6 +96,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $newPost) {
 		$blog->addPost($newPost);
+		$newPost->setBlog($blog);
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
 

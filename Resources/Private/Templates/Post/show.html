@@ -33,8 +33,8 @@
 	</div>
 	</f:for>
 </div>
+<h4>Add your own</h4>
 <f:form name="newComment" method="post" controller="Comment" action="create" object="{newComment}" arguments="{post : post}">
-	<h4>Add your own</h4>
 	<label for="author">name <span class="required">(required)</span></label><br />
 	<f:form.textbox id="author" property="author" />
 	<br />
@@ -42,9 +42,9 @@
 	<f:form.textbox id="email" property="email" />
 	<br />
 	<label for="text">message <span class="required">(required)</span></label><br />
-	<f:form.textarea id="text" property="content" rows="8" cols="46"/>
+	<f:form.textarea id="text" property="content" rows="6" cols="46"/>
 	<br />
-	<f:form.submit>Say it</f:form.submit>
+	<f:form.submit class="submit" value="Submit"/>
 </f:form>
 
 </f:section>

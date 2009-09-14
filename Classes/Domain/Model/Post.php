@@ -37,27 +37,26 @@
 class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
-	 * @var int The uid of the blog the post is related to
+	 * @var Tx_BlogExample_Domain_Model_Blog
+	 * @identity
 	 */
-	protected $blogUid;
-
+	protected $blog;
+	
 	/**
 	 * @var string
+	 * @validate StringLength(minimum = 3, maximum = 50)
+	 * @identity
 	 */
 	protected $title;
 
 	/**
 	 * @var DateTime
+	 * @identity
 	 */
 	protected $date;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage
-	 */
-	protected $tags;
-
-	/**
-	 * @var Tx_BlogExample_Model_Person
+	 * @var Tx_BlogExample_Domain_Model_Person
 	 */
 	protected $author;
 
@@ -67,27 +66,26 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	protected $content;
 
 	/**
-	 * @var integer
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Tag>
 	 */
-	protected $votes = 0;
+	protected $tags;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Category>
+	 * FIXME validate Count(atLeast = 1)
+	 */
+	protected $categories;
+
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
 	 */
 	protected $comments;
 
 	/**
-	 * @var boolean
-	 */
-	protected $published = FALSE;
-	
-	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
 	 */
 	protected $relatedPosts;
-
 	
-
 	/**
 	 * Constructs this post
 	 */
@@ -96,27 +94,27 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->date = new DateTime();
-	}	
+	}
 	
 	/**
-	 * Sets the uid of the blog this post is related to
+	 * Sets the blog this post is part of
 	 *
-	 * @param int $blogUid The blog uid
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog
 	 * @return void
 	 */
-	public function setBlogUid($blogUid) {
-		$this->blogUid = $blogUid;
+	public function setBlog(Tx_BlogExample_Domain_Model_Blog $blog) {
+		$this->blog = $blog;
 	}
 
 	/**
-	 * Returns the uid of the blog this post is related to
+	 * Returns the blog this post is part of
 	 *
-	 * @return int The blog uid this post is part of
+	 * @return Tx_BlogExample_Domain_Model_Blog The blog this post is part of
 	 */
-	public function getBlogUid() {
-		return $this->blogUid;
+	public function getBlog() {
+		return $this->blog;
 	}
-	
+
 	/**
 	 * Setter for title
 	 *

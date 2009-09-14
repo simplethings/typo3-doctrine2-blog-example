@@ -7,6 +7,44 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 		'showRecordFieldList' => 'hidden, title, description, logo, posts, administrator'
 	),
 	'columns' => array(
+		'sys_language_uid' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => Array(
+					Array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages',-1),
+					Array('LLL:EXT:lang/locallang_general.php:LGL.default_value',0)
+				)
+			)
+		),
+		'l18n_parent' => Array (
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+			'config' => Array (
+				'type' => 'select',
+				'items' => Array (
+					Array('', 0),
+				),
+				'foreign_table' => 'tt_news',
+				'foreign_table_where' => 'AND tt_news.uid=###REC_FIELD_l18n_parent### AND tt_news.sys_language_uid IN (-1,0)',
+			)
+		),
+		'l18n_diffsource' => Array(
+			'config'=>array(
+				'type'=>'passthrough')
+		),
+		't3ver_label' => Array (
+			'displayCond' => 'FIELD:t3ver_label:REQ:true',
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+			'config' => Array (
+				'type'=>'none',
+				'cols' => 27
+			)
+		),
 		'hidden' => array(
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -54,13 +92,12 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_blog.posts',
 			'config' => array(
 				'type' => 'inline',
-				'loadingStrategy' => 'proxy',
+				'loadingStrategy' => 'storage',
 				'deleteRelationsWithParent' => 1,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
 				// TODO Re-enable the foreign key references by uncommenting the following two lines
 //				'foreign_field' => 'blog_uid',
-//				'foreign_table_field' => 'blog_table',
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
@@ -91,7 +128,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 $TCA['tx_blogexample_domain_model_post'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_post']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, title, date, author, content, votes, published, tags, comments, related_posts'
+		'showRecordFieldList' => 'hidden, title, date, author, content, tags, comments, related_posts'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -141,22 +178,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'cols' => 80
 			)
 		),
-		'votes' => array(
-			'label'  => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.votes',
-			'config' => array(
-				'type' => 'input',
-				'eval' => 'trim, double2',
-				'size' => '4',
-				'max'  => '6'
-			)
-		),
-		'published' => array(
-			'exclude' => 0,
-			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.published',
-			'config'  => array(
-				'type' => 'check'
-			)
-		),
 		'tags' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.tags',
@@ -196,7 +217,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.related',
 			'config' => array(
 				'type' => 'select',
-				'loadingStrategy' => 'proxy',
+				'loadingStrategy' => 'storage',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 9999,
@@ -211,20 +232,19 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
 			)
 		),
-		// TODO Re-enable the foreign key references by uncommenting the following two column configurations
-//		'blog_uid' => array(		
-//			'config' => array(
-//				'type' => 'passthrough',	
-//			)
-//		),
-//		'blog_table' => array(		
-//			'config' => array(
-//				'type' => 'passthrough',	
-//			)
-//		),
+		'blog_uid' => array(		
+			'config' => array(
+				'type' => 'passthrough',	
+			)
+		),
+		'blog_table' => array(		
+			'config' => array(
+				'type' => 'passthrough',	
+			)
+		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, title, date, author, content, votes, published, tags, comments, related_posts')
+		'1' => array('showitem' => 'hidden, title, date, author, content, tags, comments, related_posts')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

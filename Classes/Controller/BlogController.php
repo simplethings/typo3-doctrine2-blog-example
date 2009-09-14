@@ -36,13 +36,17 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	protected $blogRepository;
 
 	/**
+	 * @var Tx_BlogExample_Domain_Model_AdministratorRepository
+	 */
+	protected $administratorRepository;
+
+	/**
 	 * Initializes the current action
 	 *
 	 * @return void
 	 */
 	public function initializeAction() {
 		$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_BlogRepository');
-		$this->postRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_PostRepository');
 		$this->administratorRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_AdministratorRepository');
 	}
 
@@ -75,25 +79,19 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
-		$this->pushFlashMessage('Your new blog was created.');
+//		$this->pushFlashMessage('Your new blog was created.');
 		$this->redirect('index');
 	}
-
-
+	
 	/**
 	 * Edits an existing blog
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog to edit or the blog with updated properties
-	 * @param Tx_BlogExample_Domain_Model_Blog $existingBlog The existing unmodified blog or NULL to use the blog
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog to be edited. This might also be a clone of the original blog already containing modifications if the edit form has been submitted, contained errors and therefore ended up in this action again.
 	 * @return string Form for editing the existing blog
-	 * @validate $blog Raw
+	 * @dontvalidate $blog
 	 */
-	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Blog $existingBlog = NULL) {
-		if ($existingBlog === NULL) {
-			$existingBlog = $blog;
-		}
+	public function editAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->view->assign('blog', $blog);
-		$this->view->assign('existingBlog', $existingBlog);
 		$this->view->assign('administrators', $this->administratorRepository->findAll());
 	}
 
@@ -167,13 +165,11 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 		$administrator->setPassword(''); // For security reasons
 		$blog->setAdministrator($administrator);
 
-		for ($postNumber = 1; $postNumber < 4; $postNumber++) {
+		for ($postNumber = 1; $postNumber < 6; $postNumber++) {
 			$post = new Tx_BlogExample_Domain_Model_Post;
 			$post->setTitle('The Post #' . $postNumber);
 			$post->setAuthor($author);
 			$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-			$post->setPublished(TRUE);
-			$post->setVotes('5.00');
 			$blog->addPost($post);
 
 			$comment = new Tx_BlogExample_Domain_Model_Comment;
@@ -195,6 +191,8 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 
 			$tag = new Tx_BlogExample_Domain_Model_Tag('Domain Driven Design');
 			$post->addTag($tag);
+
+			$post->setBlog($blog);
 		}
 
 		return $blog;

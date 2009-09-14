@@ -119,9 +119,6 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addPost(Tx_BlogExample_Domain_Model_Post $post) {
-		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->posts->_loadRealInstance();
-		}
 		$this->posts->attach($post);
 	}
 
@@ -132,9 +129,6 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removePost(Tx_BlogExample_Domain_Model_Post $postToRemove) {
-		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->posts->_loadRealInstance();
-		}
 		$this->posts->detach($postToRemove);
 	}
 
@@ -153,11 +147,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return Tx_Extbase_Persistence_ObjectStorage
 	 */
 	public function getPosts() {
-		// TODO This should be invoked transparently
-		if ($this->posts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->posts->_loadRealInstance();
-		}
-		return clone $this->posts;
+		return $this->posts;
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <f:layout name="default" />
-
 <f:section name="mainbox">
 
 <div class="csc-header csc-header-n1"><h2 class="csc-firstHeader">Welcome to {blog.title}</h2></div>
@@ -18,7 +17,7 @@
 		<f:then>
 		<p class="bodytext"><f:translate key="label_recent_posts">Below are the most recent posts:</f:translate></p>
 			<ul>
-				<f:for each="{blog.posts}" as="post">
+				<f:for each="{recentPosts}" as="post">
 					<li>
 						<h3>
 							<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
