@@ -32,7 +32,7 @@ plugin.tx_blogexample.settings {
 }
 
 # This is an example how to modify the translation
-plugin.tx_blogexample._LOCAL_LANG {
+plugin.tx_blogexample.settings._LOCAL_LANG {
 	default {
 		read_more = more >>
 	}
