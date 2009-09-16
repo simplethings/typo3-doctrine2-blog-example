@@ -1,10 +1,6 @@
 <f:layout name="default" />
 <f:section name="mainbox">
 
-<f:for each="{flashMessages}" as="message">
-	<p class="tx-extbase-flash-message"><strong>{message}</strong></p>
-</f:for>
-
 <div class="csc-header csc-header-n1"><h2 class="csc-firstHeader">Welcome to {blog.title}</h2></div>
 <p class="bodytext">{blog.description} In order to start blogging, read the <a href="#">Help section</a>.
 <f:if condition="{blog.administrator}">

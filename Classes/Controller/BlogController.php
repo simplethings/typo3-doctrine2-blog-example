@@ -79,7 +79,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
-		$this->pushFlashMessage('Your new blog was created.');
+		$this->flashMessages->add('Your new blog was created.');
 		$this->redirect('index');
 	}
 	
@@ -103,7 +103,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->blogRepository->update($blog);
-		$this->pushFlashMessage('Your blog has been updated.');
+		$this->flashMessages->add('Your blog has been updated.');
 		$this->redirect('index');
 	}
 
@@ -115,7 +115,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 */
 	public function deleteAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->blogRepository->remove($blog);
-		$this->pushFlashMessage('Your blog has been removed.');
+		$this->flashMessages->add('Your blog has been removed.');
 		$this->redirect('index');
 	}
 

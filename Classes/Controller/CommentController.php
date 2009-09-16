@@ -40,7 +40,7 @@ class Tx_BlogExample_Controller_CommentController extends Tx_Extbase_MVC_Control
 	 */
 	public function createAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $newComment) {
 		$post->addComment($newComment);
-		$this->pushFlashMessage('Your new comment was created.');
+		$this->flashMessages->add('Your new comment was created.');
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
 
