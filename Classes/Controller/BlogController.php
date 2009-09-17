@@ -138,7 +138,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function populateAction() {
-		$author = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Person', 'Jochen', 'Rau', 'foo.bar@typoplanet.de');
+		$author = t3lib_div::makeInstance('Tx_BlogExample_Domain_Model_Person', 'Stephen', 'Smith', 'foo.bar@example.com');
 		for ($blogNumber = 1; $blogNumber < 4; $blogNumber++) {
 			$blog = $this->getBlog($blogNumber, $author);
 			$this->blogRepository->add($blog);
