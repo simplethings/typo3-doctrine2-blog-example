@@ -67,8 +67,7 @@ CREATE TABLE tx_blogexample_domain_model_post (
 	comments int(11) unsigned DEFAULT '0' NOT NULL,
 	related_posts int(11) unsigned DEFAULT '0' NOT NULL,
 
-	blog_uid int(11) DEFAULT '0' NOT NULL,
-	blog_table tinytext NOT NULL,
+	blog int(11) DEFAULT '0' NOT NULL,
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -99,8 +98,7 @@ CREATE TABLE tx_blogexample_domain_model_comment (
 	l18n_parent int(11) DEFAULT '0' NOT NULL,
 	l18n_diffsource mediumblob NOT NULL,
 
-	post_uid int(11) DEFAULT '0' NOT NULL,
-	post_table tinytext NOT NULL,
+	post int(11) DEFAULT '0' NOT NULL,
 
 	date int(11) DEFAULT '0' NOT NULL,
 	author varchar(255) DEFAULT '' NOT NULL,

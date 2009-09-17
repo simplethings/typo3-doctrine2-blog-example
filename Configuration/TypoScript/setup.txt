@@ -1,34 +1,7 @@
-config.tx_extbase.persistence.classes {
-	Tx_BlogExample_Domain_Model_Post {
-		mapping {
-			columns {
-				blog_uid.mapOnProperty = blog
-			}
-		}
-	}
-}
-
 plugin.tx_blogexample.settings {
 	maxItems = 1
-	foo = TEXT
 	foo.value = Hello World!
 	foo.bar.baz = 10
-	foo = COBJ
-	controllers {
-		Post {
-			singlePid = 25
-			maxItems = 8
-			actions {
-				index {
-					maxItems = 5
-				}
-			}
-		}
-		Comment {
-			content.crop = 100
-		}
-	}
-
 }
 
 # This is an example how to modify the translation

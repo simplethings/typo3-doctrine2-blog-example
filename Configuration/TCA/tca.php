@@ -93,11 +93,11 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'config' => array(
 				'type' => 'inline',
 				'loadingStrategy' => 'storage',
-				'deleteRelationsWithParent' => 1,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
-				// TODO Re-enable the foreign key references by uncommenting the following two lines
-//				'foreign_field' => 'blog_uid',
+//				 TODO Re-enable the foreign key references by uncommenting the following lines
+//				'foreign_field' => 'blog',
+				'maxitems'      => 999999, // TODO This is only necessary because of a bug in tcemain
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
@@ -203,8 +203,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'loadingStrategy' => 'proxy',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Comment',
 				'foreign_table' => 'tx_blogexample_domain_model_comment',
-				'foreign_field' => 'post_uid',
-				'foreign_table_field' => 'post_table',
+				'foreign_field' => 'post',
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
@@ -232,15 +231,11 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
 			)
 		),
-		'blog_uid' => array(		
-			'config' => array(
-				'type' => 'passthrough',	
-			)
-		),
-		'blog_table' => array(		
-			'config' => array(
-				'type' => 'passthrough',	
-			)
+		'blog' => array(
+// TODO Re-enable the foreign key references by uncommenting the following lines
+//			'config' => array(
+//				'type' => 'passthrough',
+//			)
 		),
 	),
 	'types' => array(
@@ -304,12 +299,7 @@ $TCA['tx_blogexample_domain_model_comment'] = array(
 				'cols' => 80
 			)
 		),
-		'post_uid' => array(		
-			'config' => array(
-				'type' => 'passthrough',	
-			)
-		),
-		'post_table' => array(		
+		'post' => array(		
 			'config' => array(
 				'type' => 'passthrough',	
 			)

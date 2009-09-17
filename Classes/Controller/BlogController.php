@@ -158,11 +158,9 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 		$blog->setTitle('Blog #' . $blogNumber);
 		$blog->setDescription('A blog about TYPO3 extension development.');
 
-		$administrator = new Tx_BlogExample_Domain_Model_Administrator('foobar', '123455');
+		$administrator = new Tx_BlogExample_Domain_Model_Administrator();
 		$administrator->setName('John Doe');
 		$administrator->setEmail('john.doe@example.com');
-		$administrator->setUsername(''); // For security reasons
-		$administrator->setPassword(''); // For security reasons
 		$blog->setAdministrator($administrator);
 
 		for ($postNumber = 1; $postNumber < 6; $postNumber++) {
