@@ -56,7 +56,10 @@ class Tx_BlogExample_ViewHelpers_Be_StartPageViewHelper extends Tx_BlogExample_V
 							$extJs = false, $extJsTheme = true, $extJsAdapter = '', $extJsDebug = false) {
 		
 		$doc = $this->getDocInstance();
-		
+
+		/** @var $pageRenderer t3lib_PageRenderer */
+		$pageRenderer = $doc->getPageRenderer();
+
 		if ($jumpToUrl) {
 			$doc->JScode = '
 				<script language="javascript" type="text/javascript">
@@ -69,19 +72,19 @@ class Tx_BlogExample_ViewHelpers_Be_StartPageViewHelper extends Tx_BlogExample_V
 		}
 		
 		if ($prototype) {
-			$doc->loadPrototype();
+			$pageRenderer->loadPrototype();
 		}
 		
 		if ($scriptaculous) {
-			$doc->loadScriptaculous($scriptaculousModule);
+			$pageRenderer->loadScriptaculous($scriptaculousModule);
 		}
 		
 		if ($extJs) {
-			$doc->loadExtJS(true, $extJsTheme, $extJsAdapter);
+			$pageRenderer->loadExtJS(true, $extJsTheme, $extJsAdapter);
 		}
 		
 		if ($extJsTheme === true && $extJsDebug === true) {
-			$doc->enableExtJsDebug();
+			$pageRenderer->enableExtJsDebug();
 		}
 		
 		
