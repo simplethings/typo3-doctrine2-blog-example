@@ -1,12 +1,34 @@
-plugin.tx_blogexample.settings {
-	maxItems = 1
-	foo.value = Hello World!
-	foo.bar.baz = 10
+ # Plugin configuration
+plugin.tx_blogexample {
+	settings {
+		 # maximum number of posts to display at once
+		maxPosts = 10
+
+		 # This is an example how to modify the translation
+		_LOCAL_LANG {
+			default {
+				read_more = more >>
+			}
+		}
+	}
+	persistence {
+		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}
+		partialRootPath = {$plugin.tx_blogexample.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_blogexample.view.layoutRootPath}
+	}
 }
 
-# This is an example how to modify the translation
-plugin.tx_blogexample.settings._LOCAL_LANG {
-	default {
-		read_more = more >>
+ # Module configuration
+module.tx_blogexample {
+	settings < plugin.tx_blogexample.settings
+	persistence < plugin.tx_blogexample.persistence
+	view < plugin.tx_blogexample.view
+	view {
+		templateRootPath = {$module.tx_blogexample.view.templateRootPath}
+		partialRootPath = {$module.tx_blogexample.view.partialRootPath}
+		layoutRootPath = {$module.tx_blogexample.view.layoutRootPath}
 	}
 }

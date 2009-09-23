@@ -45,6 +45,31 @@ class Tx_BlogExample_Controller_CommentController extends Tx_Extbase_MVC_Control
 	}
 
 	/**
+	 * Deletes an existing comment
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Post $post The post the comment is related to
+	 * @param Tx_BlogExample_Domain_Model_Comment $comment The comment to be deleted
+	 * @return void
+	 */
+	public function deleteAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $comment) {
+		$post->removeComment($comment);
+		$this->flashMessages->add('The comment was removed.');
+		$this->redirect('edit', 'Post', NULL, array('post' => $post, 'blog' => $post->getBlog()));
+	}
+
+	/**
+	 * Deletes all comments of the given post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Post $post The post the comment is related to
+	 * @return void
+	 */
+	public function deleteAllAction(Tx_BlogExample_Domain_Model_Post $post) {
+		$post->removeAllComments();
+		$this->flashMessages->add('Comments have been removed.');
+		$this->redirect('edit', 'Post', NULL, array('post' => $post, 'blog' => $post->getBlog()));
+	}
+
+	/**
 	 * Override getErrorFlashMessage to present
 	 * nice flash error messages.
 	 *
@@ -54,6 +79,10 @@ class Tx_BlogExample_Controller_CommentController extends Tx_Extbase_MVC_Control
 		switch ($this->actionMethodName) {
 			case 'createAction' :
 				return 'Could not create the new comment:';
+			case 'deleteAction' :
+				return 'Could not delete comment:';
+			case 'createAction' :
+				return 'Could not delete comments:';
 			default :
 				return parent::getErrorFlashMessage();
 		}

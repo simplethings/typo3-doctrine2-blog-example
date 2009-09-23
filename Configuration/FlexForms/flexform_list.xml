@@ -7,15 +7,17 @@
         </TCEforms>
         <type>array</type>
         <el>
-          <maxItems>
+          <maxPosts>
             <TCEforms>
-              <label>Max. Items to display?</label>
+              <label>Max. number of posts to display at once</label>
               <config>
                 <type>input</type>
                 <size>2</size>
+				<eval>int</eval>
+				<default>10</default>
               </config>
             </TCEforms>
-          </maxItems>    
+          </maxPosts>
         </el>
       </ROOT>
     </sDEF>

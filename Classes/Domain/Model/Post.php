@@ -177,9 +177,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Adds a tag to this post
+	 * Removes tag from this post
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @param Tx_BlogExample_Domain_Model_Tag $tagToDelete
 	 * @return void
 	 */
 	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tagToDelete) {
@@ -287,6 +287,16 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function addComment(Tx_BlogExample_Domain_Model_Comment $comment) {
 		$this->comments->attach($comment);
+	}
+
+	/**
+	 * Removes Comment from this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Comment $commentToDelete
+	 * @return void
+	 */
+	public function removeComment(Tx_BlogExample_Domain_Model_Comment $commentToDelete) {
+		$this->comments->detach($commentToDelete);
 	}
 	
 	/**

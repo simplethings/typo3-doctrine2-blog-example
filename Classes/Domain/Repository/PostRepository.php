@@ -39,7 +39,7 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
-			->setLimit($limit)
+			->setLimit((integer)$limit)
 			->execute();
 	}
 
@@ -84,7 +84,7 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
-			->setLimit($limit)
+			->setLimit((integer)$limit)
 			->execute();
 	}
 }

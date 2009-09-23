@@ -40,14 +40,13 @@ class Tx_BlogExample_Domain_Validator_BlogValidator extends Tx_Extbase_Validatio
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog
 	 * @return boolean true
 	 */
-	public function isValid($blog) {
-		return TRUE; // FIXME Validation is TRUE at any time
+public function isValid($blog) {
 		if (!$blog instanceof Tx_BlogExample_Domain_Model_Blog) {
 			$this->addError('The blog is not a blog', 1);
 			return FALSE;
 		}
-		if ($blog->getIdentifier() === 'Extbase') {
-			$this->addError('"Extbase" can\'t be used as a blog name.', 2);
+		if ($blog->getTitle() === 'Extbase') {
+			$this->addError('"Extbase" can\'t be used as a blog title.', 2);
 			return FALSE;
 		}
 		return TRUE;

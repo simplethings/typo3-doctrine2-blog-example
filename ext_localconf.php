@@ -2,7 +2,7 @@
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 /**
- * Configure the Plugin to call the 
+ * Configure the Plugin to call the
  * right combination of Controller and Action according to
  * the user input (default settings, FlexForm, URL etc.)
  */
@@ -15,8 +15,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'Comment' => 'create',
 		),
 	array(																			// An array of non-cachable controller-action-combinations (they must already be enabled)
-		'Blog' => 'delete,deleteAll,edit,update,populate',
-		'Post' => 'show,delete,edit,update',
+		'Blog' => 'new,create,delete,deleteAll,edit,update,populate',
+		'Post' => 'new,create,delete,edit,update',
 		'Comment' => 'create',
 		)
 );

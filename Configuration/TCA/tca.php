@@ -95,8 +95,8 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'loadingStrategy' => 'storage',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
-//				 TODO Re-enable the foreign key references by uncommenting the following lines
-//				'foreign_field' => 'blog',
+				//				 TODO Re-enable the foreign key references by uncommenting the following lines
+				//				'foreign_field' => 'blog',
 				'maxitems'      => 999999, // TODO This is only necessary because of a bug in tcemain
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
@@ -187,7 +187,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'minitems' => 0,
 				'maxitems' => 9999,
 				'autoSizeMax' => 30,
-				'multiple' => 0,
+				'multiple' => 1,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Tag',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
 				'MM' => 'tx_blogexample_post_tag_mm',
