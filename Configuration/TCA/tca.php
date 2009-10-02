@@ -191,8 +191,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Tag',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
 				'MM' => 'tx_blogexample_post_tag_mm',
-				'MM_insert_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
-				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
 			)
 		),
 		'comments' => array(
@@ -227,15 +225,13 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				// 'foreign_table_where' => 'AND tx_blogexample_domain_model_post.blog_uid=###REC_FIELD_blog_uid### AND tx_blogexample_domain_model_post.uid!=###THIS_UID###',
 				'MM' => 'tx_blogexample_post_post_mm',
 				'MM_opposite_field' => 'related_posts',
-				'MM_insert_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
-				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_post'),
 			)
 		),
 		'blog' => array(
 // TODO Re-enable the foreign key references by uncommenting the following lines
-//			'config' => array(
-//				'type' => 'passthrough',
-//			)
+// 			'config' => array(
+// 				'type' => 'passthrough',
+// 			)
 		),
 	),
 	'types' => array(
