@@ -3,13 +3,6 @@ plugin.tx_blogexample {
 	settings {
 		 # maximum number of posts to display at once
 		maxPosts = 10
-
-		 # This is an example how to modify the translation
-		_LOCAL_LANG {
-			default {
-				read_more = more >>
-			}
-		}
 	}
 	persistence {
 		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
@@ -18,6 +11,12 @@ plugin.tx_blogexample {
 		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}
 		partialRootPath = {$plugin.tx_blogexample.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_blogexample.view.layoutRootPath}
+	}
+	# This is an example how to modify the translation
+	_LOCAL_LANG {
+		default {
+			read_more = more >>
+		}
 	}
 }
 
