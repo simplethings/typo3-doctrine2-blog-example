@@ -1,9 +1,9 @@
 <f:layout name="default" />
 
 <f:section name="iconButtons">
-	<f:be.buttons.icon uri="{f:uri.action(action='index' controller='Blog')}" icon="closedok" title="Back" />
-	<f:be.buttons.icon uri="{f:uri.action(action='new' arguments='{blog: blog}')}" icon="new_el" title="Create new Post" />
-	<f:be.buttons.icon uri="{f:uri.action(action='edit' controller='Blog' arguments='{blog: blog}')}" icon="edit2" title="Edit this blog" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', controller:'Blog')}" icon="closedok" title="Back" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'new', arguments:{blog: blog})}" icon="new_el" title="Create new Post" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'edit', controller:'Blog', arguments:{blog: blog})}" icon="edit2" title="Edit this blog" />
 </f:section>
 
 <f:section name="content">
@@ -13,13 +13,13 @@
 		<f:if condition="{blog.posts}">
 			<f:then>
 				<ul>
-					<f:for each="{recentPosts}" as="post">
+					<f:for each="{blog.posts}" as="post">
 						<li>
 							<h3>
 								<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">
 									{post.title}
 								</f:link.action>
-								<f:be.buttons.icon uri="{f:uri.action(action='edit' arguments='{post: post, blog: blog}')}" icon="edit2" title="Edit this Post" />
+								<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:{post: post, blog: blog})}" icon="edit2" title="Edit this Post" />
 							</h3>
 							<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
 						</li>

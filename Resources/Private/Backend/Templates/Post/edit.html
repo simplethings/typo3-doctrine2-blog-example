@@ -2,9 +2,9 @@
 <f:layout name="default" />
 
 <f:section name="iconButtons">
-	<f:be.buttons.icon uri="{f:uri.action(action='index' arguments='{blog: blog}')}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments: {blog: blog})}" icon="closedok" title="Cancel" />
 	<f:be.buttons.icon uri="javascript: document.post.submit();" icon="saveandclosedok" title="Save" />
-	<f:be.buttons.icon uri="{f:uri.action(action='delete' arguments='{blog: blog}')}" icon="deletedok" title="Delete this blog" />
+	<f:be.buttons.icon uri="{f:uri.action(action: 'delete', arguments: {blog: blog})}" icon="deletedok" title="Delete this blog" />
 </f:section>
 
 <f:section name="content">
@@ -32,7 +32,7 @@
 						</div>
 						<div class="tx-blogexample-comment-text">
 							<f:format.nl2br>{comment.content}</f:format.nl2br>
-							<f:be.buttons.icon uri="{f:uri.action(action='delete' controller='Comment' arguments='{post: post, comment: comment}')}" icon="deletedok" title="Create new Post" />
+							<f:be.buttons.icon uri="{f:uri.action(action:'delete', controller: 'Comment', arguments:{post: post, comment: comment})}" icon="deletedok" title="Create new Post" />
 						</div>
 						<hr class="clear" />
 					</div>

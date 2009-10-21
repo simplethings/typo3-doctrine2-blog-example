@@ -2,8 +2,8 @@
 <f:layout name="default" />
 
 <f:section name="iconButtons">
-	<f:be.buttons.icon uri="{f:uri.action(action='index' arguments='{blog: blog}')}" icon="closedok" title="Cancel" />
-	<f:be.buttons.icon uri="{f:uri.action(action='edit' arguments='{post: post, blog: blog}')}" icon="edit2" title="Edit this Post" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments:{blog: blog})}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:{post: post, blog: blog})}" icon="edit2" title="Edit this Post" />
 </f:section>
 
 <f:section name="content">

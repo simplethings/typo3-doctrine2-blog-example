@@ -1,7 +1,7 @@
 <f:layout name="default" />
 
 <f:section name="iconButtons">
-	<f:be.buttons.icon uri="{f:uri.action(action='index' arguments='{blog: blog}')}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments:{blog: blog})}" icon="closedok" title="Cancel" />
 	<f:be.buttons.icon uri="javascript: document.newPost.submit();" icon="saveandclosedok" title="Save" />
 </f:section>
 
