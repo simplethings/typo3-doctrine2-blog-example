@@ -14,7 +14,7 @@
 					<li>
 						<h3>
 							<f:link.action action="index" controller="Post"	arguments="{blog : blog}">
-								{blog.title}
+								{blog.title} (<f:count subject="{blog.posts}" />)
 							</f:link.action>
 						</h3>
 						<p>
