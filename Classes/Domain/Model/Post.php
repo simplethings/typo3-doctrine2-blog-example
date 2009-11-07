@@ -161,13 +161,11 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for tags
 	 *
-	 * @param array $tags One or more Tx_BlogExample_Domain_Model_Tag objects
+	 * @param Tx_Extbase_Persistence_ObjectStorage $tags One or more Tx_BlogExample_Domain_Model_Tag objects
 	 * @return void
 	 */
-	public function setTags(array $tags) {
-		foreach ($tags as $tag) {
-			$this->addTag($tag);			
-		}
+	public function setTags(Tx_Extbase_Persistence_ObjectStorage $tags) {
+		$this->tags = clone $tags;
 	}
 
 	/**
@@ -181,19 +179,13 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Removes tag from this post
+	 * Removes a tag from this post
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Tag $tagToDelete
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag
 	 * @return void
 	 */
-	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tagToDelete) {
-		foreach ($this->tags as $key => $tag) {
-			if ($tag === $tagToDelete) {
-				unset($this->tags[$key]);
-				reset($this->tags);
-				return;
-			}
-		}
+	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tag) {
+		$this->tags->detach($tag);
 	}
 	
 	/**
@@ -208,10 +200,10 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Getter for tags
 	 *
-	 * @return array holding Tx_BlogExample_Domain_Model_Tag objects
+	 * @return Tx_Extbase_Persistence_ObjectStorage A storage holding Tx_BlogExample_Domain_Model_Tag objects
 	 */
 	public function getTags() {
-		return $this->tags;
+		return clone $this->tags;
 	}
 
 	/**
