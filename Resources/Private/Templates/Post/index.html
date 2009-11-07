@@ -20,7 +20,7 @@
 					<f:for each="{recentPosts}" as="post">
 						<li>
 							<h3>
-								<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
+								<f:link.action action="show" controller="Post" arguments="{post: post, blog: blog}">{post.title}</f:link.action>
 							</h3>
 							<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
 							<f:render partial="postMetaData" arguments="{post: post}"/>

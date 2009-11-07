@@ -28,8 +28,26 @@
  */
 class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 	
+	public function remove($post) {
+		$post->removeAllTags();
+		parent::remove($post);
+	}
+	
 	/**
-	 * Finds posts by the specified blog
+	 * Finds all posts by the specified blog
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
+	 * @return array The posts
+	 */
+	public function findAllByBlog(Tx_BlogExample_Domain_Model_Blog $blog) {
+		$query = $this->createQuery();
+		return $query->matching($query->equals('blog', $blog))
+			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
+			->execute();
+	}
+
+	/**
+	 * Finds posts by the specified blog with limit
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max

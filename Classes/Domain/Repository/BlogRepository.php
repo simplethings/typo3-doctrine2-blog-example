@@ -27,22 +27,6 @@
  * A repository for Blogs
  */
 class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {
-	
-	/**
-	 * Remove the blog's posts before removing the blog itself.
-	 *
-	 * @param int $blog
-	 * @return void
-	 */
-	public function remove($blog) {
-		if ($blog instanceof Tx_BlogExample_Domain_Model_Blog) {
-			foreach ($blog->getPosts() as $post) {
-				$post->removeAllComments();
-			}
-			$blog->removeAllPosts();
-			parent::remove($blog);
-		}
-	}
-
+			
 }
 ?>

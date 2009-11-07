@@ -92,12 +92,10 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_blog.posts',
 			'config' => array(
 				'type' => 'inline',
-				'loadingStrategy' => 'storage',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
-				//				 TODO Re-enable the foreign key references by uncommenting the following lines
-				//				'foreign_field' => 'blog',
-				'maxitems'      => 999999, // TODO This is only necessary because of a bug in tcemain
+				'foreign_field' => 'blog',
+				'maxitems'      => 999999,
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
@@ -112,7 +110,6 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Administrator',
-//				'foreign_table_where' => 'AND fe_users.pid=###CURRENT_PID###',
 				'maxitems' => 1,
 			)
 		),
@@ -138,6 +135,16 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'type' => 'check'
 			)
 		),
+		'blog' => Array (		
+			'exclude' => 1,		
+			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.blog',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'tx_blogexample_domain_model_blog',
+				'foreign_class' => 'Tx_BlogExample_Domain_Model_Blog',
+				'maxitems' => 1,
+			)
+		),		
 		'title' => array(
 			'exclude' => 0,
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.title',
@@ -221,7 +228,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.comments',
 			'config' => array(
 				'type' => 'inline',
-				'loadingStrategy' => 'storage',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Comment',
 				'foreign_table' => 'tx_blogexample_domain_model_comment',
 				'foreign_field' => 'post',
@@ -237,7 +243,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.related',
 			'config' => array(
 				'type' => 'select',
-				'loadingStrategy' => 'storage',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 9999,
@@ -245,20 +250,13 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'multiple' => 0,
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
-				// 'foreign_table_where' => 'AND tx_blogexample_domain_model_post.blog_uid=###REC_FIELD_blog_uid### AND tx_blogexample_domain_model_post.uid!=###THIS_UID###',
 				'MM' => 'tx_blogexample_post_post_mm',
 				'MM_opposite_field' => 'related_posts',
 			)
 		),
-		'blog' => array(
-// TODO Re-enable the foreign key references by uncommenting the following lines
-// 			'config' => array(
-// 				'type' => 'passthrough',
-// 			)
-		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, title, date, author, content, tags, comments, related_posts')
+		'1' => array('showitem' => 'hidden, blog, title, date, author, content, tags, comments, related_posts')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

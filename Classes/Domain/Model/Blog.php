@@ -56,6 +56,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage
 	 * @lazy
+	 * @cascade remove
 	 */
 	protected $posts;
 

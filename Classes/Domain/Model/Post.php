@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************
 *  Copyright notice
 *
@@ -38,7 +37,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Blog
-	 * @identity
+	 * @lazy
 	 */
 	protected $blog;
 	
@@ -78,6 +77,8 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 
 	/**
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
+	 * @lazy
+	 * @cascade remove
 	 */
 	protected $comments;
 
@@ -112,6 +113,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return Tx_BlogExample_Domain_Model_Blog The blog this post is part of
 	 */
 	public function getBlog() {
+		if ($this->blog instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+			$this->blog->_loadRealInstance();
+		}
 		return $this->blog;
 	}
 
@@ -270,13 +274,11 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for the comments to this post
 	 *
-	 * @param array $comments an array of Tx_BlogExample_Domain_Model_Comment instances
+	 * @param Tx_Extbase_Persistence_ObjectStorage $comments An Object Storage of related Comment instances
 	 * @return void
 	 */
-	public function setComments(array $comments) {
-		foreach ($comments as $comment) {
-			$this->addComment($comment);
-		}
+	public function setComments(Tx_Extbase_Persistence_ObjectStorage $comments) {
+		$this->comments = $comments;
 	}
 
 	/**
@@ -314,23 +316,17 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Comment
 	 */
 	public function getComments() {
-		// TODO This should be invoked transparently
-		if ($this->comments instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->comments->_loadRealInstance();
-		}
 		return clone $this->comments;
 	}
 	
 	/**
 	 * Setter for the related posts
 	 *
-	 * @param array $relatedPosts an array of Tx_BlogExample_Domain_Model_Post instances
+	 * @param Tx_Extbase_Persistence_ObjectStorage $relatedPosts An Object Storage containing related Posts instances
 	 * @return void
 	 */
-	public function setRelatedPosts(array $relatedPosts) {
-		foreach ($relatedPosts as $relatedPost) {
-			$this->addRelatedPost($relatedPosts);
-		}
+	public function setRelatedPosts(Tx_Extbase_Persistence_ObjectStorage $relatedPosts) {
+		$this->relatedPosts = $relatedPosts;
 	}
 	
 	/**
@@ -340,9 +336,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function addRelatedPost(Tx_BlogExample_Domain_Model_Post $post) {
-		if ($this->relatedPosts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->relatedPosts->_loadRealInstance();
-		}
 		$this->relatedPosts->attach($post);
 	}
 	
@@ -361,10 +354,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Post
 	 */
 	public function getRelatedPosts() {
-		// TODO This should be invoked transparently
-		if ($this->relatedPosts instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->relatedPosts->_loadRealInstance();
-		}
 		return clone $this->relatedPosts;
 	}
 	

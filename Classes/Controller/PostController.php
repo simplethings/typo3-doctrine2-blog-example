@@ -68,7 +68,6 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 */
 	public function showAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $newComment = NULL) {
 		$this->view->assign('post', $post);
-		$this->view->assign('blog', $post->getBlog());
 		$this->view->assign('newComment', $newComment);
 	}
 
@@ -136,7 +135,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function deleteAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
-		$blog->removePost($post);
+		$this->postRepository->remove($post);
 		$this->flashMessages->add('Your post was removed.');
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
