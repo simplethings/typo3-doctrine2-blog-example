@@ -112,7 +112,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Administrator',
-//				'foreign_table_where' => 'AND fe_users.pid=###STORAGE_PID###',
+//				'foreign_table_where' => 'AND fe_users.pid=###CURRENT_PID###',
 				'maxitems' => 1,
 			)
 		),
@@ -191,6 +191,29 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Tag',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
 				'MM' => 'tx_blogexample_post_tag_mm',
+				'wizards' => Array(
+		             '_PADDING' => 1,
+		             '_VERTICAL' => 1,
+		             'edit' => Array(
+		                 'type' => 'popup',
+		                 'title' => 'Edit',
+		                 'script' => 'wizard_edit.php',
+		                 'icon' => 'edit2.gif',
+		                 'popup_onlyOpenIfSelected' => 1,
+		                 'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+		             ),
+		             'add' => Array(
+		                 'type' => 'script',
+		                 'title' => 'Create new',
+		                 'icon' => 'add.gif',
+		                 'params' => Array(
+		                     'table'=>'tx_blogexample_domain_model_tag',
+		                     'pid' => '###CURRENT_PID###',
+		                     'setValue' => 'prepend'
+		                 ),
+		                 'script' => 'wizard_add.php',
+		             ),
+		         )
 			)
 		),
 		'comments' => array(
@@ -413,8 +436,6 @@ $TCA['tx_blogexample_domain_model_tag'] = array(
 				'foreign_table' => 'tx_blogexample_domain_model_post',
 				'MM' => 'tx_blogexample_post_tag_mm',
 				'MM_opposite_field' => 'tags',
-				'MM_insert_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
-				'MM_match_fields' => array('tablenames' => 'tx_blogexample_domain_model_tag'),
 			)
 		),
 	),
