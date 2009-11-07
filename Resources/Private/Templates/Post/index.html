@@ -13,9 +13,9 @@
 	</f:if>
 	</p>
 	<div class="tx-blogexample-list-container">
-		<f:if condition="{blog.posts}">
+		<f:if condition="{recentPosts}">
 			<f:then>
-			<p class="bodytext"><f:translate key="label_recent_posts">Below are the most recent posts:</f:translate></p>
+			<p class="bodytext"><f:translate key="label_recent_posts">Below are the most recent posts:</f:translate> (<f:count subject="{recentPosts}" /> out of {totalNumberOfPosts})</p>
 				<ul>
 					<f:for each="{recentPosts}" as="post">
 						<li>

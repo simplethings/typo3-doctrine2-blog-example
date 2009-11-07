@@ -55,6 +55,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	public function indexAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$this->view->assign('blog', $blog);
 		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($blog, $this->settings['maxPosts']));
+		$this->view->assign('totalNumberOfPosts', $this->postRepository->countByBlog($blog));
 	}
 
 	/**

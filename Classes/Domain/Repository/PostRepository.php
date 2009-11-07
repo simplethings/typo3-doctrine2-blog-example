@@ -44,6 +44,17 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	}
 
 	/**
+	 * Count posts of the specified blog
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
+	 * @return int The number of posts
+	 */
+	public function countByBlog(Tx_BlogExample_Domain_Model_Blog $blog) {
+		$query = $this->createQuery();
+		return $query->matching($query->equals('blog', $blog))->count();
+	}
+
+	/**
 	 * Finds the previous of the given post
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Post $post The reference post
@@ -87,5 +98,6 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 			->setLimit((integer)$limit)
 			->execute();
 	}
+	
 }
 ?>
