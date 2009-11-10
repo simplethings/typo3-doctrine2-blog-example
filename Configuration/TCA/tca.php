@@ -95,6 +95,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'foreign_class' => 'Tx_BlogExample_Domain_Model_Post',
 				'foreign_table' => 'tx_blogexample_domain_model_post',
 				'foreign_field' => 'blog',
+				'foreign_sortby' => 'sorting',
 				'maxitems'      => 999999,
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
