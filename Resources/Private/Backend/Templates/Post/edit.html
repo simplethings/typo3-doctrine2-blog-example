@@ -2,9 +2,9 @@
 <f:layout name="default" />
 
 <f:section name="iconButtons">
-	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments: {blog: blog})}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments: {post : post, blog: post.blog})}" icon="closedok" title="Cancel" />
 	<f:be.buttons.icon uri="javascript: document.post.submit();" icon="saveandclosedok" title="Save" />
-	<f:be.buttons.icon uri="{f:uri.action(action: 'delete', arguments: {blog: blog})}" icon="deletedok" title="Delete this blog" />
+	<f:be.buttons.icon uri="{f:uri.action(action: 'delete', arguments: {post : post, blog: post.blog})}" icon="deletedok" title="Delete this blog" />
 </f:section>
 
 <f:section name="content">
@@ -38,7 +38,7 @@
 					</div>
 				</f:for>
 				<p>&nbsp;</p>
-				<p><f:link.action action="deleteAll" controller="Comment" arguments="{post: post}"><strong>Delete all Comments of this post (not working currently)</strong></f:link.action></p>
+				<p><f:link.action action="deleteAll" controller="Comment" arguments="{post: post}"><strong>Delete all Comments of this post</strong></f:link.action></p>
 			</f:then>
 			<f:else>
 				<p><em>There are no comments for this post.</em></p>
