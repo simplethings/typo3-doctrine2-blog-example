@@ -49,7 +49,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 
 	/**
 	 * @var DateTime
-	 * @identity
 	 */
 	protected $date;
 
@@ -67,13 +66,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Tag>
 	 */
 	protected $tags;
-
-	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Category>
-	 * FIXME validate Count(atLeast = 1)
-	 */
-	protected $categories;
-
+	
 	/**
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
 	 * @lazy
@@ -244,25 +237,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Sets the votes for this post
-	 *
-	 * @param integer $votes
-	 * @return void
-	 */
-	public function setVotes($votes) {
-		$this->votes = $votes;
-	}
-
-	/**
-	 * Getter for votes
-	 *
-	 * @return integer
-	 */
-	public function getVotes() {
-		return $this->votes;
-	}
-
-	/**
 	 * Setter for the comments to this post
 	 *
 	 * @param Tx_Extbase_Persistence_ObjectStorage $comments An Object Storage of related Comment instances
@@ -346,25 +320,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function getRelatedPosts() {
 		return clone $this->relatedPosts;
-	}
-	
-	/**
-	 * Sets the published/unpublished state for this post
-	 *
-	 * @param boolean $published
-	 * @return void
-	 */
-	public function setPublished($published) {
-		$this->published = $published;
-	}
-
-	/**
-	 * Getter for published/unpublished state of this post
-	 *
-	 * @return boolean
-	 */
-	public function getPublished() {
-		return $this->published;
 	}
 	
 	/**

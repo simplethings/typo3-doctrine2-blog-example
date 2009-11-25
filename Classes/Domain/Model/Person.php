@@ -48,13 +48,6 @@ class Tx_BlogExample_Domain_Model_Person extends Tx_Extbase_DomainObject_Abstrac
 	protected $email;
 
 	/**
-	 * The person's avatar
-	 *
-	 * @var string
-	 */
-	protected $avatar = '';
-
-	/**
 	 * Constructs a new Person
 	 *
 	 */

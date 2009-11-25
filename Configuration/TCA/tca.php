@@ -413,22 +413,7 @@ $TCA['tx_blogexample_domain_model_person'] = array(
 				'eval' => 'trim, required',
 				'max'  => 256
 			)
-		),
-		'avatar' => array(
-			'exclude' => 1,
-			'label'   => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_person.avatar',
-			'config'  => array(
-				'type'          => 'group',
-				'internal_type' => 'file',
-				'allowed'       => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-				'max_size'      => 3000,
-				'uploadfolder'  => 'uploads/pics',
-				'show_thumbs'   => 1,
-				'size'          => 1,
-				'maxitems'      => 1,
-				'minitems'      => 0
-			)
-		),
+		)
 	),
 	'types' => array(
 		'1' => array('showitem' => 'firstname, lastname, email, avatar')
