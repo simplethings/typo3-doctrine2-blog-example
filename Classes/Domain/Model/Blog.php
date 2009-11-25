@@ -38,8 +38,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * The blog's title.
 	 *
 	 * @var string
-	 * @validate Text, StringLength(minimum = 1, maximum = 80)
-	 * @identity
+	 * @validate StringLength(minimum = 1, maximum = 80)
 	 */
 	protected $title = '';
 
@@ -47,14 +46,14 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * A short description of the blog
 	 *
 	 * @var string
-	 * @validate Text, StringLength(maximum = 150)
+	 * @validate StringLength(maximum = 150)
 	 */
 	protected $description = '';
 
 	/**
 	 * The posts contained in this blog
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
 	 * @lazy
 	 * @cascade remove
 	 */
