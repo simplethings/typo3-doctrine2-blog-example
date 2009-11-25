@@ -10,7 +10,7 @@
 	<f:render partial="formErrors" arguments="{for: 'newPost'}" />
 	<f:form method="post" controller="Post" action="create"  name="newPost" object="{newPost}" arguments="{blog : blog}">
 		<label for="author">Author <span class="required">(required)</span></label><br />
-		<f:form.select property="author" options="{authors}" optionValueField="uid" optionLabelField="fullName"><select><option>###dummy###</option></select></f:form.select><br />
+		<f:form.select property="author" options="{authors}" optionValueField="uid" optionLabelField="fullName"><select><option>dummy</option></select></f:form.select><br />
 		<label for="title">Title <span class="required">(required)</span></label><br />
 		<f:form.textbox property="title" /><br />
 		<label for="content">Content <span class="required">(required)</span></label><br />

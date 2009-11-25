@@ -44,7 +44,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * @var string
 	 * @validate StringLength(minimum = 3, maximum = 50)
-	 * @identity
 	 */
 	protected $title;
 
