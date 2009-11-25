@@ -7,7 +7,7 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tx_blogexample_domain_model_blog">Blog</label>
-			<label index="tx_blogexample_domain_model_blog.name">Name of the blog</label>
+			<label index="tx_blogexample_domain_model_blog.title">Blog title</label>
 			<label index="tx_blogexample_domain_model_blog.description">Short description</label>
 			<label index="tx_blogexample_domain_model_blog.logo">Logo</label>
 			<label index="tx_blogexample_domain_model_blog.posts">Posts</label>
