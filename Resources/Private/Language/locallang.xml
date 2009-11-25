@@ -6,6 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="error.blog_name_extbase">I'm sorry. "Extbase" can't be used as a blog title.</label>
 			<label index="read_more">read more >></label>
 			<label index="label_recent_posts">Below are the most recent posts:</label>
 			<label index="title">Blogs</label>

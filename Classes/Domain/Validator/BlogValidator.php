@@ -41,12 +41,8 @@ class Tx_BlogExample_Domain_Validator_BlogValidator extends Tx_Extbase_Validatio
 	 * @return boolean true
 	 */
 public function isValid($blog) {
-		if (!$blog instanceof Tx_BlogExample_Domain_Model_Blog) {
-			$this->addError('The blog is not a blog', 1);
-			return FALSE;
-		}
 		if ($blog->getTitle() === 'Extbase') {
-			$this->addError('"Extbase" can\'t be used as a blog title.', 2);
+			$this->addError(Tx_Extbase_Utility_Localization::translate('error.blog_name_extbase', 'BlogExample'), 2);
 			return FALSE;
 		}
 		return TRUE;
