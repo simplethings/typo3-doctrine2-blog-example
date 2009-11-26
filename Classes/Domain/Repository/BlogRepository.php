@@ -26,7 +26,6 @@
 /**
  * A repository for Blogs
  */
-class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {
-			
+class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {			
 }
 ?>

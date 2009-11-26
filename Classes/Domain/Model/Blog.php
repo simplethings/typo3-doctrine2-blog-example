@@ -51,7 +51,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	protected $description = '';
 
 	/**
-	 * The posts contained in this blog
+	 * The posts of this blog
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
 	 * @lazy
