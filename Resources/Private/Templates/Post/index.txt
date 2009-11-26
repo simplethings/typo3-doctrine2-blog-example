@@ -14,5 +14,5 @@ Tags: <f:for each="{post.tags}" as="tag">[{tag.name}] </f:for>
 		No Posts available.
 	</f:else>
 </f:if>
-<f:link.action arguments="{blog : blog}" format="xml">format link</f:link.action>
+<f:link.action arguments="{blog : blog}" format="html">back</f:link.action>
 </pre>
