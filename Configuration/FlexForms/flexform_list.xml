@@ -7,7 +7,7 @@
         </TCEforms>
         <type>array</type>
         <el>
-          <maxPosts>
+          <settings.maxPosts>
             <TCEforms>
               <label>Max. number of posts to display at once</label>
               <config>
@@ -17,7 +17,7 @@
 				<default>10</default>
               </config>
             </TCEforms>
-          </maxPosts>
+          </settings.maxPosts>
         </el>
       </ROOT>
     </sDEF>

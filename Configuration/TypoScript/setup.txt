@@ -31,3 +31,10 @@ module.tx_blogexample {
 		layoutRootPath = {$module.tx_blogexample.view.layoutRootPath}
 	}
 }
+
+plugin.tx_blogexample._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+)
