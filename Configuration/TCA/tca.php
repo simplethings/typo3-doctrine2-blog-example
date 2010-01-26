@@ -109,6 +109,9 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'config' => Array (
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
+				'items' => array(
+					array('--none--', 0),
+					),
 				'maxitems' => 1,
 				'wizards' => Array(
 		             '_PADDING' => 1,
