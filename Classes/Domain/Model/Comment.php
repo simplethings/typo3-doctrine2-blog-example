@@ -58,8 +58,7 @@ class Tx_BlogExample_Domain_Model_Comment extends Tx_Extbase_DomainObject_Abstra
 	 * @validate NotEmpty
 	 */
 	protected $content;
-	
-	
+
 	/**
 	 * Constructs this post
 	 */

@@ -56,7 +56,7 @@ class Tx_BlogExample_Domain_Model_Person extends Tx_Extbase_DomainObject_Abstrac
 		$this->setLastname($lastname);
 		$this->setEmail($email);
 	}
-	
+
 	/**
 	 * Sets this persons's firstname
 	 *

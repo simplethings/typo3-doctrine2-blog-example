@@ -125,10 +125,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function deleteAllAction() {
-		$blogs = $this->blogRepository->findAll();
-		foreach ($blogs as $blog) {
-			$this->blogRepository->remove($blog);
-		}
+		$this->blogRepository->removeAll();
 		$this->redirect('index');
 	}
 
