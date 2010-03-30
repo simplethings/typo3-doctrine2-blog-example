@@ -47,6 +47,21 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	}
 
 	/**
+	 * Finds all posts by the specified tag
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag The tag the post must refer to
+	 * @return array The posts
+	 */
+	// TODO This isn't supported by Extbase, yet
+	// FIXME Remove experimental codeext
+	public function findAllByTag(Tx_BlogExample_Domain_Model_Tag $tag) {
+		$query = $this->createQuery();
+		return $query->matching($query->equals('tags.title', $tag->getTitle()))
+			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
+			->execute();
+	}
+
+	/**
 	 * Finds posts by the specified blog with limit
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
