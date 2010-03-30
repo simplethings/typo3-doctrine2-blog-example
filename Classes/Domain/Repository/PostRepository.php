@@ -47,17 +47,23 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	}
 
 	/**
-	 * Finds all posts by the specified tag
+	 * Finds posts by the specified tag and blog
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Tag $tag The tag the post must refer to
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
+	 * @param integer $limit The number of posts to return at max
 	 * @return array The posts
 	 */
-	// TODO This isn't supported by Extbase, yet
-	// FIXME Remove experimental codeext
-	public function findAllByTag(Tx_BlogExample_Domain_Model_Tag $tag) {
+	public function findByTagAndBlog(Tx_BlogExample_Domain_Model_Tag $tag, Tx_BlogExample_Domain_Model_Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
-		return $query->matching($query->equals('tags.title', $tag->getTitle()))
+		return $query->matching(
+				$query->logicalAnd(
+					$query->equals('blog', $blog),
+					$query->contains('tags', $tag)
+				)
+			)
 			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
+			->setLimit((integer)$limit)
 			->execute();
 	}
 

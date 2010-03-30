@@ -13,11 +13,14 @@
 	</f:if>
 	</p>
 	<div class="tx-blogexample-list-container">
-		<f:if condition="{recentPosts}">
+		<f:if condition="{tag}">
+			<h2>Posts tagged with &quot;{tag.name}&quot;:</h2>
+		</f:if>
+		<f:if condition="{posts}">
 			<f:then>
-			<p><f:translate key="label_recent_posts">Below are the most recent posts:</f:translate> (<f:count subject="{recentPosts}" /> out of <f:count subject="{blog.posts}" />)</p>
+			<p><f:translate key="label_recent_posts">Below are the most recent posts:</f:translate> (<f:count subject="{posts}" /> out of <f:count subject="{blog.posts}" />)</p>
 				<dl>
-					<f:for each="{recentPosts}" as="post">
+					<f:for each="{posts}" as="post">
 						<dt>
 							<f:link.action action="show" controller="Post" arguments="{post: post, blog: blog}">{post.title}</f:link.action>
 						</dt>
