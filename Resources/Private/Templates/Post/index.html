@@ -1,6 +1,7 @@
 <f:layout name="default" />
 
 <f:section name="content">
+
 	<div class="csc-header csc-header-n1"><h2 class="csc-firstHeader">Welcome to {blog.title}</h2></div>
 	<p>{blog.description} In order to start blogging, read the <a href="#">Help section</a>.
 	<f:if condition="{blog.administrator}">
@@ -14,7 +15,7 @@
 	</p>
 	<div class="tx-blogexample-list-container">
 		<f:if condition="{tag}">
-			<h2>Posts tagged with &quot;{tag.name}&quot;:</h2>
+			<h2>Posts tagged with &quot;{tag}&quot;:</h2>
 		</f:if>
 		<f:if condition="{posts}">
 			<f:then>

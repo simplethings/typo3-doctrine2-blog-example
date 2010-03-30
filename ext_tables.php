@@ -155,6 +155,18 @@ $TCA['tx_blogexample_domain_model_tag'] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_blogexample_post_tag_mm');
+$TCA['tx_blogexample_post_tag_mm'] = array(
+	'ctrl' => array(
+		'title'             => 'Post <-> Tag',
+		'label'				=> 'uid_local',
+		'label_alt'			=> 'uid_foreign',
+		'label_alt_force'	=> TRUE,
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_relation.gif'
+	)
+);
+
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
 $pluginSignature = strtolower($extensionName) . '_pi1';
 

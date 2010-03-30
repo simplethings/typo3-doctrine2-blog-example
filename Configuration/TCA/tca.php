@@ -235,37 +235,24 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.tags',
 			'config' => array(
-				'type' => 'select',
+				'type' => 'inline',
+				'foreign_table' => 'tx_blogexample_post_tag_mm',
+				'foreign_field' => 'uid_local',
+				'foreign_selector' => 'uid_foreign',
+				'foreign_unique' => 'uid_foreign',
+				'foreign_sortby' => 'sorting',
+				'foreign_label' => 'uid_foreign',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 9999,
 				'autoSizeMax' => 30,
 				'multiple' => 0,
-				'foreign_table' => 'tx_blogexample_domain_model_tag',
-				'MM' => 'tx_blogexample_post_tag_mm',
-				'wizards' => Array(
-		             '_PADDING' => 1,
-		             '_VERTICAL' => 1,
-		             'edit' => Array(
-		                 'type' => 'popup',
-		                 'title' => 'Edit',
-		                 'script' => 'wizard_edit.php',
-		                 'icon' => 'edit2.gif',
-		                 'popup_onlyOpenIfSelected' => 1,
-		                 'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-		             ),
-		             'add' => Array(
-		                 'type' => 'script',
-		                 'title' => 'Create new',
-		                 'icon' => 'add.gif',
-		                 'params' => Array(
-		                     'table'=>'tx_blogexample_domain_model_tag',
-		                     'pid' => '###CURRENT_PID###',
-		                     'setValue' => 'prepend'
-		                 ),
-		                 'script' => 'wizard_add.php',
-		             ),
-		         )
+				'appearance' => array(
+					'useSortable' => 1,
+					'newRecordLinkPosition' => 'bottom',
+					'collapseAll' => 1,
+					'expandSingle' => 1,
+				)
 			)
 		),
 		'comments' => array(
@@ -275,11 +262,16 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_blogexample_domain_model_comment',
 				'foreign_field' => 'post',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 9999,
+				'autoSizeMax' => 30,
+				'multiple' => 0,
 				'appearance' => array(
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
 					'expandSingle' => 1,
-				),
+				)
 			)
 		),
 		'related_posts' => array(
@@ -472,4 +464,33 @@ $TCA['tx_blogexample_domain_model_tag'] = array(
 		'1' => array('showitem' => '')
 	)
 );
+
+$TCA['tx_blogexample_post_tag_mm'] = array(
+	'ctrl' => $TCA['tx_blogexample_post_tag_mm']['ctrl'],
+	'interface' => array(
+		'showRecordFieldList' => 'uid_local, uid_foreign'
+	),
+	'columns' => array(
+		'uid_local' => array(		
+			'label'   => 'Post',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_blogexample_domain_model_post',
+				'maxitems' => 1,
+			)
+		),
+		'uid_foreign' => array(		
+			'label'   => 'Tag',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_blogexample_domain_model_tag',
+				'maxitems' => 1,
+			)
+		),
+	),
+	'types' => array(
+		'1' => array('showitem' => 'uid_local, uid_foreign')
+	)
+);
+
 ?>

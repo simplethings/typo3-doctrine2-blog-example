@@ -49,17 +49,17 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	/**
 	 * Finds posts by the specified tag and blog
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @param string $tag
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
 	 * @return array The posts
 	 */
-	public function findByTagAndBlog(Tx_BlogExample_Domain_Model_Tag $tag, Tx_BlogExample_Domain_Model_Blog $blog, $limit = 20) {
+	public function findByTagAndBlog($tag, Tx_BlogExample_Domain_Model_Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
 		return $query->matching(
 				$query->logicalAnd(
 					$query->equals('blog', $blog),
-					$query->contains('tags', $tag)
+					$query->equals('tags.name', $tag)
 				)
 			)
 			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))

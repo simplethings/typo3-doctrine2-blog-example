@@ -104,9 +104,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return Tx_BlogExample_Domain_Model_Blog The blog this post is part of
 	 */
 	public function getBlog() {
-		if ($this->blog instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
-			$this->blog->_loadRealInstance();
-		}
 		return $this->blog;
 	}
 

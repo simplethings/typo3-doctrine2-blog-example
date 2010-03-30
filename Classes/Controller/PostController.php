@@ -50,13 +50,14 @@ class Tx_BlogExample_Controller_PostController extends Tx_Extbase_MVC_Controller
 	 * List action for this controller. Displays latest posts
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog to show the posts of
-	 * @param Tx_BlogExample_Domain_Model_Tag $tag The tag to show the posts for
+	 * @param string $tag The name of the tag to show the posts for
 	 * @return string
 	 */
-	public function indexAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Tag $tag = NULL) {
-		if ($tag === NULL) {
+	public function indexAction(Tx_BlogExample_Domain_Model_Blog $blog, $tag = NULL) {
+		if (empty($tag)) {
 			$posts = $this->postRepository->findRecentByBlog($blog, $this->settings['maxPosts']);
 		} else {
+			$tag = urldecode($tag);
 			$posts = $this->postRepository->findByTagAndBlog($tag, $blog, $this->settings['maxPosts']);
 			$this->view->assign('tag', $tag);
 		}
