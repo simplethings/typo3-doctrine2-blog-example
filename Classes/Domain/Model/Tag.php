@@ -49,16 +49,6 @@ class Tx_BlogExample_Domain_Model_Tag extends Tx_Extbase_DomainObject_AbstractVa
 	}
 
 	/**
-	 * Setter for name
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
 	 * Returns this tag's name
 	 *
 	 * @return string This tag's name

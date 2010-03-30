@@ -63,6 +63,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * The blog's administrator
 	 *
 	 * @var Tx_BlogExample_Domain_Model_Administrator
+	 * @lazy
 	 */
 	protected $administrator;
 

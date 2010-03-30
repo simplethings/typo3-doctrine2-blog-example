@@ -37,7 +37,6 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Blog
-	 * @lazy
 	 */
 	protected $blog;
 	
