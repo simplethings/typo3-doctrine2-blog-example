@@ -26,6 +26,17 @@
 /**
  * A repository for Blogs
  */
-class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {			
+class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {
+
+	public function findAll() {
+		$query = $this->createQuery();
+		// $query->setOrderings(array('posts.date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+		// This would work if Extbase translates it to
+		// SELECT tx_blogexample_domain_model_blog.*,MAX(tx_blogexample_domain_model_post.date) tx_extbase_sorting FROM tx_blogexample_domain_model_blog INNER JOIN tx_blogexample_domain_model_post ON tx_blogexample_domain_model_blog.uid=tx_blogexample_domain_model_post.blog GROUP BY tx_blogexample_domain_model_blog.uid ORDER BY tx_extbase_sorting DESC
+		// bzw. für ASC
+		// SELECT tx_blogexample_domain_model_blog.*,MIN(tx_blogexample_domain_model_post.date) tx_extbase_sorting FROM tx_blogexample_domain_model_blog INNER JOIN tx_blogexample_domain_model_post ON tx_blogexample_domain_model_blog.uid=tx_blogexample_domain_model_post.blog GROUP BY tx_blogexample_domain_model_blog.uid ORDER BY tx_extbase_sorting ASC
+		return $query->execute();
+	}
+
 }
 ?>

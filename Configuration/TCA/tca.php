@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA['tx_blogexample_domain_model_blog'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_blog']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, title, description, logo, posts, administrator'
+		'showRecordFieldList' => 'title, posts, administrator'
 	),
 	'columns' => array(
 		'sys_language_uid' => Array (
@@ -29,13 +29,14 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'items' => Array (
 					Array('', 0),
 				),
-				'foreign_table' => 'tt_news',
-				'foreign_table_where' => 'AND tt_news.uid=###REC_FIELD_l18n_parent### AND tt_news.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_blogexample_domain_model_blog',
+				'foreign_table_where' => 'AND tx_blogexample_domain_model_blog.uid=###REC_FIELD_l18n_parent### AND tx_blogexample_domain_model_blog.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(
 			'config'=>array(
-				'type'=>'passthrough')
+				'type'=>'passthrough'
+			)
 		),
 		't3ver_label' => Array (
 			'displayCond' => 'FIELD:t3ver_label:REQ:true',
@@ -112,7 +113,6 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 				'items' => array(
 					array('--none--', 0),
 					),
-				'maxitems' => 1,
 				'wizards' => Array(
 		             '_PADDING' => 1,
 		             '_VERTICAL' => 1,
@@ -140,7 +140,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, title, description, logo, posts, administrator')
+		'1' => array('showitem' => 'sys_language_uid, hidden, title, description, logo, posts, administrator')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')
@@ -150,9 +150,45 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 $TCA['tx_blogexample_domain_model_post'] = array(
 	'ctrl' => $TCA['tx_blogexample_domain_model_post']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, title, date, author, content, tags, comments, related_posts'
+		'showRecordFieldList' => 'title, date, author',
+		'maxDBListItems' => 100,
+		'maxSingleDBListItems' => 500
+	),
+	'types' => array(
+		'1' => array('showitem' => 'sys_language_uid, hidden, blog, title, date, author, content, tags, comments, related_posts')
 	),
 	'columns' => array(
+		'sys_language_uid' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => Array(
+					Array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages',-1),
+					Array('LLL:EXT:lang/locallang_general.php:LGL.default_value',0)
+				)
+			)
+		),
+		'l18n_parent' => Array (
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+			'config' => Array (
+				'type' => 'select',
+				'items' => Array (
+					Array('', 0),
+				),
+				'foreign_table' => 'tx_blogexample_domain_model_post',
+				'foreign_table_where' => 'AND tx_blogexample_domain_model_post.uid=###REC_FIELD_l18n_parent### AND tx_blogexample_domain_model_post.sys_language_uid IN (-1,0)',
+			)
+		),
+		'l18n_diffsource' => Array(
+			'config'=>array(
+				'type'=>'passthrough'
+			)
+		),
 		'hidden' => array(
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -236,18 +272,10 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:tx_blogexample_domain_model_post.tags',
 			'config' => array(
 				'type' => 'inline',
-				'foreign_table' => 'tx_blogexample_post_tag_mm',
-				'foreign_field' => 'uid_local',
-				'foreign_selector' => 'uid_foreign',
-				'foreign_unique' => 'uid_foreign',
-				'foreign_sortby' => 'sorting',
-				'foreign_label' => 'uid_foreign',
-				'size' => 10,
-				'minitems' => 0,
-				'maxitems' => 9999,
-				'autoSizeMax' => 30,
-				'multiple' => 0,
+				'foreign_table' => 'tx_blogexample_domain_model_tag',
+				'MM' => 'tx_blogexample_post_tag_mm',
 				'appearance' => array(
+					'useCombination' => 1,
 					'useSortable' => 1,
 					'newRecordLinkPosition' => 'bottom',
 					'collapseAll' => 1,
@@ -290,12 +318,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'MM_opposite_field' => 'related_posts',
 			)
 		),
-	),
-	'types' => array(
-		'1' => array('showitem' => 'hidden, blog, title, date, author, content, tags, comments, related_posts')
-	),
-	'palettes' => array(
-		'1' => array('showitem' => '')
 	)
 );
 
@@ -424,6 +446,37 @@ $TCA['tx_blogexample_domain_model_tag'] = array(
 		'showRecordFieldList' => 'hidden, name, posts'
 	),
 	'columns' => array(
+		'sys_language_uid' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => Array(
+					Array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages',-1),
+					Array('LLL:EXT:lang/locallang_general.php:LGL.default_value',0)
+				)
+			)
+		),
+		'l18n_parent' => Array (
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+			'config' => Array (
+				'type' => 'select',
+				'items' => Array (
+					Array('', 0),
+				),
+				'foreign_table' => 'tx_blogexample_domain_model_tag',
+				'foreign_table_where' => 'AND tx_blogexample_domain_model_tag.uid=###REC_FIELD_l18n_parent### AND tx_blogexample_domain_model_tag.sys_language_uid IN (-1,0)',
+			)
+		),
+		'l18n_diffsource' => Array(
+			'config'=>array(
+				'type'=>'passthrough'
+			)
+		),
 		'hidden' => array(
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -458,7 +511,7 @@ $TCA['tx_blogexample_domain_model_tag'] = array(
 		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, name, posts')
+		'1' => array('showitem' => 'sys_language_uid, hidden, name, posts')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')
