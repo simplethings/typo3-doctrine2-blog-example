@@ -156,19 +156,13 @@ CREATE TABLE tx_blogexample_domain_model_tag (
 # Table structure for table 'tx_blogexample_post_tag_mm'
 #
 CREATE TABLE tx_blogexample_post_tag_mm (
-	uid int(10) unsigned DEFAULT '0' NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
-
 	uid_local int(10) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(10) unsigned DEFAULT '0' NOT NULL,
 	sorting int(10) unsigned DEFAULT '0' NOT NULL,
 	sorting_foreign int(10) unsigned DEFAULT '0' NOT NULL,
 
-	deleted tinyint(3) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(3) unsigned DEFAULT '0' NOT NULL,
-
-	PRIMARY KEY (uid),
-	KEY parent (pid),
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );
 
 #

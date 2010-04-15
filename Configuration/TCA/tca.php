@@ -232,7 +232,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_blogexample_domain_model_person',
-				'maxitems' => 1,
 				'wizards' => Array(
 		             '_PADDING' => 1,
 		             '_VERTICAL' => 1,
@@ -274,6 +273,7 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_blogexample_domain_model_tag',
 				'MM' => 'tx_blogexample_post_tag_mm',
+				'maxitems' => 9999,
 				'appearance' => array(
 					'useCombination' => 1,
 					'useSortable' => 1,
@@ -291,7 +291,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 				'foreign_table' => 'tx_blogexample_domain_model_comment',
 				'foreign_field' => 'post',
 				'size' => 10,
-				'minitems' => 0,
 				'maxitems' => 9999,
 				'autoSizeMax' => 30,
 				'multiple' => 0,
@@ -308,7 +307,6 @@ $TCA['tx_blogexample_domain_model_post'] = array(
 			'config' => array(
 				'type' => 'select',
 				'size' => 10,
-				'minitems' => 0,
 				'maxitems' => 9999,
 				'autoSizeMax' => 30,
 				'multiple' => 0,
@@ -515,34 +513,6 @@ $TCA['tx_blogexample_domain_model_tag'] = array(
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')
-	)
-);
-
-$TCA['tx_blogexample_post_tag_mm'] = array(
-	'ctrl' => $TCA['tx_blogexample_post_tag_mm']['ctrl'],
-	'interface' => array(
-		'showRecordFieldList' => 'uid_local, uid_foreign'
-	),
-	'columns' => array(
-		'uid_local' => array(		
-			'label'   => 'Post',
-			'config' => array(
-				'type' => 'select',
-				'foreign_table' => 'tx_blogexample_domain_model_post',
-				'maxitems' => 1,
-			)
-		),
-		'uid_foreign' => array(		
-			'label'   => 'Tag',
-			'config' => array(
-				'type' => 'select',
-				'foreign_table' => 'tx_blogexample_domain_model_tag',
-				'maxitems' => 1,
-			)
-		),
-	),
-	'types' => array(
-		'1' => array('showitem' => 'uid_local, uid_foreign')
 	)
 );
 
