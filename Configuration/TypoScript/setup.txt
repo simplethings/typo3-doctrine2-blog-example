@@ -6,6 +6,9 @@ plugin.tx_blogexample {
 	}
 	persistence {
 		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
+		classes {
+			Tx_BlogExample_Domain_Model_Administrator.mapping.tableName = fe_users
+		}
 	}
 	view {
 		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}
