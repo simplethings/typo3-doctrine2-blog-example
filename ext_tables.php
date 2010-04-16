@@ -31,15 +31,14 @@ if (TYPO3_MODE === 'BE')	{
 		)
 	);
 
-	/**
-	 * Add labels for context sensitive help (CSH)
-	 */
-	t3lib_extMgm::addLLrefForTCAdescr('_MOD_web_BlogExampleTxBlogexampleM1', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_csh.xml');
 }
 
+/**
+ * Add labels for context sensitive help (CSH)
+ */
+t3lib_extMgm::addLLrefForTCAdescr('_MOD_web_BlogExampleTxBlogexampleM1', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_csh.xml');
+
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Blog Example');
-
-
 
 t3lib_extMgm::allowTableOnStandardPages('tx_blogexample_domain_model_blog');
 $TCA['tx_blogexample_domain_model_blog'] = array (
@@ -142,6 +141,13 @@ $TCA['tx_blogexample_domain_model_tag'] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif'
 	)
 );
+
+t3lib_div::loadTCA('fe_users');
+t3lib_extMgm::addTCAcolumns('fe_users', $tempColumns, 1);
+t3lib_extMgm::addToAllTCAtypes('fe_users', 'tx_extbase_type');
+$TCA['fe_users']['ctrl']['type'] = 'tx_extbase_type'; // TODO handle already set 'type'
+$TCA['fe_users']['types']['Tx_BlogExample_Domain_Model_Administrator'] = $TCA['fe_users']['types']['0'];
+array_push($TCA['fe_users']['columns']['tx_extbase_type']['config']['items'], array('LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xml:fe_users.tx_extbase_type.Tx_BlogExample_Domain_Model_Administrator', 'Tx_BlogExample_Domain_Model_Administrator'));
 
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
 $pluginSignature = strtolower($extensionName) . '_pi1';

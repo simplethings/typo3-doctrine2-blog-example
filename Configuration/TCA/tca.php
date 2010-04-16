@@ -110,6 +110,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 			'config' => Array (
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
+				'foreign_table_where' => "AND fe_users.tx_extbase_type='Tx_BlogExample_Domain_Model_Administrator'",
 				'items' => array(
 					array('--none--', 0),
 					),
@@ -131,7 +132,7 @@ $TCA['tx_blogexample_domain_model_blog'] = array(
 		                 'params' => Array(
 		                     'table'=>'fe_users',
 		                     'pid' => '###CURRENT_PID###',
-		                     'setValue' => 'prepend'
+	                         'setValue' => 'prepend'
 		                 ),
 		                 'script' => 'wizard_add.php',
 		             ),
