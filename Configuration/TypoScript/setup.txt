@@ -7,7 +7,12 @@ plugin.tx_blogexample {
 	persistence {
 		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
 		classes {
-			Tx_BlogExample_Domain_Model_Administrator.mapping.tableName = fe_users
+			Tx_BlogExample_Domain_Model_Administrator {
+				mapping {
+					tableName = fe_users
+					recordType = Tx_BlogExample_Domain_Model_Administrator
+				}
+			}
 		}
 	}
 	view {
