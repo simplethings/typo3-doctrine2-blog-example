@@ -27,8 +27,6 @@
  * An Administrator of a Blog
  *
  * @version $Id:$
- * @scope prototype
- * @entity
  */
 class Tx_BlogExample_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
 

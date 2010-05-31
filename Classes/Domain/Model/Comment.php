@@ -31,8 +31,6 @@
  * @version $Id:$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @scope prototype
- * @entity
  */
 class Tx_BlogExample_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
 
