@@ -27,12 +27,7 @@
  * A repository for Posts
  */
 class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
-	
-	public function remove($post) {
-		$post->removeAllTags();
-		parent::remove($post);
-	}
-	
+
 	/**
 	 * Finds all posts by the specified blog
 	 *
