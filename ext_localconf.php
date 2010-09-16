@@ -13,11 +13,11 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'Blog' => 'index,show,new,create,delete,deleteAll,edit,update,populate',	// The first controller and its first action will be the default 
 		'Post' => 'index,show,new,create,delete,edit,update',
 		'Comment' => 'create'
-		),
-	array(																			// An array of non-cachable controller-action-combinations (they must already be enabled)
-		'Blog' => 'new,edit',
-		'Post' => 'new,create,edit'
-		)
+	), array(																			// An array of non-cachable controller-action-combinations (they must already be enabled)
+		'Blog' => 'create,delete,deleteAll,update,populate',
+		'Post' => 'create,delete,update',
+		'Comment' => 'create'
+	)
 );
 
 ?>
