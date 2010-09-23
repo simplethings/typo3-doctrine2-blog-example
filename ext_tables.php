@@ -4,11 +4,34 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
 /**
  * Registers a Plugin to be listed in the Backend. You also have to configure the Dispatcher in ext_localconf.php.
  */
-Tx_Extbase_Utility_Extension::registerPlugin(
-	$_EXTKEY,// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
-	'Pi1',				// A unique name of the plugin in UpperCamelCase
-	'A Blog Example'	// A title shown in the backend dropdown field
-);
+if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['registerSinglePlugin']) {
+	Tx_Extbase_Utility_Extension::registerPlugin(
+		$_EXTKEY,// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
+		'Pi1',				// A unique name of the plugin in UpperCamelCase
+		'A Blog Example (fully fletged)'	// A title shown in the backend dropdown field
+	);
+} else {
+	Tx_Extbase_Utility_Extension::registerPlugin(
+		$_EXTKEY,
+		'BlogList',
+		'Blog: Blog list'
+	);
+	Tx_Extbase_Utility_Extension::registerPlugin(
+		$_EXTKEY,
+		'PostList',
+		'Blog: Post list'
+	);
+	Tx_Extbase_Utility_Extension::registerPlugin(
+		$_EXTKEY,
+		'PostSingle',
+		'Blog: Post single'
+	);
+	Tx_Extbase_Utility_Extension::registerPlugin(
+		$_EXTKEY,
+		'BlogAdmin',
+		'Blog: Blog administration'
+	);
+}
 
 if (TYPO3_MODE === 'BE')	{
 	/**
@@ -20,7 +43,7 @@ if (TYPO3_MODE === 'BE')	{
 		'tx_blogexample_m1',	// Submodule key
 		'',						// Position
 		array(																			// An array holding the controller-action-combinations that are accessible
-			'Blog' => 'index,show,new,create,delete,deleteAll,edit,update,populate',	// The first controller and its first action will be the default
+			'Blog' => 'index,new,create,delete,deleteAll,edit,update,populate',	// The first controller and its first action will be the default
 			'Post' => 'index,show,new,create,delete,edit,update',
 			'Comment' => 'create,delete,deleteAll',
 			),
