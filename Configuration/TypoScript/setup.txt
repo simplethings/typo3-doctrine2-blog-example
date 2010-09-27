@@ -24,6 +24,7 @@ plugin.tx_blogexample {
 		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}
 		partialRootPath = {$plugin.tx_blogexample.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_blogexample.view.layoutRootPath}
+		defaultPid = auto
 	}
 	# This is an example how to modify the translation
 	_LOCAL_LANG {

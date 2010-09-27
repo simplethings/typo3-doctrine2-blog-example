@@ -8,28 +8,28 @@ if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['registerSinglePlugin']) {
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 		'Pi1',				// A unique name of the plugin in UpperCamelCase
-		'A Blog Example (fully fletged)'	// A title shown in the backend dropdown field
+		'A Blog Example'	// A title shown in the backend dropdown field
 	);
 } else {
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'BlogList',
-		'Blog: Blog list'
+		'List of Blogs (BlogExample)'
 	);
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'PostList',
-		'Blog: Post list'
+		'List of Posts (BlogExample)'
 	);
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'PostSingle',
-		'Blog: Post single'
+		'Single Post (BlogExample)'
 	);
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'BlogAdmin',
-		'Blog: Blog administration'
+		'Admin Plugin (BlogExample)'
 	);
 }
 
