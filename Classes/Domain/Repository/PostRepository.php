@@ -85,11 +85,11 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	 */
 	public function findPrevious(Tx_BlogExample_Domain_Model_Post $post) {
 		$query = $this->createQuery();
-		$posts = $query->matching($query->lessThan('date', $post->getDate()))
+		return $query->matching($query->lessThan('date', $post->getDate()))
 			->setOrderings(array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
 			->setLimit(1)
-			->execute();
-		return (count($posts) == 0) ? NULL : current($posts);
+			->execute()
+			->getFirst();
 	}
 
 	/**
@@ -100,11 +100,11 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	 */
 	public function findNext(Tx_BlogExample_Domain_Model_Post $post) {
 		$query = $this->createQuery();
-		$posts = $query->matching($query->greaterThan('date', $post->getDate()))
+		return $query->matching($query->greaterThan('date', $post->getDate()))
 			->setOrderings(array('date' =>  Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
 			->setLimit(1)
-			->execute();
-		return (count($posts) == 0) ? NULL : current($posts);
+			->execute()
+			->getFirst();
 	}
 
 	/**
@@ -121,6 +121,6 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 			->setLimit((integer)$limit)
 			->execute();
 	}
-	
+
 }
 ?>
