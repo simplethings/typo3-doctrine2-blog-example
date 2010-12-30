@@ -8,28 +8,33 @@ if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['registerSinglePlugin']) {
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 		'Pi1',				// A unique name of the plugin in UpperCamelCase
-		'A Blog Example'	// A title shown in the backend dropdown field
+		'A Blog Example',	// A title shown in the backend dropdown field
+		t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_blogexample_domain_model_blog.gif'
 	);
 } else {
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'BlogList',
-		'List of Blogs (BlogExample)'
+		'List of Blogs (BlogExample)',
+		t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_blogexample_domain_model_blog.gif'
 	);
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'PostList',
-		'List of Posts (BlogExample)'
+		'List of Posts (BlogExample)',
+		t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_blogexample_domain_model_post.gif'
 	);
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'PostSingle',
-		'Single Post (BlogExample)'
+		'Single Post (BlogExample)',
+		t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_blogexample_domain_model_post.gif'
 	);
 	Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY,
 		'BlogAdmin',
-		'Admin Plugin (BlogExample)'
+		'Admin Plugin (BlogExample)',
+		t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_blogexample_domain_model_blog.gif'
 	);
 }
 
