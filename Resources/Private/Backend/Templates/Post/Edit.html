@@ -1,5 +1,5 @@
 {namespace blog=Tx_BlogExample_ViewHelpers}
-<f:layout name="default" />
+<f:layout name="Default" />
 
 <f:section name="iconButtons">
 	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments: {post : post, blog: post.blog})}" icon="closedok" title="Cancel" />
@@ -9,7 +9,7 @@
 
 <f:section name="content">
 	<h2>Edit post "{post.title}"</h2>
-	<f:render partial="formErrors" arguments="{for: 'post'}" />
+	<f:render partial="FormErrors" arguments="{for: 'post'}" />
 	<f:form method="post" controller="Post" action="update" name="post" object="{post}" arguments="{blog : blog}" >
 		<label for="author">Author</label><br />
 		<f:form.select value="{post.author.uid}" name="author" options="{authors}" optionLabelField="fullName"><select><option>dummy</option></select></f:form.select><br />

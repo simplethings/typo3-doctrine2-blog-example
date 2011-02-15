@@ -1,5 +1,10 @@
 {namespace blog=Tx_BlogExample_ViewHelpers}
-<f:layout name="default" />
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments:{blog: post.blog})}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:{post: post, blog: post.blog})}" icon="edit2" title="Edit this Post" />
+</f:section>
 
 <f:section name="content">
 	<div class="tx-blogexample-single-item">
@@ -9,7 +14,7 @@
 		</h3>
 		<p class="bodytext"><f:format.nl2br>{post.content}</f:format.nl2br></p>
 		<p class="bodytext">By: {post.author.fullName}</p>
-		<f:render partial="postTags" arguments="{post: post}"/>
+		<f:render partial="PostTags" arguments="{post: post}"/>
 		<f:if condition="{post.relatedPosts}">
 			<div>Related posts:</div>
 			<ul class="tx-blogexample-related">
@@ -42,22 +47,4 @@
 			</div>
 		</f:for>
 	</div>
-	<h4>Add your own</h4>
-	<f:form name="newComment" method="post" controller="Comment" action="create" object="{newComment}" arguments="{post : post}">
-		<f:form.errors for="newComment">
-			<div class="error">
-				<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
-			</div>
-		</f:form.errors>
-		<label for="author">name <span class="required">(required)</span></label><br />
-		<f:form.textbox id="author" property="author" />
-		<br />
-		<label for="email">email <span class="required">(required)</span></label><br />
-		<f:form.textbox id="email" property="email" />
-		<br />
-		<label for="text">message <span class="required">(required)</span></label><br />
-		<f:form.textarea id="text" property="content" rows="6" cols="46"/>
-		<br />
-		<f:form.submit class="submit" value="Submit"/>
-	</f:form>
 </f:section>

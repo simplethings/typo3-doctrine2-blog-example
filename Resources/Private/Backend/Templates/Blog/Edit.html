@@ -1,9 +1,15 @@
-<f:layout name="default" />
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index')}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="javascript: document.blog.submit();" icon="saveandclosedok" title="Save" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'delete', arguments:{blog: blog})}" icon="deletedok" title="Delete this blog" />
+</f:section>
 
 <f:section name="content">
-	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit blog "{blog.title}"</h1></div>
+	<h2>Edit blog "{blog.title}"</h2>
 	<p class="bodytext">Edit the information about your blog below:</p>
-	<f:render partial="formErrors" arguments="{for: 'blog'}" />
+	<f:render partial="FormErrors" arguments="{for: 'blog'}" />
 	<f:form method="post" action="update" name="blog" object="{blog}">
 		<label for="title">Title</label><br />
 		<f:form.textbox property="title" /><br />
@@ -11,6 +17,5 @@
 		<f:form.textarea property="description" rows="8" cols="46" /><br />
 		<label for="administrator">Administrator</label><br />
 		<f:form.select property="administrator" value="{blog.administrator}" options="{administrators}" optionLabelField="name"><select><option>dummy</option></select></f:form.select><br />
-		<f:form.submit class="submit" value="Submit"/>
 	</f:form>
 </f:section>
