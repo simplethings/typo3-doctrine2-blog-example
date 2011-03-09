@@ -29,7 +29,7 @@
 class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller_AbstractController {
 
 	/**
-	 * @var Tx_BlogExample_Domain_Model_BlogRepository
+	 * @var Tx_BlogExample_Domain_Repository_BlogRepository
 	 */
 	protected $blogRepository;
 

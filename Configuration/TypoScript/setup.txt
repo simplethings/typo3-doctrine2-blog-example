@@ -10,19 +10,6 @@ plugin.tx_blogexample {
 	}
 	persistence {
 		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
-		classes {
-			Tx_Extbase_Domain_Model_FrontendUser {
-				subclasses {
-					Tx_BlogExample_Domain_Model_Administrator = Tx_BlogExample_Domain_Model_Administrator
-				}
-			}
-			Tx_BlogExample_Domain_Model_Administrator {
-				mapping {
-					tableName = fe_users
-					recordType = Tx_BlogExample_Domain_Model_Administrator
-				}
-			}
-		}
 	}
 	view {
 		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}

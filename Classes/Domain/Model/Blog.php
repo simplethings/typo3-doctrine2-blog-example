@@ -45,6 +45,13 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	protected $description = '';
 
 	/**
+	 * A relative path to a logo image
+	 *
+	 * @var string
+	 */
+	protected $logo;
+
+	/**
 	 * The posts of this blog
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
@@ -86,6 +93,21 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+
+	/**
+	 * @param string $logo
+	 * @return void
+	 */
+	public function setLogo($logo) {
+		$this->logo = $logo;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLogo() {
+		return $this->logo;
 	}
 
 	/**
