@@ -63,4 +63,9 @@ if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['registerSinglePlugin']) {
 	);
 }
 
+if (TYPO3_MODE === 'BE') {
+	// register setup command
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'Tx_BlogExample_Command_SetupCommandController';
+}
+
 ?>
