@@ -25,8 +25,10 @@
 
 /**
  * A person - acting as author
+ * 
+ * @entity
  */
-class Tx_BlogExample_Domain_Model_Person extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_BlogExample_Domain_Model_Person extends Tx_Doctrine2_DomainObject_AbstractEntity {
 
 	/**
 	 * @var string

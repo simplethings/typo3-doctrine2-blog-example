@@ -25,8 +25,10 @@
 
 /**
  * A blog post
+ * 
+ * @entity
  */
-class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_AbstractEntity {
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Blog
@@ -56,19 +58,19 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	protected $content;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Tag>
+	 * @var Tx_Doctrine2_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Tag>
 	 */
 	protected $tags;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
+	 * @var Tx_Doctrine2_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
 	 * @lazy
 	 * @cascade remove
 	 */
 	protected $comments;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
+	 * @var Tx_Doctrine2_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
 	 * @lazy
 	 */
 	protected $relatedPosts;
@@ -77,9 +79,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * Constructs this post
 	 */
 	public function __construct() {
-		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->tags = new Tx_Doctrine2_Persistence_ObjectStorage();
+		$this->comments = new Tx_Doctrine2_Persistence_ObjectStorage();
+		$this->relatedPosts = new Tx_Doctrine2_Persistence_ObjectStorage();
 		$this->date = new DateTime();
 	}
 
@@ -144,10 +146,10 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for tags
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage $tags One or more Tx_BlogExample_Domain_Model_Tag objects
+	 * @param Tx_Doctrine2_Persistence_ObjectStorage $tags One or more Tx_BlogExample_Domain_Model_Tag objects
 	 * @return void
 	 */
-	public function setTags(Tx_Extbase_Persistence_ObjectStorage $tags) {
+	public function setTags(Tx_Doctrine2_Persistence_ObjectStorage $tags) {
 		$this->tags = $tags;
 	}
 
@@ -177,14 +179,14 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removeAllTags() {
-		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->tags = new Tx_Doctrine2_Persistence_ObjectStorage();
 	}
 
 	/**
 	 * Getter for tags
 	 * Note: We return a clone of the tags because they must not be modified as they are Value Objects
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage A storage holding Tx_BlogExample_Domain_Model_Tag objects
+	 * @return Tx_Doctrine2_Persistence_ObjectStorage A storage holding Tx_BlogExample_Domain_Model_Tag objects
 	 */
 	public function getTags() {
 		return clone $this->tags;
@@ -231,10 +233,10 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for the comments to this post
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage $comments An Object Storage of related Comment instances
+	 * @param Tx_Doctrine2_Persistence_ObjectStorage $comments An Object Storage of related Comment instances
 	 * @return void
 	 */
-	public function setComments(Tx_Extbase_Persistence_ObjectStorage $comments) {
+	public function setComments(Tx_Doctrine2_Persistence_ObjectStorage $comments) {
 		$this->comments = $comments;
 	}
 
@@ -273,7 +275,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Comment
+	 * @return An Tx_Doctrine2_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Comment
 	 */
 	public function getComments() {
 		return $this->comments;
@@ -282,10 +284,10 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for the related posts
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage $relatedPosts An Object Storage containing related Posts instances
+	 * @param Tx_Doctrine2_Persistence_ObjectStorage $relatedPosts An Object Storage containing related Posts instances
 	 * @return void
 	 */
-	public function setRelatedPosts(Tx_Extbase_Persistence_ObjectStorage $relatedPosts) {
+	public function setRelatedPosts(Tx_Doctrine2_Persistence_ObjectStorage $relatedPosts) {
 		$this->relatedPosts = $relatedPosts;
 	}
 
@@ -314,7 +316,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the related posts
 	 *
-	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Post
+	 * @return An Tx_Doctrine2_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Post
 	 */
 	public function getRelatedPosts() {
 		return $this->relatedPosts;

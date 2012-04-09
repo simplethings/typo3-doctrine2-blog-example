@@ -25,8 +25,10 @@
 
 /**
  * A blog
+ * 
+ * @entity
  */
-class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_BlogExample_Domain_Model_Blog extends Tx_Doctrine2_DomainObject_AbstractEntity {
 
 	/**
 	 * The blog's title.
@@ -54,26 +56,27 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * The posts of this blog
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
-	 * @lazy
-	 * @cascade remove
+	 * @var array
 	 */
 	protected $posts;
 
 	/**
 	 * The blog's administrator
-	 *
-	 * @var Tx_BlogExample_Domain_Model_Administrator
-	 * @lazy
 	 */
 	protected $administrator;
+        
+        /**
+         * @Column(type="timestamp")
+         * @var DateTime 
+         */
+        protected $crdate;
 
 	/**
 	 * Constructs a new Blog
 	 *
 	 */
 	public function __construct() {
-		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->posts = new Tx_Doctrine2_Persistence_ObjectStorage();
 	}
 
 	/**
@@ -155,13 +158,13 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractE
 	 * @return void
 	 */
 	public function removeAllPosts() {
-		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->posts = new Tx_Doctrine2_Persistence_ObjectStorage();
 	}
 
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage
+	 * @return Tx_Doctrine2_Persistence_ObjectStorage
 	 */
 	public function getPosts() {
 		return $this->posts;

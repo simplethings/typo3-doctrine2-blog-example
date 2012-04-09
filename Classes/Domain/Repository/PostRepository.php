@@ -26,7 +26,7 @@
 /**
  * A repository for blog posts
  */
-class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Doctrine2_Persistence_Repository {
 
 	protected $defaultOrderings = array('date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING);
 
@@ -34,7 +34,7 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	 * Finds all posts by the specified blog
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
-	 * @return Tx_Extbase_Persistence_QueryResultInterface The posts
+	 * @return Tx_Doctrine2_Persistence_QueryResultInterface The posts
 	 */
 	public function findAllByBlog(Tx_BlogExample_Domain_Model_Blog $blog) {
 		$query = $this->createQuery();
@@ -50,7 +50,7 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	 *
 	 * @param string $tag
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
-	 * @return Tx_Extbase_Persistence_QueryResultInterface The posts
+	 * @return Tx_Doctrine2_Persistence_QueryResultInterface The posts
 	 */
 	public function findByTagAndBlog($tag, Tx_BlogExample_Domain_Model_Blog $blog) {
 		$query = $this->createQuery();
@@ -68,7 +68,7 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	 * Finds all remaining posts of the blog
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Post $post The reference post
-	 * @return Tx_Extbase_Persistence_QueryResultInterface The posts
+	 * @return Tx_Doctrine2_Persistence_QueryResultInterface The posts
 	 */
 	public function findRemaining(Tx_BlogExample_Domain_Model_Post $post) {
 		$blog = $post->getBlog();
@@ -122,7 +122,7 @@ class Tx_BlogExample_Domain_Repository_PostRepository extends Tx_Extbase_Persist
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
-	 * @return Tx_Extbase_Persistence_QueryResultInterface The posts
+	 * @return Tx_Doctrine2_Persistence_QueryResultInterface The posts
 	 */
 	public function findRecentByBlog(Tx_BlogExample_Domain_Model_Blog $blog, $limit = 5) {
 		$query = $this->createQuery();

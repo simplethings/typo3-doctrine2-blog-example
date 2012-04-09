@@ -26,7 +26,7 @@
 /**
  * A repository for blogs
  */
-class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Doctrine2_Persistence_Repository {
 
 	protected $defaultOrderings = array(
 		'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING,
@@ -40,7 +40,7 @@ class Tx_BlogExample_Domain_Repository_BlogRepository extends Tx_Extbase_Persist
 	 */
 	public function initializeObject() {
 		/*
-		$querySettings = $this->objectManager->create('Tx_Extbase_Persistence_Typo3QuerySettings');
+		$querySettings = $this->objectManager->create('Tx_Doctrine2_Persistence_Typo3QuerySettings');
 		$querySettings->setRespectStoragePage(FALSE);
 		$this->setDefaultQuerySettings($querySettings);
 		 */

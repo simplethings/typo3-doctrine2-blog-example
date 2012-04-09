@@ -26,7 +26,7 @@
 /**
  * A repository for administrators
  */
-class Tx_BlogExample_Domain_Repository_AdministratorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
+class Tx_BlogExample_Domain_Repository_AdministratorRepository extends Tx_Doctrine2_Domain_Repository_FrontendUserRepository {
 
 }
 ?>

@@ -26,7 +26,7 @@
 /**
  * A repository for persons
  */
-class Tx_BlogExample_Domain_Repository_PersonRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_BlogExample_Domain_Repository_PersonRepository extends Tx_Doctrine2_Persistence_Repository {
 
 }
 ?>

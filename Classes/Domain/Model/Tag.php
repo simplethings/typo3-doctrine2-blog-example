@@ -25,8 +25,10 @@
 
 /**
  * A blog post tag
+ * 
+ * @entity
  */
-class Tx_BlogExample_Domain_Model_Tag extends Tx_Extbase_DomainObject_AbstractValueObject {
+class Tx_BlogExample_Domain_Model_Tag extends Tx_Doctrine2_DomainObject_AbstractValueObject {
 
 	/**
 	 * @var string

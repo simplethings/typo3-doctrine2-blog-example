@@ -25,8 +25,10 @@
 
 /**
  * A blog post comment
+ * 
+ * @entity
  */
-class Tx_BlogExample_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_BlogExample_Domain_Model_Comment extends Tx_Doctrine2_DomainObject_AbstractEntity {
 
 	/**
 	 * @var DateTime

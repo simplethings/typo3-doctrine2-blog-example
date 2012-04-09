@@ -25,8 +25,10 @@
 
 /**
  * An Administrator of a Blog
+ * 
+ * @entity
  */
-class Tx_BlogExample_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
+class Tx_BlogExample_Domain_Model_Administrator extends Tx_Doctrine2_Domain_Model_FrontendUser {
 
 }
 ?>
