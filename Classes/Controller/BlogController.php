@@ -38,22 +38,31 @@ class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller
 	 */
 	protected $administratorRepository;
 
+    /**
+     * @var Tx_Doctrine2_Manager
+     */
+    protected $manager;
+
+    public function injectManager(Tx_Doctrine2_Manager $manager) {
+        $this->manager = $manager;
+    }
+
  	/**
-+	 * Dependency injection of the Blog Repository
+	 * Dependency injection of the Blog Repository
  	 *
 	 * @param Tx_BlogExample_Domain_Repository_BlogRepository $blogRepository
  	 * @return void
--	 */
+	 */
 	public function injectBlogRepository(Tx_BlogExample_Domain_Repository_BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
 	}
 
  	/**
-+	 * Dependency injection of the Administrator Repository
+	 * Dependency injection of the Administrator Repository
  	 *
 	 * @param Tx_BlogExample_Domain_Repository_AdministratorRepository $administratorRepository
  	 * @return void
--	 */
+	 */
 	public function injectAdministratorRepository(Tx_BlogExample_Domain_Repository_AdministratorRepository $administratorRepository) {
 		$this->administratorRepository = $administratorRepository;
 	}
@@ -138,6 +147,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller
 	public function deleteAllAction() {
 		// TODO access protection
 		$this->blogRepository->removeAll();
+        $this->manager->persistAll();
 		$this->redirect('index');
 	}
 
@@ -154,6 +164,8 @@ class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller
 			$blog = $blogFactory->createBlog($blogNumber);
 			$this->blogRepository->add($blog);
 		}
+        $this->manager->persistAll();
+
 		$this->addFlashMessage('populated');
 		$this->redirect('index');
 	}

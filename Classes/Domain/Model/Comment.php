@@ -25,7 +25,7 @@
 
 /**
  * A blog post comment
- * 
+ *
  * @entity
  */
 class Tx_BlogExample_Domain_Model_Comment extends Tx_Doctrine2_DomainObject_AbstractEntity {
@@ -53,12 +53,24 @@ class Tx_BlogExample_Domain_Model_Comment extends Tx_Doctrine2_DomainObject_Abst
 	 */
 	protected $content;
 
+    /**
+     * @var Tx_BlogExample_Domain_Model_Post 
+     * @ManyToOne(targetEntity="Tx_BlogExample_Domain_Model_Post", inversedBy="comments")
+     * @JoinColumn(name="post", referencedColumnName="uid")
+     */
+    protected $post;
+
 	/**
 	 * Constructs this post
 	 */
 	public function __construct() {
 		$this->date = new DateTime();
 	}
+
+    public function setPost(Tx_BlogExample_Domain_Model_Post $post)
+    {
+        $this->post = $post;
+    }
 
 	/**
 	 * Setter for date

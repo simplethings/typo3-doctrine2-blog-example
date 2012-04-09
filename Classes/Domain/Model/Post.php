@@ -25,13 +25,16 @@
 
 /**
  * A blog post
- * 
+ *
  * @entity
  */
 class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_AbstractEntity {
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Blog
+     * @ManyToOne(targetEntity="Tx_BlogExample_Domain_Model_Blog",
+     * inversedBy="posts")
+     * @JoinColumn(name="blog", referencedColumnName="uid")
 	 */
 	protected $blog;
 
@@ -48,6 +51,8 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Person
+     * @ManyToOne(targetEntity="Tx_BlogExample_Domain_Model_Person", cascade={"persist"})
+     * @JoinColumn(name="author", referencedColumnName="uid")
 	 */
 	protected $author;
 
@@ -58,20 +63,29 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	protected $content;
 
 	/**
-	 * @var Tx_Doctrine2_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Tag>
+	 * @var Tx_BlogExample_Domain_Model_Tag[]
+     * @ManyToMany(targetEntity="Tx_BlogExample_Domain_Model_Tag",
+     * cascade={"persist"})
+     * @JoinTable(name="tx_blogexample_post_tag_mm",
+     *  joinColumns={@JoinColumn(name="uid_local", referencedColumnName="uid")},
+     *  inverseJoinColumns={@JoinColumn(name="uid_foreign", referencedColumnName="uid")}
+     * )
 	 */
 	protected $tags;
 
 	/**
-	 * @var Tx_Doctrine2_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
-	 * @lazy
-	 * @cascade remove
+	 * @var Tx_BlogExample_Domain_Model_Comment[]
+     * @OneToMany(targetEntity="Tx_BlogExample_Domain_Model_Comment", mappedBy="post")
 	 */
 	protected $comments;
 
 	/**
-	 * @var Tx_Doctrine2_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
-	 * @lazy
+	 * @var Tx_BlogExample_Domain_Model_Post[]
+     * @ManyToMany(targetEntity="Tx_BlogExample_Domain_Model_Post")
+     * @JoinTable(name="tx_blogexample_post_post_mm",
+     *  joinColumns={@JoinColumn(name="uid_local", referencedColumnName="uid")},
+     *  inverseJoinColumns={@JoinColumn(name="uid_foreign", referencedColumnName="uid")}
+     * )
 	 */
 	protected $relatedPosts;
 
@@ -79,9 +93,9 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * Constructs this post
 	 */
 	public function __construct() {
-		$this->tags = new Tx_Doctrine2_Persistence_ObjectStorage();
-		$this->comments = new Tx_Doctrine2_Persistence_ObjectStorage();
-		$this->relatedPosts = new Tx_Doctrine2_Persistence_ObjectStorage();
+		$this->tags = new \Doctrine\Common\Collections\ArrayCollection;
+		$this->comments = new \Doctrine\Common\Collections\ArrayCollection;
+		$this->relatedPosts = new \Doctrine\Common\Collections\ArrayCollection;
 		$this->date = new DateTime();
 	}
 
@@ -160,7 +174,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function addTag(Tx_BlogExample_Domain_Model_Tag $tag) {
-		$this->tags->attach($tag);
+		$this->tags->add($tag);
 	}
 
 	/**
@@ -170,7 +184,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tag) {
-		$this->tags->detach($tag);
+		$this->tags->remove($tag);
 	}
 
 	/**
@@ -247,7 +261,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function addComment(Tx_BlogExample_Domain_Model_Comment $comment) {
-		$this->comments->attach($comment);
+		$this->comments->add($comment);
 	}
 
 	/**
@@ -257,7 +271,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeComment(Tx_BlogExample_Domain_Model_Comment $commentToDelete) {
-		$this->comments->detach($commentToDelete);
+		$this->comments->remove($commentToDelete);
 	}
 
 	/**
@@ -268,7 +282,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	public function removeAllComments() {
 		$comments = clone $this->comments;
 		foreach($comments as $comment) {
-			$this->comments->detach($comment);
+			$this->comments->remove($comment);
 		}
 	}
 
@@ -298,7 +312,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function addRelatedPost(Tx_BlogExample_Domain_Model_Post $post) {
-		$this->relatedPosts->attach($post);
+		$this->relatedPosts->add($post);
 	}
 
 	/**
@@ -309,7 +323,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	public function removeAllRelatedPosts() {
 		$relatedPosts = clone $this->relatedPosts;
 		foreach($relatedPosts as $relatedPost) {
-			$this->relatedPosts->detach($relatedPost);
+			$this->relatedPosts->remove($relatedPost);
 		}
 	}
 

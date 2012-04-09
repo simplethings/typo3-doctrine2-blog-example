@@ -51,32 +51,37 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Doctrine2_DomainObject_Abstrac
 	 *
 	 * @var string
 	 */
-	protected $logo;
+	protected $logo = '';
 
 	/**
 	 * The posts of this blog
 	 *
-	 * @var array
+     * @OneToMany(targetEntity="Tx_BlogExample_Domain_Model_Post", mappedBy="blog", cascade={"persist", "remove"})
 	 */
 	protected $posts;
 
 	/**
 	 * The blog's administrator
+     *
+     * @var Tx_Doctrine2_Domain_Model_FrontendUser
+     * @ManyToOne(targetEntity="Tx_Doctrine2_Domain_Model_FrontendUser", cascade={"persist"})
+     * @JoinColumn(name="administrator", referencedColumnName="uid")
 	 */
 	protected $administrator;
-        
-        /**
-         * @Column(type="timestamp")
-         * @var DateTime 
-         */
-        protected $crdate;
+
+    /**
+     * @Column(type="timestamp")
+     * @var DateTime
+     */
+    protected $crdate;
 
 	/**
 	 * Constructs a new Blog
 	 *
 	 */
 	public function __construct() {
-		$this->posts = new Tx_Doctrine2_Persistence_ObjectStorage();
+		$this->posts = new \Doctrine\Common\Collections\ArrayCollection;
+        $this->crdate = new \DateTime();
 	}
 
 	/**
@@ -139,7 +144,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function addPost(Tx_BlogExample_Domain_Model_Post $post) {
-		$this->posts->attach($post);
+		$this->posts->add($post);
 	}
 
 	/**
@@ -149,7 +154,7 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removePost(Tx_BlogExample_Domain_Model_Post $postToRemove) {
-		$this->posts->detach($postToRemove);
+		$this->posts->remove($postToRemove);
 	}
 
 	/**
