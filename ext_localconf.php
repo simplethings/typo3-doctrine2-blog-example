@@ -10,7 +10,7 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY] = unserialize($_EXTCONF);
  */
 if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['registerSinglePlugin']) {
 	// fully fletged blog
-	Tx_Extbase_Utility_Extension::configurePlugin(
+	Tx_Doctrine2_Utility_Extension::configurePlugin(
 		$_EXTKEY,																	// The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 		'Pi1',																		// A unique name of the plugin in UpperCamelCase
 		array (																		// An array holding the controller-action-combinations that are accessible
