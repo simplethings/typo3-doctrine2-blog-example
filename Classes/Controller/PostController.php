@@ -67,7 +67,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
 	 */
 	public function indexAction(Tx_BlogExample_Domain_Model_Blog $blog, $tag = NULL) {
 		if (empty($tag)) {
-			$posts = $this->postRepository->findByBlog($blog);
+			$posts = $this->postRepository->findAllByBlog($blog);
 		} else {
 			$tag = urldecode($tag);
 			$posts = $this->postRepository->findByTagAndBlog($tag, $blog);
