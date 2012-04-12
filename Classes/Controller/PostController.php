@@ -38,6 +38,15 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
 	 */
 	protected $personRepository;
 
+    /**
+     * @var Tx_Doctrine2_Manager
+     */
+    protected $manager;
+
+    public function injectManager(Tx_Doctrine2_Manager $manager) {
+        $this->manager = $manager;
+    }
+
 	/**
 	 * Dependency injection of the Post Repository
 	 *
@@ -116,6 +125,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
 		// TODO access protection
 		$blog->addPost($newPost);
 		$newPost->setBlog($blog);
+        $this->manager->persistAll();
 		$this->addFlashMessage('created');
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
@@ -145,6 +155,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
 	public function updateAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
 		// TODO access protection
 		$this->postRepository->update($post);
+        $this->manager->persistAll();
 		$this->addFlashMessage('updated');
 		$this->redirect('show', NULL, NULL, array('post' => $post, 'blog' => $blog));
 	}
@@ -159,6 +170,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
 	public function deleteAction(Tx_BlogExample_Domain_Model_Blog $blog, Tx_BlogExample_Domain_Model_Post $post) {
 		// TODO access protection
 		$this->postRepository->remove($post);
+        $this->manager->persistAll();
 		$this->addFlashMessage('deleted', t3lib_FlashMessage::INFO);
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}

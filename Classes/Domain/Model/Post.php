@@ -75,7 +75,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Comment[]
-     * @OneToMany(targetEntity="Tx_BlogExample_Domain_Model_Comment", mappedBy="post")
+     * @OneToMany(targetEntity="Tx_BlogExample_Domain_Model_Comment", mappedBy="post", cascade={"persist","remove"})
 	 */
 	protected $comments;
 
@@ -245,22 +245,13 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	}
 
 	/**
-	 * Setter for the comments to this post
-	 *
-	 * @param Tx_Doctrine2_Persistence_ObjectStorage $comments An Object Storage of related Comment instances
-	 * @return void
-	 */
-	public function setComments(Tx_Doctrine2_Persistence_ObjectStorage $comments) {
-		$this->comments = $comments;
-	}
-
-	/**
 	 * Adds a comment to this post
 	 *
 	 * @param Tx_BlogExample_Domain_Model_Comment $comment
 	 * @return void
 	 */
 	public function addComment(Tx_BlogExample_Domain_Model_Comment $comment) {
+        $comment->setPost($this);
 		$this->comments->add($comment);
 	}
 

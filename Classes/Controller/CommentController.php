@@ -28,6 +28,15 @@
  */
 class Tx_BlogExample_Controller_CommentController extends Tx_BlogExample_Controller_AbstractController {
 
+    /**
+     * @var Tx_Doctrine2_Manager
+     */
+    protected $manager;
+
+    public function injectManager(Tx_Doctrine2_Manager $manager) {
+        $this->manager = $manager;
+    }
+
 	/**
 	 * Adds a comment to a blog post and redirects to single view
 	 *
@@ -38,6 +47,7 @@ class Tx_BlogExample_Controller_CommentController extends Tx_BlogExample_Control
 	public function createAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $newComment) {
 		$post->addComment($newComment);
 		$this->addFlashMessage('created');
+        $this->manager->persistAll();
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
 
@@ -51,6 +61,7 @@ class Tx_BlogExample_Controller_CommentController extends Tx_BlogExample_Control
 	public function deleteAction(Tx_BlogExample_Domain_Model_Post $post, Tx_BlogExample_Domain_Model_Comment $comment) {
 		// TODO access protection
 		$post->removeComment($comment);
+        $this->manager->persistAll();
 		$this->addFlashMessage('deleted', t3lib_FlashMessage::INFO);
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
@@ -64,6 +75,7 @@ class Tx_BlogExample_Controller_CommentController extends Tx_BlogExample_Control
 	public function deleteAllAction(Tx_BlogExample_Domain_Model_Post $post) {
 		// TODO access protection
 		$post->removeAllComments();
+        $this->manager->persistAll();
 		$this->addFlashMessage('deletedAll', t3lib_FlashMessage::INFO);
 		$this->redirect('edit', 'Post', NULL, array('post' => $post, 'blog' => $post->getBlog()));
 	}
