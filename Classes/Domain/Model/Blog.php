@@ -178,17 +178,17 @@ class Tx_BlogExample_Domain_Model_Blog extends Tx_Doctrine2_DomainObject_Abstrac
 	/**
 	 * Sets the administrator value
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Administrator $administrator The Administrator of this Blog
+	 * @param Tx_Doctrine2_Domain_Model_FrontendUser $administrator The Administrator of this Blog
 	 * @return void
 	 */
-	public function setAdministrator(Tx_BlogExample_Domain_Model_Administrator $administrator) {
+	public function setAdministrator(Tx_Doctrine2_Domain_Model_FrontendUser $administrator) {
 		$this->administrator = $administrator;
 	}
 
 	/**
 	 * Returns the administrator value
 	 *
-	 * @return Tx_BlogExample_Domain_Model_Administrator
+	 * @return Tx_Doctrine2_Domain_Model_FrontendUser
 	 */
 	public function getAdministrator() {
 		return $this->administrator;

@@ -54,7 +54,7 @@ class Tx_BlogExample_Domain_Model_Comment extends Tx_Doctrine2_DomainObject_Abst
 	protected $content;
 
     /**
-     * @var Tx_BlogExample_Domain_Model_Post 
+     * @var Tx_BlogExample_Domain_Model_Post
      * @ManyToOne(targetEntity="Tx_BlogExample_Domain_Model_Post", inversedBy="comments")
      * @JoinColumn(name="post", referencedColumnName="uid")
      */

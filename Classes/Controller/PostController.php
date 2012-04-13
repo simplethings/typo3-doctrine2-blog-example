@@ -43,7 +43,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
      */
     protected $manager;
 
-    public function injectManager(Tx_Doctrine2_Manager $manager) {
+    public function injectManager(Tx_Extbase_Persistence_ManagerInterface $manager) {
         $this->manager = $manager;
     }
 
@@ -111,7 +111,7 @@ class Tx_BlogExample_Controller_PostController extends Tx_BlogExample_Controller
 		$this->view->assign('authors', $this->personRepository->findAll());
 		$this->view->assign('blog', $blog);
 		$this->view->assign('newPost', $newPost);
-		$this->view->assign('remainingPosts', $this->postRepository->findByBlog($blog));
+		$this->view->assign('remainingPosts', $this->postRepository->findAllByBlog($blog));
 	}
 
 	/**

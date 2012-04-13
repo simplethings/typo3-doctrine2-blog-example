@@ -43,7 +43,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller
      */
     protected $manager;
 
-    public function injectManager(Tx_Doctrine2_Manager $manager) {
+    public function injectManager(Tx_Extbase_Persistence_ManagerInterface $manager) {
         $this->manager = $manager;
     }
 
@@ -97,6 +97,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller
 	public function createAction(Tx_BlogExample_Domain_Model_Blog $newBlog) {
 		// TODO access protection
 		$this->blogRepository->add($newBlog);
+        $this->manager->persistAll();
 		$this->addFlashMessage('created');
 		$this->redirect('index');
 	}
@@ -135,6 +136,7 @@ class Tx_BlogExample_Controller_BlogController extends Tx_BlogExample_Controller
 	public function deleteAction(Tx_BlogExample_Domain_Model_Blog $blog) {
 		// TODO access protection
 		$this->blogRepository->remove($blog);
+        $this->manager->persistAll();
 		$this->addFlashMessage('deleted', t3lib_FlashMessage::INFO);
 		$this->redirect('index');
 	}

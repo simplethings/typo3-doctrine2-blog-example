@@ -29,11 +29,11 @@
 class Tx_BlogExample_Controller_CommentController extends Tx_BlogExample_Controller_AbstractController {
 
     /**
-     * @var Tx_Doctrine2_Manager
+     * @var Tx_Extbase_Persistence_ManagerInterface
      */
     protected $manager;
 
-    public function injectManager(Tx_Doctrine2_Manager $manager) {
+    public function injectManager(Tx_Extbase_Persistence_ManagerInterface $manager) {
         $this->manager = $manager;
     }
 

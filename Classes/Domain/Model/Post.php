@@ -75,7 +75,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 
 	/**
 	 * @var Tx_BlogExample_Domain_Model_Comment[]
-     * @OneToMany(targetEntity="Tx_BlogExample_Domain_Model_Comment", mappedBy="post", cascade={"persist","remove"})
+     * @OneToMany(targetEntity="Tx_BlogExample_Domain_Model_Comment", mappedBy="post", cascade={"persist","remove"}, orphanRemoval=true)
 	 */
 	protected $comments;
 
@@ -184,7 +184,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tag) {
-		$this->tags->remove($tag);
+		$this->tags->removeElement($tag);
 	}
 
 	/**
@@ -193,17 +193,17 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeAllTags() {
-		$this->tags = new Tx_Doctrine2_Persistence_ObjectStorage();
+		$this->tags->clear();
 	}
 
 	/**
 	 * Getter for tags
 	 * Note: We return a clone of the tags because they must not be modified as they are Value Objects
 	 *
-	 * @return Tx_Doctrine2_Persistence_ObjectStorage A storage holding Tx_BlogExample_Domain_Model_Tag objects
+	 * @return array A storage holding Tx_BlogExample_Domain_Model_Tag objects
 	 */
 	public function getTags() {
-		return clone $this->tags;
+		return $this->tags->toArray();
 	}
 
 	/**
@@ -262,7 +262,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeComment(Tx_BlogExample_Domain_Model_Comment $commentToDelete) {
-		$this->comments->remove($commentToDelete);
+		$this->comments->removeElement($commentToDelete);
 	}
 
 	/**
@@ -271,19 +271,16 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeAllComments() {
-		$comments = clone $this->comments;
-		foreach($comments as $comment) {
-			$this->comments->remove($comment);
-		}
+		$this->comments->clear();
 	}
 
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return An Tx_Doctrine2_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Comment
+	 * @return array
 	 */
 	public function getComments() {
-		return $this->comments;
+		return $this->comments->toArray();
 	}
 
 	/**
@@ -312,10 +309,7 @@ class Tx_BlogExample_Domain_Model_Post extends Tx_Doctrine2_DomainObject_Abstrac
 	 * @return void
 	 */
 	public function removeAllRelatedPosts() {
-		$relatedPosts = clone $this->relatedPosts;
-		foreach($relatedPosts as $relatedPost) {
-			$this->relatedPosts->remove($relatedPost);
-		}
+        $this->relatedPosts->clear();
 	}
 
 	/**
